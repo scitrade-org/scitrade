@@ -3,44 +3,445 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trading Products Catalog</title>
-    <!-- Import the requested fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>SciTrade Products - Coming Soon</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/scitradelogotransp.png">
+    <!-- Import fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
-        body {
-            font-family: 'rajdhani', sans-serif;
-            background-color: transparent;
-            margin: 0;
-            padding: 20px;
-            color: #ffffff;
-            overflow-x: hidden;
+        :root {
+            --cyan: #00ffff;
+            --dark-cyan: #03c9c2;
+            --white: #ffffff;
+            --black: #000000;
+            --transparent-black: rgba(0, 0, 0, 0.7);
+            --red: #03fcf4;
+            --gray-bg: #0a0a0a;
         }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--black);
+            overflow-x: hidden;
+            perspective: 1px;
+            width: 100%;
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Custom Scrollbar - LARGER with better hover */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--cyan);
+            border-radius: 5px;
+            border: 2px solid var(--black);
+            transition: all 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #03c9c2;
+            box-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
+            transform: scale(1.1);
+        }
+
+        /* Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--cyan) var(--black);
+        }
+
+        ::selection {
+            background: #00ffff;
+            color: var(--black);
+        }
+
+        ::-moz-selection {
+            background: #00ffff;
+            color: var(--black);
+        }
+
+        /* --- NAVIGATION BAR --- */
+        .sci-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
+            z-index: 1001;
+            background-color: transparent;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif !important;
+            backdrop-filter: blur(5px);
+        }
+
+        .sci-navbar * {
+            font-family: 'Rajdhani', sans-serif !important;
+        }
+
+        .sci-navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .sci-nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .sci-logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: auto;
+        }
+
+        .sci-logo {
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .sci-logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.7));
+        }
+
+        .sci-brand-name {
+            font-family: 'Rajdhani', sans-serif !important;
+            font-size: 18px;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--white);
+            margin-left: 12px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .sci-logo-container:hover .sci-brand-name {
+            color: var(--cyan);
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+        }
+
+        .sci-nav-links {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .sci-nav-item {
+            font-family: 'Rajdhani', sans-serif !important;
+        }
+
+        .sci-nav-link {
+            position: relative;
+            padding: 8px 16px;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-size: 18px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif !important;
+        }
+
+        .sci-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background-color: var(--cyan);
+            transition: width 0.3s ease, left 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .sci-nav-link:hover {
+            color: var(--cyan);
+        }
+
+        .sci-nav-link:hover::after {
+            width: calc(100% - 32px);
+            left: 50%;
+        }
+
+        .sci-nav-link.active {
+            color: var(--cyan);
+        }
+
+        .sci-nav-link.active::after {
+            width: calc(100% - 32px);
+            left: 50%;
+        }
+
+        .sci-mobile-toggle {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .sci-mobile-toggle:hover {
+            color: var(--cyan);
+            transform: scale(1.1);
+        }
+
+        /* Animated hamburger menu */
+        .sci-hamburger {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            margin: 0 auto;
+            transform: rotate(0deg);
+            transition: .5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .sci-hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: var(--white);
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .sci-hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .sci-hamburger span:nth-child(2),
+        .sci-hamburger span:nth-child(3) {
+            top: 9px;
+        }
+
+        .sci-hamburger span:nth-child(4) {
+            top: 18px;
+        }
+
+        .sci-hamburger.open span:nth-child(1) {
+            top: 9px;
+            width: 0%;
+            left: 50%;
+        }
+
+        .sci-hamburger.open span:nth-child(2) {
+            transform: rotate(45deg);
+            background: var(--cyan);
+        }
+
+        .sci-hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg);
+            background: var(--cyan);
+        }
+
+        .sci-hamburger.open span:nth-child(4) {
+            top: 9px;
+            width: 0%;
+            left: 50%;
+        }
+
+        /* Scroll indicator */
+        .sci-scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyan), #06f9ff, #00ddff);
+            z-index: 1002;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* --- MAIN CONTENT STYLES --- */
         .container {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
             position: relative;
+            padding-top: 100px;
+            z-index: 1;
         }
-        .category {
-            margin-bottom: 50px;
-            display: none; /* Hide all categories by default */
-            animation: fadeIn 0.8s ease-in-out;
+
+        /* Banner Section */
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            background: linear-gradient(45deg, rgba(0,0,0,0.9), rgba(0,40,40,0.8));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-bottom: 60px;
+            border-bottom: 3px solid var(--cyan);
         }
-        .category.active { 
-            display: block; /* Show active category */
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
         }
-        h2 {
-            font-family: 'rajdhani', sans-serif;
-            color: #03fcf4;
-            border-bottom: 2px solid #03fcf4;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 40px;
+            max-width: 800px;
+        }
+
+        .banner-title {
+            font-size: 4rem;
             text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: titleFadeIn 2s ease-out forwards;
+            font-family: 'Oswald', sans-serif;
+            color: var(--white);
+            font-weight: 300;
+        }
+
+        @keyframes titleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .banner-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background-color: var(--cyan);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px var(--cyan);
+        }
+
+        .banner-subtitle {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 800px;
+            opacity: 0;
+            animation: subtitleFadeIn 2s ease-out 0.5s forwards;
+            font-family: 'Oswald', sans-serif;
+            color: var(--white);
+            font-weight: 300;
+        }
+
+        @keyframes subtitleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background-color: var(--cyan);
+            color: var(--black);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.2rem;
             font-weight: 600;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(3, 252, 244, 0.3);
-            position: relative;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+            margin-top: 20px;
+            font-family: 'Rajdhani', sans-serif;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
+        }
+
+        /* Products Container */
+        .category {
+            margin-bottom: 80px;
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        .category.active { 
+            display: block;
+        }
+        
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--cyan);
+            border-bottom: 2px solid var(--cyan);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            position: relative;
+            font-size: 2.5rem;
+        }
+        
         h2::after {
             content: '';
             position: absolute;
@@ -48,9 +449,10 @@
             left: 0;
             width: 100px;
             height: 4px;
-            background-color: #03fcf4;
-            box-shadow: 0 0 10px rgba(3, 252, 244, 0.7);
+            background-color: var(--cyan);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
         }
+
         .filter-container {
             display: flex;
             justify-content: center;
@@ -60,96 +462,99 @@
             background-color: rgba(0, 0, 0, 0.5);
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(3, 252, 244, 0.2), inset 0 0 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(3, 252, 244, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2), inset 0 0 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.2);
             position: sticky;
-            top: 20px;
+            top: 100px;
             z-index: 100;
         }
+        
         .filter-group {
             display: flex;
             align-items: center;
             position: relative;
             transition: all 0.3s ease;
         }
+        
         .filter-group:hover {
             transform: translateY(-3px);
         }
+        
         .filter-label {
-            font-family: 'rajdhani', sans-serif;
-            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--white);
             font-size: 18px;
             margin-right: 15px;
             align-self: center;
             font-weight: 500;
             letter-spacing: 1px;
-            text-shadow: 0 0 5px rgba(3, 252, 244, 0.3);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
         }
+        
         select {
-            font-family: 'rajdhani', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             padding: 12px 20px;
             border-radius: 8px;
             background-color: rgba(0, 0, 0, 0.7);
-            color: #ffffff;
-            border: 1px solid #03fcf4;
+            color: var(--white);
+            border: 1px solid var(--cyan);
             outline: none;
             cursor: pointer;
             font-size: 16px;
             min-width: 220px;
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2303FCF4%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300ffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
             background-repeat: no-repeat;
             background-position: right 15px top 50%;
             background-size: 12px auto;
             transition: all 0.4s ease;
             text-transform: uppercase;
             font-weight: 400;
-            box-shadow: 0 0 10px rgba(3, 252, 244, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
         }
+        
         select:hover {
-            border-color: #03fcf4;
-            box-shadow: 0 0 20px rgba(3, 252, 244, 0.6);
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
             transform: translateY(-2px);
             background-color: rgba(20, 0, 0, 0.8);
         }
+        
         select:focus {
-            border-color: #03fcf4;
-            box-shadow: 0 0 25px rgba(3, 252, 244, 0.7);
+            border-color: var(--cyan);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
         }
+        
         option {
             background-color: #000000;
             padding: 10px;
         }
-        .product-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }        
+
         .product-grid {
             display: grid;
-            gap: 20px; /* Reduced from 30px */
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             perspective: 1000px;
         }
+        
         .product-card {
-            border: 1px solid #03fcf4;
-            padding: 15px; /* Reduced from 20px */
-            border-radius: 8px; /* Reduced from 12px */
+            border: 1px solid var(--cyan);
+            padding: 25px;
+            border-radius: 12px;
             background-color: rgba(0, 0, 0, 0.6);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(3, 252, 244, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 255, 0.2);
             transform-style: preserve-3d;
-            backdrop-filter: blur(5px);
             animation: fadeIn 0.6s ease-out;
         }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
         .product-card::before {
             content: '';
             position: absolute;
@@ -159,52 +564,68 @@
             height: 200%;
             background: linear-gradient(
                 to bottom right,
-                rgba(3, 252, 244, 0.1),
+                rgba(0, 255, 255, 0.1),
                 transparent,
-                rgba(3, 252, 244, 0.1)
+                rgba(0, 255, 255, 0.1)
             );
             transform: rotate(45deg);
             z-index: -1;
             transition: all 0.8s ease;
             opacity: 0;
         }
+        
         .product-card:hover::before {
             opacity: 1;
             transform: rotate(45deg) translate(10%, 10%);
         }
+        
         .product-card:hover {
-            transform: translateY(-5px) rotateX(5deg);
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(3, 252, 244, 0.5);
-            border-color: #03fcf4;
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 255, 255, 0.5);
+            border-color: var(--cyan);
         }
+
         .product-content {
             transition: all 0.4s ease;
             backface-visibility: hidden;
         }
+        
         .product-card:hover .product-content {
-            filter: blur(3px);
             transform: scale(0.95);
         }
-        
+
         .product-image {
-                    filter: hue-rotate(180deg) saturate(2);
-                    width: 90%; 
-                    margin: 0 auto 8px auto; /* Reduced bottom margin
-                    aspect-ratio: 1 / 1; /* Maintains the perfect square */
-                    background-color: rgba(30, 30, 30, 0.7);
-                    border-radius: 8px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: #777;
-                    font-family: 'rajdhani', sans-serif;
-                    text-transform: uppercase;
-                    border: 1px solid #ff0000;
-                    position: relative;
-                    overflow: hidden;
-                    transition: all 0.5s ease;
-                    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 200px;
+            margin: 0 auto 20px auto;
+            background-color: rgba(20, 20, 20, 0.8);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #777;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            border: 2px solid var(--cyan);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
         }
+        
+        .product-image::before {
+            content: 'COMING SOON';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--cyan);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            z-index: 2;
+        }
+        
         .product-image::after {
             content: '';
             position: absolute;
@@ -221,34 +642,24 @@
             transform: skewX(-25deg);
             transition: all 0.8s ease;
         }
+        
         .product-card:hover .product-image::after {
             animation: shine 1.5s infinite;
         }
+        
         @keyframes shine {
             0% { left: -100%; }
             100% { left: 200%; }
         }
-        .product-price {
-            font-family: 'rajdhani', sans-serif;
-            font-weight: 600;
-            color: #03fcf4;
-            text-align: right;
-            margin-top: 5px; /* Reduced from 15px to 5px */
-            font-size: 18;
-            text-shadow: 0 0 10px rgba(3, 252, 244, 0.3);
-            transition: all 0.3s ease;
-            margin: 0; /* Removed previous margin */
-        }
-        
-        /* Optional: You can also adjust the height of the product name if needed */
+
         .product-name {
-            font-family: 'rajdhani', sans-serif;
-            font-weight: 0;
-            color: #ffffff;
-            font-size: 16px; /* Reduced from 20px */
-            height: 40px; /* Reduced from 55px */
-            margin-bottom: 8px; /* Adjusted spacing */
-            line-height: 1.3; /* Tighter line spacing */
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            color: var(--white);
+            font-size: 1.3rem;
+            height: 60px;
+            margin-bottom: 15px;
+            line-height: 1.4;
             letter-spacing: 0.5px;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
@@ -257,10 +668,23 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
         }
+
+        .product-price {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            color: var(--cyan);
+            text-align: right;
+            margin-top: 15px;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
         .product-card:hover .product-price {
             transform: scale(1.1);
-            text-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
         }
+
         .view-detail {
             position: absolute;
             top: 0;
@@ -273,27 +697,29 @@
             opacity: 0;
             transition: opacity 0.4s ease;
             background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(3px);
             border-radius: 12px;
             z-index: 5;
         }
+        
         .product-card:hover .view-detail {
             opacity: 1;
             animation: pulseBackground 2s infinite;
         }
+        
         @keyframes pulseBackground {
             0% { background-color: rgba(0, 0, 0, 0.7); }
             50% { background-color: rgba(0, 50, 50, 0.7); }
             100% { background-color: rgba(0, 0, 0, 0.7); }
         }
+        
         .view-btn {
-            padding: 12px 24px;
-            background-color: #03fcf4;
-            color: #ffffff;
-            font-family: 'rajdhani', sans-serif;
+            padding: 15px 30px;
+            background-color: var(--cyan);
+            color: var(--white);
+            font-family: 'Rajdhani', sans-serif;
             border: none;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
@@ -302,61 +728,47 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            box-shadow: 0 0 20px rgba(3, 252, 244, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
             text-decoration: none;
             display: inline-block;
         }
-        .view-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.4s ease;
-            z-index: -1;
-        }
+        
         .view-btn:hover {
-            background-color: #03c5bd;
+            background-color: #00cccc;
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(3, 252, 244, 0.7);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.7);
         }
-        .view-btn:hover::before {
-            animation: btnShine 1s infinite;
-        }
-        @keyframes btnShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
+
         .note {
-            font-family: 'rajdhani', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             font-style: italic;
             margin: 15px 0 30px;
-            font-size: 18px;
-            color: #ffffff;
+            font-size: 1.1rem;
+            color: var(--white);
             line-height: 1.6;
             padding: 15px 20px;
             background-color: rgba(0, 0, 0, 0.4);
-            border-left: 4px solid #03fcf4;
+            border-left: 4px solid var(--cyan);
             border-radius: 0 8px 8px 0;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
+        
         .show-all {
             text-align: center;
-            margin: 40px 0;
+            margin: 60px 0;
             perspective: 1000px;
         }
+        
         .show-all-btn {
             background: none;
-            border: 2px solid #ffffff;
-            color: #ffffff;
-            padding: 12px 30px;
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: 15px 40px;
             border-radius: 50px;
-            font-family: 'rajdhani', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             cursor: pointer;
             transition: all 0.4s ease;
-            font-size: 18px;
+            font-size: 1.2rem;
             letter-spacing: 2px;
             position: relative;
             overflow: hidden;
@@ -366,6 +778,7 @@
             background-color: rgba(0, 0, 0, 0.4);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
+        
         .show-all-btn::before {
             content: '';
             position: absolute;
@@ -373,185 +786,313 @@
             left: 0;
             width: 0;
             height: 100%;
-            background-color: #03fcf4;
+            background-color: var(--cyan);
             transition: all 0.4s ease;
             z-index: -1;
         }
+        
         .show-all-btn:hover {
-            color: #ffffff;
-            border-color: #03fcf4;
-            box-shadow: 0 10px 20px rgba(3, 252, 244, 0.5);
+            color: var(--white);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.5);
             transform: translateY(-5px) rotateX(10deg);
         }
+        
         .show-all-btn:hover::before {
             width: 100%;
         }
+        
         .hidden {
             display: none !important;
         }
-        /* Particle background */
-        #particles-js {
+
+        /* Coming Soon Overlay - Fixed in Center */
+        .coming-soon-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 6px;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: #03fcf4;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: #03c5bd;
-        }
-        /* Loading animation */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
             transition: all 0.5s ease;
+            pointer-events: auto;
         }
-        .loader.hidden {
+
+        .coming-soon-overlay.hidden {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
         }
-        .loader-content {
+
+        .coming-soon-modal {
+            background-color: rgba(15, 15, 15, 0.95);
+            border-left: 5px solid var(--cyan);
+            padding: 50px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
             text-align: center;
-        }
-        .candlestick-loader {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            height: 80px;
-            margin-bottom: 20px;
-            perspective: 1000px;
-        }
-        .candle {
             position: relative;
-            width: 18px;
-            height: 50px;
-            margin: 0 8px;
-            background: #ffffff;
-            animation: candleAnimation 1.8s infinite ease-in-out;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+            transform: translateY(0);
+            animation: modalAppear 0.6s ease-out;
         }
-        .candle::before, .candle::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            width: 2px;
-            background: #ffffff;
-        }
-        .candle::before {
-            top: -15px;
-            height: 15px;
-            transform: translateX(-50%);
-            animation: wickAnimation 1.8s infinite ease-in-out;
-        }
-        .candle::after {
-            bottom: -15px;
-            height: 15px;
-            transform: translateX(-50%);
-            animation: wickAnimation 1.8s infinite ease-in-out;
-        }
-        .candle1 {
-            animation-delay: 0s;
-        }
-        .candle1::before, .candle1::after {
-            animation-delay: 0s;
-        }
-        .candle2 {
-            animation-delay: 0.6s;
-        }
-        .candle2::before, .candle2::after {
-            animation-delay: 0.6s;
-        }
-        .candle3 {
-            animation-delay: 1.2s;
-        }
-        .candle3::before, .candle3::after {
-            animation-delay: 1.2s;
-        }
-        @keyframes candleAnimation {
-            0% {
-                background: #ffffff;
-                transform: scaleY(0.8) translateY(0);
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
             }
-            50% {
-                background: #03fcf4;
-                transform: scaleY(1.2) translateY(-20px);
-                box-shadow: 0 0 20px rgba(3, 252, 244, 0.7);
-            }
-            100% {
-                background: #ffffff;
-                transform: scaleY(0.8) translateY(0);
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-        @keyframes wickAnimation {
-            0% {
-                background: #ffffff;
-            }
-            50% {
-                background: #03fcf4;
-            }
-            100% {
-                background: #ffffff;
-            }
+
+        .coming-soon-modal i {
+            font-size: 5rem;
+            color: var(--cyan);
+            margin-bottom: 30px;
+            animation: spin 3s linear infinite;
         }
-        .loader-text {
-            color: #ffffff;
-            font-family: 'rajdhani', sans-serif;
-            font-size: 18px;
-            letter-spacing: 2px;
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .coming-soon-modal h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            border: none;
             text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(3, 252, 244, 0.3);
+            letter-spacing: 3px;
+            font-family: 'Oswald', sans-serif;
+            color: var(--white);
+            font-weight: 300;
         }
+
+        .coming-soon-modal h2::after {
+            display: none;
         }
-  ::selection {
-    background: #03fcf4; /* Cyan highlight */
-    color: white; /* Optional: Set text color for better contrast */
-  }
-  ::-moz-selection {
-    background: #03fcf4; /* For Firefox */
-    color: white;
-  }
+
+        .coming-soon-modal p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
+            color: var(--white);
+            font-weight: 300;
+        }
+
+        .close-modal {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--cyan);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+        }
+
+        .close-modal:hover {
+            background-color: #00cccc;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .sci-nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                background-color: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 20px 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.5s ease-in-out;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+                gap: 0;
+            }
+
+            .sci-nav-links.open {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .sci-nav-item {
+                width: 100%;
+                text-align: center;
+            }
+
+            .sci-nav-link {
+                display: block;
+                padding: 15px 0;
+                font-size: 20px;
+                width: 100%;
+            }
+
+            .sci-nav-link::after {
+                bottom: 5px;
+            }
+
+            .sci-nav-link:hover::after {
+                width: 50%;
+            }
+
+            .sci-nav-link:hover {
+                background-color: rgba(0, 255, 255, 0.1);
+            }
+
+            .sci-mobile-toggle {
+                display: block;
+            }
+
+            .banner {
+                height: 60vh;
+            }
+
+            .banner-title {
+                font-size: 2.5rem;
+            }
+
+            .banner-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                top: 80px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .coming-soon-modal {
+                padding: 30px;
+            }
+
+            .coming-soon-modal h2 {
+                font-size: 2.2rem;
+            }
+
+            .coming-soon-modal p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .banner-title {
+                font-size: 2rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-name {
+                font-size: 1.2rem;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-label {
+                margin-bottom: 10px;
+            }
+
+            select {
+                min-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Loader -->
-    <div class="loader">
-        <div class="loader-content">
-            <div class="candlestick-loader">
-                <div class="candle candle1"></div>
-                <div class="candle candle2"></div>
-                <div class="candle candle3"></div>
+    <!-- Scroll Progress Bar -->
+    <div class="sci-scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Navigation Bar -->
+    <nav class="sci-navbar" id="sciNavbar">
+        <div class="sci-nav-container">
+            <div class="sci-logo-container">
+                <a href="index.html">
+                    <img src="https://raw.githubusercontent.com/scitrade-org/scitrade/main/Logo/scitradelogotransp.png" alt="SciTrade Logo" class="sci-logo">
+                </a>
+                <a href="index.html" class="sci-brand-name">SciTrade</a>
             </div>
-            <div class="loader-text">Loading Premium Products...</div>
+
+            <ul class="sci-nav-links" id="sciNavLinks">
+                <li class="sci-nav-item">
+                    <a href="index.html" class="sci-nav-link">Home</a>
+                </li>
+                <li class="sci-nav-item">
+                    <a href="products.html" class="sci-nav-link active">Products</a>
+                </li>
+                <li class="sci-nav-item">
+                    <a href="mission.html" class="sci-nav-link">Mission</a>
+                </li>
+                <li class="sci-nav-item">
+                    <a href="contact.html" class="sci-nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <button class="sci-mobile-toggle" id="mobileToggle">
+                <div class="sci-hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Coming Soon Overlay - Appears immediately in front -->
+    <div class="coming-soon-overlay" id="comingSoonOverlay">
+        <div class="coming-soon-modal">
+            <i class="fas fa-hourglass-half"></i>
+            <h2>Coming Soon</h2>
+            <p>Our premium trading products are currently under development. We're working hard to bring you the most innovative and effective trading tools in the market.</p>
+            <p>Stay tuned for our official launch!</p>
+            <button class="close-modal" id="closeComingSoon">Continue Browsing</button>
         </div>
     </div>
-    
-    <!-- Particle background -->
-    <div id="particles-js"></div>
-    
+
+    <!-- Banner -->
+    <div class="banner">
+        <div class="banner-content">
+            <h1 class="banner-title">Premium Trading Products</h1>
+            <p class="banner-subtitle">Revolutionary tools for the modern trader</p>
+            <div class="coming-soon-badge">COMING SOON</div>
+        </div>
+    </div>
+
     <div class="container">
-        <!-- Title removed as requested -->
-        
         <div class="filter-container">
             <div class="filter-group">
                 <div class="filter-label">CATEGORY:</div>
@@ -597,74 +1138,54 @@
             <div class="product-grid">
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/triplesupertrendthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-header">
                             <div class="product-name">Triple Super trend with RSI, BB, Alligator, SMA&EMA Crossover Signals</div>
                             <div class="product-price">50 $</div>
                         </div>
                     </div>
                     <div class="view-detail">
-                        <a href="#technical-product-1" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/smaemadifferencethumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Triple SMA&EMA Difference Chart</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#technical-product-2" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/obvsmadifference.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">OBV & SMA Difference Chart</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#technical-product-3" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
-                <!--<div class="product-card" data-price="50">-->
-                <!--    <div class="product-content">-->
-                <!--        <div class="product-image">Product Image</div>-->
-                <!--        <div class="product-name">Multi-RSI Confirmation Signals</div>-->
-                <!--        <div class="product-price">50 $</div>-->
-                <!--    </div>-->
-                <!--    <div class="view-detail">-->
-                <!--        <a href="#technical-product-4" class="view-btn">VIEW DETAILS</a>-->
-                <!--    </div>-->
-                <!--</div>-->
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/sltpthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">StopLoss TakeProfit Optimized Indicator</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#technical-product-5" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
-                <!--<div class="product-card" data-price="50">-->
-                <!--    <div class="product-content">-->
-                <!--        <div class="product-image">Product Image</div>-->
-                <!--        <div class="product-name">Volume Profile & Delta</div>-->
-                <!--        <div class="product-price">50 $</div>-->
-                <!--    </div>-->
-                <!--    <div class="view-detail">-->
-                <!--        <a href="#technical-product-6" class="view-btn">VIEW DETAILS</a>-->
-                <!--    </div>-->
-                <!--</div>-->
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/ultimatecandlepatternindicatorthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Ultimate Candle Pattern Indicator</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#technical-product-7" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
             </div>
@@ -676,62 +1197,42 @@
             <div class="product-grid">
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/ainewsanalyzer.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Advanced AI News Analyzer</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#fundamental-product-1" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/generalseasonalanalysis.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Detailed Seasonal Analysis Reports</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#fundamental-product-2" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
-                <!--<div class="product-card" data-price="50">-->
-                <!--    <div class="product-content">-->
-                <!--        <div class="product-image">Product Image</div>-->
-                <!--        <div class="product-name">Forex Factory Scraper</div>-->
-                <!--        <div class="product-price">50 $</div>-->
-                <!--    </div>-->
-                <!--    <div class="view-detail">-->
-                <!--        <a href="#fundamental-product-3" class="view-btn">VIEW DETAILS</a>-->
-                <!--    </div>-->
-                <!--</div>-->
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/newscalendarthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">News Calendar</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#fundamental-product-4" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
-                <!--<div class="product-card" data-price="50">-->
-                <!--    <div class="product-content">-->
-                <!--        <div class="product-image">Product Image</div>-->
-                <!--        <div class="product-name">Twitter Events Scraper</div>-->
-                <!--        <div class="product-price">50 $</div>-->
-                <!--    </div>-->
-                <!--    <div class="view-detail">-->
-                <!--        <a href="#fundamental-product-5" class="view-btn">VIEW DETAILS</a>-->
-                <!--    </div>-->
-                <!--</div>-->
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/correlationthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Correlation Indicator</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#fundamental-product-6" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
             </div>
@@ -743,52 +1244,42 @@
             <div class="product-grid">
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/arimathumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Optimized ARIMA Model</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#ai-product-1" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/lstmthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Multi-Variable-Sequential LSTM Model</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#ai-product-2" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
-                <!--<div class="product-card" data-price="50">-->
-                <!--    <div class="product-content">-->
-                <!--        <div class="product-image">Product Image</div>-->
-                <!--        <div class="product-name">Multi-Variable-Single Prediction LSTM Model</div>-->
-                <!--        <div class="product-price">50 $</div>-->
-                <!--    </div>-->
-                <!--    <div class="view-detail">-->
-                <!--        <a href="#ai-product-3" class="view-btn">VIEW DETAILS</a>-->
-                <!--    </div>-->
-                <!--</div>-->
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/mvssthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Multi-Variable-Sequential Common Sequence Mathematical Model</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#ai-product-4" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/mvsinglethumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Multi-Variable-Single Mathematical Model</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#ai-product-5" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
             </div>
@@ -800,62 +1291,42 @@
             <div class="product-grid">
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">RSI Breakout</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#expert-product-1" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">Long Wick Reversal</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#expert-product-2" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
-                                </div>
+                </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/advancedcandlepatternea.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Candle Streak Reversal & Wick EA</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#expert-product-3" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">Triple Super trend</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#expert-product-4" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="50">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">ATR Trailing Stop Loss</div>
-                        <div class="product-price">50 $</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#expert-product-5" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="50">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">EMA Trailing Stop Loss</div>
-                        <div class="product-price">50 $</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#expert-product-6" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
             </div>
@@ -867,74 +1338,44 @@
             <div class="product-grid">
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">Risk Management</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#money-product-1" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/riskcalculatorthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Risk calculator</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#money-product-2" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/risksimulator.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-name">Profit simulator</div>
                         <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#money-product-3" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="50">
                     <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/tradinggamelogo.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-image"></div>
                         <div class="product-header">    
                             <div class="product-name">Trading game for polishing skills</div>
                             <div class="product-price">50 $</div>
                         </div>
                     </div>
                     <div class="view-detail">
-                        <a href="#money-product-4" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="9.99">
-                    <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/traderjournalthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
-                        <div class="product-name">Optimized Journal with heatmaps</div>
-                        <div class="product-price">9.99 $</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#money-product-5" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="50">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Trades Tracker</div>
-                        <div class="product-price">50 $</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#money-product-6" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="50">
-                    <div class="product-content">
-                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/ytvideoanalyser.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
-                        <div class="product-name">YouTube video analyzer</div>
-                        <div class="product-price">50 $</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#money-product-7" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
             </div>
@@ -946,102 +1387,32 @@
             <div class="product-grid">
                 <div class="product-card" data-price="59.99">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">Weekly zoom calls</div>
                         <div class="product-price">59.99$/Month</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#private-product-1" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="19.99">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">Consulting calls</div>
                         <div class="product-price">19.99$/Hour</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#private-product-2" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="149.99">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">Psychology lessons</div>
                         <div class="product-price">149.99$/Month</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#private-product-3" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="99.9">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Technical analysis lessons</div>
-                        <div class="product-price">99.9$/Month</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#private-product-4" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="99.9">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Fundamental analysis lessons</div>
-                        <div class="product-price">99.9$/Month</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#private-product-5" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="199">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Volume analysis lessons</div>
-                        <div class="product-price">199$/Month</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#private-product-6" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="99.9">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Seasonal analysis lessons</div>
-                        <div class="product-price">99.9$/Month</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#private-product-7" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="299">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Edge coaching</div>
-                        <div class="product-price">299$/Month</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#private-product-8" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="99.9">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Programming lessons</div>
-                        <div class="product-price">99.9$/Month</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#private-product-9" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="149.9">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Mathematics lessons</div>
-                        <div class="product-price">149.9$/Month</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#private-product-10" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
             </div>
@@ -1054,67 +1425,32 @@
             <div class="product-grid">
                 <div class="product-card" data-price="99">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">Volume Profile</div>
+                        <div class="product-price">99 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#volume-product-1" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="99">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">On Balance Volume</div>
                         <div class="product-price">99 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#volume-product-2" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
                 <div class="product-card" data-price="99">
                     <div class="product-content">
-                        <div class="product-image">Product Image</div>
+                        <div class="product-image"></div>
                         <div class="product-name">Chaikin Money Flow Index</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#volume-product-3" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="99">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Volume Bars</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#volume-product-4" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="99">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">VWAP</div>
                         <div class="product-price">99 $</div>
                     </div>
                     <div class="view-detail">
-                        <a href="#volume-product-5" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="99">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Volume Delta for each candle</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#volume-product-6" class="view-btn">VIEW DETAILS</a>
-                    </div>
-                </div>
-                <div class="product-card" data-price="99">
-                    <div class="product-content">
-                        <div class="product-image">Product Image</div>
-                        <div class="product-name">Cumulative Volume Delta</div>
-                    </div>
-                    <div class="view-detail">
-                        <a href="#volume-product-7" class="view-btn">VIEW DETAILS</a>
+                        <button class="view-btn">COMING SOON</button>
                     </div>
                 </div>
             </div>
@@ -1124,8 +1460,63 @@
             <button id="show-all-btn" class="show-all-btn">SHOW ALL PRODUCTS</button>
         </div>
     </div>
-
+    
+    <!-- Footer -->
+    <div style="width:100%; padding:0; margin:0;">
+      <iframe src="https://scitrade-org.github.io/scitrade/Code/footer.html" 
+              style="width:100%; height:600px; border:none; overflow:hidden;"
+              scrolling="no" frameborder="0" allowtransparency="true">
+      </iframe>
+    </div>
+    
     <script>
+        // Mobile menu toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('sciNavLinks');
+            const hamburger = document.querySelector('.sci-hamburger');
+            navLinks.classList.toggle('open');
+            hamburger.classList.toggle('open');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.sci-nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                const navLinks = document.getElementById('sciNavLinks');
+                const hamburger = document.querySelector('.sci-hamburger');
+                if (navLinks.classList.contains('open')) {
+                    navLinks.classList.remove('open');
+                    hamburger.classList.remove('open');
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('sciNavbar');
+            const scrollProgress = document.getElementById('scrollProgress');
+            
+            // Add scrolled class to navbar
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Update scroll progress bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+
+        // Initialize navbar on load
+        window.addEventListener('load', function() {
+            const navbar = document.getElementById('sciNavbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            }
+        });
+
         // JavaScript for filtering functionality
         document.addEventListener('DOMContentLoaded', function() {
             // Get all categories, filter dropdowns, and product cards
@@ -1134,10 +1525,31 @@
             const priceFilter = document.getElementById('price-filter');
             const showAllBtn = document.getElementById('show-all-btn');
             const productCards = document.querySelectorAll('.product-card');
+            const comingSoonOverlay = document.getElementById('comingSoonOverlay');
+            const closeComingSoon = document.getElementById('closeComingSoon');
+            const viewButtons = document.querySelectorAll('.view-btn');
             
             // Show all categories on page load
             categories.forEach(category => {
                 category.classList.add('active');
+            });
+            
+            // Show coming soon overlay on page load - appears immediately
+            setTimeout(() => {
+                comingSoonOverlay.classList.remove('hidden');
+            }, 100);
+            
+            // Close coming soon overlay
+            closeComingSoon.addEventListener('click', function() {
+                comingSoonOverlay.classList.add('hidden');
+            });
+            
+            // Handle view button clicks
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    comingSoonOverlay.classList.remove('hidden');
+                });
             });
             
             // Function to apply filters
@@ -1161,7 +1573,7 @@
                 
                 // Then filter by price
                 productCards.forEach(card => {
-                    const cardPrice = card.getAttribute('data-price');
+                    const cardPrice = parseFloat(card.getAttribute('data-price'));
                     
                     // Reset visibility first
                     card.classList.remove('hidden');
@@ -1177,7 +1589,6 @@
                     // Apply price filter if needed
                     if (selectedPrice !== 'all') {
                         const [min, max] = selectedPrice.split('-').map(Number);
-                        const cardPrice = parseFloat(card.getAttribute('data-price'));
                         
                         if (cardPrice < min || cardPrice > max) {
                             card.classList.add('hidden');
@@ -1206,20 +1617,7 @@
                     card.classList.remove('hidden');
                 });
             });
-
-            // Hide loader when page loads
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    document.querySelector('.loader').classList.add('hidden');
-                }, 1000);
-            });
         });
     </script>
-<div style="width:100%; padding:0; margin:0;">
-  <iframe src="https://scitrade-org.github.io/scitrade/Code/footer.html" 
-          style="width:100%; height:600px; border:none; overflow:hidden;"
-          scrolling="no" frameborder="0" allowtransparency="true">
-  </iframe>
-</div>
 </body>
 </html>
