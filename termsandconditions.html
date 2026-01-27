@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SciTrade - Terms and Conditions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 300;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid rgba(3, 252, 244, 0.3);
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(3, 252, 244, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(3, 252, 244, 0.5);
+            padding-bottom: 15px;
+        }
+
+        h1 {
+            color: #03fcf4;
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .effective-date {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        h2 {
+            color: #03fcf4;
+            font-size: 24px;
+            margin: 20px 0 10px 0;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #03fcf4;
+            transition: width 0.3s ease;
+        }
+
+        section:hover h2::after {
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 20px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        section:hover {
+            background: rgba(3, 252, 244, 0.05);
+            transform: translateX(5px);
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            color: #03fcf4;
+            font-weight: 400;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000;
+            box-shadow: inset 0 0 5px rgba(3, 252, 244, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #03fcf4, #039c96);
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(3, 252, 244, 0.7);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #039c96, #03fcf4);
+        }
+
+        /* Custom Text Selection */
+        ::selection {
+            background-color: rgba(3, 252, 244, 0.7);
+            color: #ffffff;
+        }
+
+        .fade-item {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(3, 252, 244, 0.3);
+            font-size: 14px;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-info a {
+            color: #03fcf4;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(3, 252, 244, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Terms and Conditions</h1>
+            <div class="effective-date">Effective Date: 5/1/2025</div>
+        </header>
+
+        <div class="introduction">
+            <p>Welcome to <span class="highlight">SciTrade</span> ("we," "us," or "our"). These Terms and Conditions ("Terms") govern your use of our website at <a href="https://sites.google.com/view/scitrade" class="highlight">https://sites.google.com/view/scitrade</a> ("Website") and the products and services we provide, including trading indicators, expert advisors (EAs), and coaching/consulting services. By accessing or using the Website, you agree to be bound by these Terms. If you do not agree, please do not use the Website.</p>
+        </div>
+
+        <section class="fade-item">
+            <h2>1. Eligibility</h2>
+            <p>You must be at least <span class="highlight">18 years of age</span> and legally able to enter into binding agreements to use this Website and purchase our products or services.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>2. Our Products and Services</h2>
+            <p><span class="highlight">SciTrade</span> provides digital products and services related to forex and financial markets, including:</p>
+            <ul>
+                <li>Trading Indicators (for platforms such as MetaTrader, Tradingview...)</li>
+                <li>Expert Advisors (EAs): Automated trading tools</li>
+                <li>Coaching and Consulting Services for forex and trading education</li>
+                <li>Trading Courses</li>
+            </ul>
+            <p>We do not provide trading signals or investment recommendations.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>3. No Financial Advice</h2>
+            <p>All content and services provided are for <span class="highlight">educational and informational purposes only</span>. SciTrade does not offer investment advice, trading signals, or broker recommendations, and nothing on this Website should be interpreted as a guarantee of profits or financial returns. All decisions made based on our tools or services are at your own risk.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>4. Risk Acknowledgment</h2>
+            <p>Trading in forex and other financial markets carries <span class="highlight">significant risk</span>. Past performance of indicators, EAs, or strategies does not guarantee future results. Only trade with money you can afford to lose, and consult with a qualified financial professional if you are unsure.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>5. User Responsibilities</h2>
+            <p>You agree not to:</p>
+            <ul>
+                <li>Use our Website for any unlawful or prohibited purpose;</li>
+                <li>Copy, resell, or redistribute our digital products without permission;</li>
+                <li>Attempt to reverse-engineer or modify any software purchased;</li>
+                <li>Violate any applicable intellectual property laws.</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>6. Intellectual Property</h2>
+            <p>All content on the Website, including software, indicators, branding, and materials, is the <span class="highlight">intellectual property</span> of SciTrade or its licensors. Unauthorized reproduction or resale is strictly prohibited.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>7. Purchases and Delivery</h2>
+            <p>All products and services are sold on a <span class="highlight">one-time purchase basis</span>. No recurring payments or subscriptions are required. Digital products are delivered electronically upon purchase. Coaching or consulting is delivered via agreed-upon communication methods (e.g., video call, chat, or email).</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>8. Refund Policy</h2>
+            <p>Due to the digital nature of our products and services, <span class="highlight">all sales are final</span>. We do not offer refunds unless required by law or in cases of accidental duplicate purchases (proof required). If you encounter a technical issue, please contact us for assistance.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>9. Third-Party Tools and Platforms</h2>
+            <p>Some of our products may require third-party platforms (e.g., MetaTrader 4/5, Jforex...). SciTrade is not responsible for the performance, reliability, or updates of third-party software.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>10. Limitation of Liability</h2>
+            <p>SciTrade will <span class="highlight">not be liable</span> for any losses, damages, or liabilities arising from your use of our products or services. This includes but is not limited to trading losses, data loss, or missed opportunities.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>11. Indemnification</h2>
+            <p>You agree to indemnify and hold harmless SciTrade and its staff from any claims, damages, or expenses arising out of your use of our Website, products, or services.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>12. Modifications to Terms</h2>
+            <p>We may update these Terms at any time. Updates will be posted to this page, and continued use of our Website or services after changes are posted constitutes your agreement to the updated Terms.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>13. Governing Law</h2>
+            <p>These Terms are governed by the laws of <span class="highlight">Lebanon</span>. Any disputes will be resolved exclusively in the courts located in Lebanon.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>14. Contact Us</h2>
+            <p>For questions about these Terms, our products, or your purchase, you can contact us at:</p>
+            <p class="contact-info">📧 Email: <a href="mailto:scitrade@gmail.com">scitrade@gmail.com</a></p>
+        </section>
+
+        <footer class="fade-item">
+            <p>© 2025 SciTrade. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animation for sections when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeItems = document.querySelectorAll('.fade-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [10, 0],
+                            easing: 'easeOutExpo',
+                            duration: 800,
+                            delay: 100
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeItems.forEach(item => {
+                observer.observe(item);
+            });
+
+            // Title animation
+            anime({
+                targets: 'h1',
+                opacity: [0, 1],
+                translateY: [-20, 0],
+                easing: 'easeOutExpo',
+                duration: 1000,
+                delay: 300
+            });
+
+            // Pulsing glow effect for headers
+            anime({
+                targets: 'h1, h2',
+                textShadow: '0 0 8px rgba(3, 252, 244, 0.7)',
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutSine',
+                duration: 2000
+            });
+            
+            // Link hover effects
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: link,
+                        color: '#ffffff',
+                        textShadow: '0 0 10px rgba(3, 252, 244, 0.9)',
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    anime({
+                        targets: link,
+                        color: '#03fcf4',
+                        textShadow: '0 0 0px rgba(3, 252, 244, 0)',
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+            });
+        });
+    </script>
+
+<iframe 
+  id="footer-frame"
+  src="https://youssefbechara.github.io/YSFB-Website-Assets/footer.html"
+  style="width:100%; height:100%; border:none; display:block;">
+</iframe>
+
+<script>
+document.getElementById('footer-frame').onload = function() {
+  this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
+  // Remove any residual spacing
+  this.style.margin = '0';
+  this.style.padding = '0';
+};
+</script>
+</body>
+</html>
