@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SciTrade Mission</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #00ffff;
+            --white: #ffffff;
+            --black: #000000;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald', sans-serif;
+            color: var(--white);
+            font-weight: 300;
+        }
+        
+        body {
+            background-color: var(--black);
+            overflow-x: hidden;
+            perspective: 1px;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--red);
+            border-radius: 2px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00cccc;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+        
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('https://raw.githubusercontent.com/scitrade-ai/Scitrade/main/Images/bullcyan.png') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center top;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+        }
+        
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 40px 20px;
+        }
+        
+        .title {
+            font-size: 5rem;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            animation: titleFadeIn 2s ease-out forwards;
+        }
+        
+        @keyframes titleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--red);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px var(--red);
+        }
+        
+        .title:hover::after {
+            width: 300px;
+            box-shadow: 0 0 20px var(--red);
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 800px;
+            opacity: 0;
+            animation: subtitleFadeIn 2s ease-out 0.5s forwards;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+        
+        @keyframes subtitleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-down span {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .scroll-down i {
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--white);
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .scroll-down i::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background-color: var(--white);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollDown 2s infinite;
+        }
+        
+        @keyframes scrollDown {
+            0% {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+            80% {
+                transform: translate(-50%, 20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, 0);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+        
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 2px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background-color: var(--red);
+            transition: width 0.5s ease;
+        }
+        
+        .section-title:hover::after {
+            width: 100%;
+            box-shadow: 0 0 12px var(--red);
+        }
+        
+        .content {
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+        
+        .highlight {
+            color: var(--red);
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight:hover {
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
+        
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .card {
+            flex: 1 1 300px;
+            background-color: rgba(20, 20, 20, 0.7);
+            border-left: 3px solid var(--red);
+            padding: 30px;
+            border-radius: 5px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.3);
+            background-color: rgba(30, 30, 30, 0.9);
+        }
+        
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .card-title {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            color: var(--red);
+        }
+        
+        .card-content {
+            font-size: 1.1rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background-color: var(--red);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            margin-top: 40px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #00cccc;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+            letter-spacing: 4px;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .parallax-section {
+            position: relative;
+            height: 400px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 100px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .parallax-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .parallax-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+        
+        .parallax-title {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .parallax-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: var(--red);
+            transition: width 0.5s ease;
+        }
+        
+        .parallax-title:hover::after {
+            width: 80%;
+            box-shadow: 0 0 8px var(--red);
+        }
+        
+        .parallax-text {
+            font-size: 1.4rem;
+            line-height: 1.6;
+        }
+        
+
+        
+        .moving-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, black 70%);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: var(--red);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.8);
+            margin-top: 100px;
+            position: relative;
+        }
+        
+        .ticker-wrap::before, .ticker-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        .ticker-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, var(--black), transparent);
+        }
+        
+        .ticker-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, var(--black), transparent);
+        }
+        
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker 30s linear infinite;
+        }
+        
+        .ticker-item {
+            display: inline-block;
+            padding: 0 30px;
+            font-size: 1.2rem;
+            color: var(--red);
+        }
+        
+        @keyframes ticker {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .banner {
+                height: 80vh;
+            }
+            
+            .title {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .card-container {
+                flex-direction: column;
+            }
+            
+            .parallax-section {
+                background-attachment: scroll;
+                height: 300px;
+            }
+            
+            .parallax-title {
+                font-size: 2.2rem;
+            }
+            
+            .parallax-text {
+                font-size: 1.2rem;
+            }
+        }
+  ::selection {
+    background: #00ffff; /* Cyan highlight */
+    color: white; /* Optional: Set text color for better contrast */
+  }
+  ::-moz-selection {
+    background: #00ffff; /* For Firefox */
+    color: white;
+  }
+    </style>
+</head>
+<body>
+    <div class="moving-bg"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="banner">
+            <div class="header">
+                <h1 class="title">What is <span class="highlight">SciTrade</span> and what is its <span class="highlight">mission</span>?</h1>
+                <p class="subtitle">Trading with purpose, innovation, and excellence</p>
+            </div>
+            <div class="scroll-down" id="scrollDown">
+                <span>SCROLL DOWN</span>
+                <i></i>
+            </div>
+        </div>
+        
+        <div class="content-container">
+            <div class="section" id="section1">
+                <h2 class="section-title">Our Identity</h2>
+                <div class="content">
+                    <p><span class="highlight">SciTrade</span> is a smart but unrelentless startup founded in 2022, determined to helping individuals navigate the complex world of trading, the innovative way.</p>
+                    <p>What we're providing is <span class="highlight">much more than education</span> - we're removing barriers to wealth creation, tailored to fit your needs, and include beginner and experienced traders.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="section2">
+                <h2 class="section-title">Our Approach</h2>
+                <div class="content">
+                    <p>At the heart of SciTrade is <span class="highlight">market experience</span>, the founder, CEO, and was driving force behind the company. With a <span class="highlight">passion</span> for the markets and a deep intuitive understanding of algorithmic dynamics by successfully aligning walls with <span class="highlight">smart trend manipulation</span> and sentiment.</p>
+                    <p>Whether you're looking to <span class="highlight">trade</span> your current approach or build a <span class="highlight">new foundation</span>, SciTrade offers the insight and <span class="highlight">guidance</span> to help you navigate markets backed by real experience and a holistic, one-on-one approach.</p>
+                    <p>We may be small, but our vision is <span class="highlight">big</span> as we the journey to <span class="highlight">making</span> more <span class="highlight">traders</span> meeting.</p>
+                </div>
+            </div>
+            
+            <div class="parallax-section" style="background-image: url('https://raw.githubusercontent.com/scitrade-ai/Scitrade/main/Images/bullcyan.png')">
+                <div class="parallax-content">
+                    <h2 class="parallax-title">Empowering Traders</h2>
+                    <p class="parallax-text">Our mission is to provide traders with the tools, knowledge, and support they need to succeed in today's dynamic markets.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="section4">
+                <h2 class="section-title">Our Goals</h2>
+                <div class="card-container">
+                    <div class="card">
+                        <h3 class="card-title">Empower New Traders</h3>
+                        <p class="card-content">Provide accessible education and resources to help beginners overcome entry barriers and build a solid foundation for successful trading.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Enhance Trading Skills</h3>
+                        <p class="card-content">Develop comprehensive learning paths that evolve with traders' capabilities, focusing on practical strategies that work in real market conditions.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Build Trading Confidence</h3>
+                        <p class="card-content">Create a supportive environment where traders can develop the psychological resilience needed to navigate market volatility with consistency.</p>
+                    </div>
+                </div>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <h3 class="card-title">Foster Community Growth</h3>
+                        <p class="card-content">Establish a collaborative network where traders can share insights, strategies, and support each other through their trading journey.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Promote Responsible Trading</h3>
+                        <p class="card-content">Emphasize risk management and sustainable approaches to trading that prioritize long-term success over short-term gains.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Innovate Trading Education</h3>
+                        <p class="card-content">Continuously develop new tools and methodologies that adapt to changing market conditions and technological advances.</p>
+                    </div>
+                </div>
+                
+                <div class="cta-container" style="text-align: center; margin-top: 70px;">
+                    <a href="#" class="cta-button">Join Us Today</a>
+                </div>
+            </div>
+            
+            <div class="ticker-wrap">
+                <div class="ticker">
+                    <div class="ticker-item">MARKETS MOVE. WE ADAPT.</div>
+                    <div class="ticker-item">LEARN. TRADE. GROW.</div>
+                    <div class="ticker-item">COMMUNITY DRIVEN TRADING</div>
+                    <div class="ticker-item">INNOVATIVE MARKET STRATEGIES</div>
+                    <div class="ticker-item">YOUR SUCCESS IS OUR PRIORITY</div>
+                    <div class="ticker-item">BREAK BARRIERS. BUILD WEALTH.</div>
+                    <div class="ticker-item">TECHNICAL EXCELLENCE</div>
+                    <div class="ticker-item">TRADING WITH CONFIDENCE</div>
+                </div>
+            </div>
+            
+            <div class="parallax-section" style="background-image: url('https://raw.githubusercontent.com/scitrade-ai/Scitrade/main/Images/bullcyan.png')">
+                <div class="parallax-content">
+                    <h2 class="parallax-title">Join Our Trading Community</h2>
+                    <p class="parallax-text">Take the next step in your trading journey with personalized guidance and a supportive community.</p>
+                </div>
+            </div>
+            <iframe 
+              id="footer-frame"
+              src="https://scitrade-ai.github.io/SciTrade/Code/footer.html"
+              style="width:100%; height:100%; border:none; display:block;">
+            </iframe>
+
+        </div>
+    </div>
+    
+    <script>
+        // Create floating particles
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                
+                // Random size
+                const size = Math.random() * 4 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random opacity
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                
+                // Random animation duration
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = duration + 's';
+                
+                // Random animation delay
+                const delay = Math.random() * 10;
+                particle.style.animationDelay = delay + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+        
+        // Smooth scrolling
+        document.getElementById('scrollDown').addEventListener('click', function() {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Animation for sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const parallaxContent = document.querySelectorAll('.parallax-content');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            parallaxContent.forEach(content => {
+                observer.observe(content);
+            });
+        });
+        
+        // Parallax effect enhancement
+        window.addEventListener('scroll', function() {
+            const parallaxSections = document.querySelectorAll('.parallax-section');
+            const banner = document.querySelector('.banner');
+            const scrollPosition = window.pageYOffset;
+            
+            // Banner parallax
+            const bannerOffset = banner.offsetTop;
+            const bannerHeight = banner.offsetHeight;
+            if (scrollPosition <= bannerHeight) {
+                const yPos = scrollPosition * 0.2; 
+                banner.style.backgroundPositionY = `calc(top + ${yPos}px)`;
+            }            
+            // Other parallax sections
+            parallaxSections.forEach(section => {
+                const sectionOffset = section.offsetTop;
+                const distanceFromTop = sectionOffset - scrollPosition;
+                
+                if (distanceFromTop > -500 && distanceFromTop < window.innerHeight) {
+                    const yPos = (distanceFromTop - window.innerHeight / 2) * 0.1;
+                    section.style.backgroundPositionY = `calc(50% + ${yPos}px)`;
+                }
+            });
+            
+            // Move particles based on scroll
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                const speed = parseFloat(particle.style.width) * 0.05;
+                const currentX = parseFloat(particle.style.left);
+                const newX = (currentX + scrollPosition * speed * 0.01) % 100;
+                particle.style.left = newX + 'vw';
+            });
+        });
+        
+        // Hover effects enhancement
+        const highlights = document.querySelectorAll('.highlight');
+        highlights.forEach(highlight => {
+            highlight.addEventListener('mouseover', () => {
+                highlight.style.textShadow = '0 0 15px rgba(0, 255, 255, 0.8)';
+            });
+            
+            highlight.addEventListener('mouseout', () => {
+                highlight.style.textShadow = 'none';
+            });
+        });
+        
+        // Add subtle hover effect to cards
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerY = rect.height / 2;
+                
+                const angleX = (y - centerY) / 20;
+                const angleY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-15px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
