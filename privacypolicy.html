@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SciTrade - Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 300;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid rgba(3, 252, 244, 0.3);
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(3, 252, 244, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(3,252,244,0.2) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            animation: floatGlow 15s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(3,252,244,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            animation: floatGlow2 18s infinite ease-in-out;
+            animation-delay: 2s;
+            z-index: -1;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(30px, 30px); }
+            50% { transform: translate(60px, 10px); }
+            75% { transform: translate(20px, 50px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes floatGlow2 {
+            0% { transform: translate(0, 0); }
+            33% { transform: translate(-40px, -30px); }
+            66% { transform: translate(-20px, -50px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(3, 252, 244, 0.5);
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(3,252,244,0), #03fcf4, rgba(3,252,244,0));
+        }
+
+        h1 {
+            color: #03fcf4;
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .effective-date {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
+        .introduction {
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h2 {
+            color: #03fcf4;
+            font-size: 24px;
+            margin: 20px 0 10px 0;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #03fcf4;
+            transition: width 0.3s ease;
+        }
+
+        section:hover h2::after {
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 25px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        section:nth-child(odd)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -5px;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(3,252,244,0), #03fcf4, rgba(3,252,244,0));
+            transition: height 0.5s ease;
+        }
+
+        section:nth-child(even)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -5px;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(3,252,244,0), #03fcf4, rgba(3,252,244,0));
+            transition: height 0.5s ease;
+        }
+
+        section:hover::before {
+            height: 100%;
+        }
+
+        section:hover {
+            background: rgba(3, 252, 244, 0.05);
+            transform: translateX(5px);
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        li::before {
+            content: '•';
+            color: #03fcf4;
+            position: absolute;
+            left: -15px;
+        }
+
+        .highlight {
+            color: #03fcf4;
+            font-weight: 400;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000;
+            box-shadow: inset 0 0 5px rgba(3, 252, 244, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #03fcf4, #039690);
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(3, 252, 244, 0.7);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #039690, #03fcf4);
+        }
+
+        /* Custom Text Selection */
+        ::selection {
+            background-color: rgba(3, 252, 244, 0.7);
+            color: #ffffff;
+        }
+
+        .fade-item {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(3, 252, 244, 0.3);
+            font-size: 14px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(3,252,244,0), #03fcf4, rgba(3,252,244,0));
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info a {
+            color: #03fcf4;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #03fcf4;
+            transition: width 0.3s ease;
+        }
+
+        .contact-info a:hover::after {
+            width: 100%;
+        }
+
+        .contact-info a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(3, 252, 244, 0.7);
+        }
+
+        .icon {
+            font-size: 18px;
+            color: #03fcf4;
+        }
+
+        a {
+            color: #03fcf4;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(3, 252, 244, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Privacy Policy</h1>
+            <div class="effective-date">Effective Date: 5/1/2025</div>
+        </header>
+
+        <div class="introduction">
+            <p>Your <span class="highlight">privacy is important</span> to us. This Privacy Policy explains how <span class="highlight">SciTrade</span> collects, uses, and protects any personal information you provide when using our website <a href="https://sites.google.com/view/scitrade">https://sites.google.com/view/scitrade</a>.</p>
+            <p>By using this website, you agree to the terms of this Privacy Policy.</p>
+        </div>
+
+        <section class="fade-item">
+            <h2>1. Information We Collect</h2>
+            <p>We only collect the information we need to fulfill your orders or respond to inquiries. This may include:</p>
+            <ul>
+                <li>Your name</li>
+                <li>Your email address</li>
+                <li>Details related to your purchase (e.g., which product you bought)</li>
+                <li>Any messages or feedback you send to us</li>
+            </ul>
+            <p>We do <span class="highlight">not collect or store</span> your payment information directly. All transactions are processed securely through third-party platforms (such as PayPal or other payment processors).</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>2. How We Use Your Information</h2>
+            <p>We use your information to:</p>
+            <ul>
+                <li>Process and deliver your purchased products or services</li>
+                <li>Respond to questions or support requests</li>
+                <li>Send updates related to your order or account (if applicable)</li>
+                <li>Improve our products and customer experience</li>
+            </ul>
+            <p>We do <span class="highlight">not send promotional emails</span> unless you specifically opt in.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>3. Sharing Your Information</h2>
+            <p>We do <span class="highlight">not sell, trade, or rent</span> your personal information to others.</p>
+            <p>We may share limited information only when necessary to:</p>
+            <ul>
+                <li>Process payments (e.g., through PayPal or Stripe)</li>
+                <li>Comply with legal requirements or law enforcement requests</li>
+                <li>Protect our rights or prevent fraud</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>4. Data Security</h2>
+            <p>We take <span class="highlight">reasonable steps</span> to protect your information, including using secure third-party platforms for payments and communications. However, no website can guarantee 100% security, so please use caution when sharing personal details online.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>5. Cookies</h2>
+            <p>We may use basic cookies to improve website performance or track general usage. These cookies do not collect personal information. You can disable cookies in your browser settings if you prefer.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>6. Your Rights</h2>
+            <p>You have the right to:</p>
+            <ul>
+                <li>Request access to any personal data we hold about you</li>
+                <li>Ask us to correct or delete your information</li>
+                <li>Withdraw your consent at any time</li>
+            </ul>
+            <p>To make a request, just contact us directly using the information below.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>7. Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. If we do, we'll post the updated version on this page. Your continued use of the site means you accept the updated policy.</p>
+        </section>
+
+        <section class="fade-item">
+            <h2>8. Contact Us</h2>
+            <p>If you have any questions or concerns about this Privacy Policy or your data, feel free to contact us:</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="icon">📧</span> Email: <a href="mailto:scitrade@gmail.com">scitrade@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">🌐</span> Website: <a href="https://sites.google.com/view/scitrade">https://sites.google.com/view/scitrade</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="fade-item">
+            <p>© 2025 SciTrade. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animation for sections when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeItems = document.querySelectorAll('.fade-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [10, 0],
+                            easing: 'easeOutExpo',
+                            duration: 800,
+                            delay: 100
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeItems.forEach(item => {
+                observer.observe(item);
+            });
+
+            // Title animation
+            anime({
+                targets: 'h1',
+                opacity: [0, 1],
+                translateY: [-20, 0],
+                easing: 'easeOutExpo',
+                duration: 1000,
+                delay: 300
+            });
+
+            // Introduction animation
+            anime({
+                targets: '.introduction',
+                opacity: [0, 1],
+                translateY: [-10, 0],
+                easing: 'easeOutExpo',
+                duration: 1000,
+                delay: 600
+            });
+
+            // Subtle pulsing glow effect for titles
+            anime({
+                targets: 'h1, h2',
+                textShadow: [
+                    '0 0 3px rgba(3, 252, 244, 0.3)',
+                    '0 0 8px rgba(3, 252, 244, 0.7)',
+                    '0 0 3px rgba(3, 252, 244, 0.3)'
+                ],
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutSine',
+                duration: 2000
+            });
+            
+            // Link hover effects
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: link,
+                        color: '#ffffff',
+                        textShadow: '0 0 10px rgba(3, 252, 244, 0.9)',
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    anime({
+                        targets: link,
+                        color: '#03fcf4',
+                        textShadow: '0 0 0px rgba(3, 252, 244, 0)',
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+            });
+
+            // Highlight emphasis on important words
+            anime({
+                targets: '.highlight',
+                fontWeight: '400',
+                color: [
+                    '#03fcf4',
+                    '#36fcf4',
+                    '#03fcf4'
+                ],
+                easing: 'easeInOutSine',
+                duration: 3000,
+                direction: 'alternate',
+                loop: true
+            });
+        });
+    </script>
+
+<iframe 
+  id="footer-frame"
+  src="https://youssefbechara.github.io/YSFB-Website-Assets/footer.html"
+  style="width:100%; height:100%; border:none; display:block;">
+</iframe>
+
+<script>
+document.getElementById('footer-frame').onload = function() {
+  this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
+  // Remove any residual spacing
+  this.style.margin = '0';
+  this.style.padding = '0';
+};
+</script>
+</body>
+</html>
