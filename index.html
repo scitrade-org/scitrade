@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SciTrade</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/scitradelogotransp.png">
     <!-- Import Rajdhani font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Import Oswald font for content sections -->
+    <!-- Import Oswald font for headers -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+    <!-- Import Roboto for body text (more professional) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         /* --- ROOT VARIABLES --- */
         :root {
@@ -18,6 +22,7 @@
             --black: #000000;
             --transparent-black: rgba(0, 0, 0, 0.7);
             --red: #03fcf4; /* This is actually cyan, named "red" in original code */
+            --gray-bg: #0a0a0a;
         }
 
         /* --- GLOBAL STYLES --- */
@@ -32,35 +37,47 @@
             overflow-x: hidden;
             perspective: 1px;
             width: 100%;
+            font-family: 'Roboto', sans-serif;
         }
 
-        /* Custom Scrollbar */
+        /* Custom Scrollbar - LARGER with better hover */
         ::-webkit-scrollbar {
-            width: 4px;
+            width: 10px;
+            height: 10px;
         }
 
         ::-webkit-scrollbar-track {
             background: var(--black);
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: var(--red);
-            border-radius: 2px;
+            border-radius: 5px;
+            border: 2px solid var(--black);
+            transition: all 0.3s ease;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: #03c9c2;
             box-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
+            transform: scale(1.1);
+        }
+
+        /* Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--red) var(--black);
         }
 
         ::selection {
             background: #03fcf4;
-            color: white;
+            color: var(--black);
         }
 
         ::-moz-selection {
             background: #03fcf4;
-            color: white;
+            color: var(--black);
         }
 
         /* --- NAVIGATION BAR --- */
@@ -82,7 +99,7 @@
 
         .sci-navbar.scrolled {
             padding: 10px 0;
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: rgba(0, 0, 0, 0.95);
             box-shadow: 0 5px 20px rgba(0, 255, 255, 0.15);
         }
 
@@ -273,7 +290,7 @@
             margin: 0 auto;
         }
 
-        /* Banner Section */
+        /* Banner Section - Full width */
         .banner {
             position: relative;
             width: 100%;
@@ -302,8 +319,8 @@
             position: relative;
             z-index: 2;
             width: 100%;
-            height: 100%; /* Add this line */
-            padding: 0; /* Changed from 40px 20px */
+            height: 100%;
+            padding: 0;
         }
 
         .title {
@@ -449,11 +466,12 @@
             }
         }
 
-        /* Content Sections */
-        .content-container {
-            max-width: 1200px;
+        /* Content Sections with horizontal margins */
+        .content-section {
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 40px;
+            background-color: var(--gray-bg);
         }
 
         .section {
@@ -499,7 +517,7 @@
         .content {
             font-size: 1.3rem;
             line-height: 1.7;
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: var(--white);
             font-weight: 300;
         }
@@ -568,9 +586,10 @@
 
         .card-content {
             font-size: 1.1rem;
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: var(--white);
             font-weight: 300;
+            line-height: 1.6;
         }
 
         /* Rating Section */
@@ -631,16 +650,16 @@
 
         .reviewer-name {
             font-size: 18px;
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: var(--white);
-            font-weight: 300;
+            font-weight: 500;
         }
 
         .reviewer-date {
             font-size: 14px;
             color: #aaa;
             margin-top: 5px;
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Roboto', sans-serif;
             font-weight: 300;
         }
 
@@ -648,8 +667,8 @@
             color: var(--red);
             font-size: 16px;
             margin-top: 5px;
-            font-family: 'Oswald', sans-serif;
-            font-weight: 300;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
         }
 
         /* CTA Button */
@@ -756,7 +775,7 @@
         .parallax-text {
             font-size: 1.4rem;
             line-height: 1.6;
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: var(--white);
             font-weight: 300;
         }
@@ -858,7 +877,28 @@
             }
         }
 
+        /* Iframe Container Styles */
+        .iframe-container {
+            width: 100%;
+            padding: 0 40px;
+            margin: 40px auto;
+            max-width: 1600px;
+        }
+
+        /* Footer Styles */
+        .footer-container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
         /* Responsive Design */
+        @media screen and (max-width: 1200px) {
+            .iframe-container,
+            .content-section {
+                padding: 40px 30px;
+            }
+        }
+
         @media screen and (max-width: 768px) {
             .sci-nav-links {
                 position: fixed;
@@ -940,6 +980,26 @@
             .parallax-text {
                 font-size: 1.2rem;
             }
+
+            .iframe-container,
+            .content-section {
+                padding: 30px 20px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .iframe-container,
+            .content-section {
+                padding: 20px 15px;
+            }
+            
+            .banner {
+                height: 70vh;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
@@ -995,10 +1055,8 @@
     <div class="container">
         <div class="banner">
             <div class="header">
-                <div style="width:100%; padding:0; margin:0;">
-                    <iframe src="https://scitrade-org.github.io/scitrade/Code/homeheader.html" style="width:100%; height:600px; border:none; overflow:hidden;" scrolling="no" frameborder="0" allowtransparency="true">
-                    </iframe>
-                </div>
+                <iframe src="https://scitrade-org.github.io/scitrade/Code/homeheader.html" style="width:100%; height:600px; border:none; overflow:hidden;" scrolling="no" frameborder="0" allowtransparency="true">
+                </iframe>
             </div>
             <div class="scroll-down" id="scrollDown">
                 <span>SCROLL DOWN</span>
@@ -1006,38 +1064,59 @@
             </div>
         </div>
 
-        <div style="width:100%; padding:0; margin:0;">
+        <div class="iframe-container">
             <iframe src="https://scitrade-org.github.io/scitrade/Code/description.html" style="width:100%; height:600px; border:none; overflow:hidden;" scrolling="no" frameborder="0" allowtransparency="true">
             </iframe>
         </div>
 
-        <div style="width:100%; padding:0; margin:0;">
-          <iframe src="https://scitrade-org.github.io/scitrade/Code/corequalities.html" 
-                  style="width:100%; height:600px; border:none; overflow:hidden;"
-                  scrolling="no" frameborder="0" allowtransparency="true">
-          </iframe>
+        <div class="iframe-container">
+            <iframe src="https://scitrade-org.github.io/scitrade/Code/corequalities.html" 
+                    style="width:100%; height:600px; border:none; overflow:hidden;"
+                    scrolling="no" frameborder="0" allowtransparency="true">
+            </iframe>
         </div>
 
-        <div style="width:100%; padding:0; margin:0;">
-          <iframe src="https://scitrade-org.github.io/scitrade/Code/carousel.html" 
-                  style="width:100%; height:600px; border:none; overflow:hidden;"
-                  scrolling="no" frameborder="0" allowtransparency="true">
-          </iframe>
+        <div class="iframe-container">
+            <iframe src="https://scitrade-org.github.io/scitrade/Code/carousel.html" 
+                    style="width:100%; height:600px; border:none; overflow:hidden;"
+                    scrolling="no" frameborder="0" allowtransparency="true">
+            </iframe>
         </div>
 
-        <div style="width:100%; padding:0; margin:0;">
-          <iframe src="https://scitrade-org.github.io/scitrade/Code/whychooseus.html" 
-                  style="width:100%; height:600px; border:none; overflow:hidden;"
-                  scrolling="no" frameborder="0" allowtransparency="true">
-          </iframe>
+        <div class="iframe-container">
+            <iframe src="https://scitrade-org.github.io/scitrade/Code/whychooseus.html" 
+                    style="width:100%; height:600px; border:none; overflow:hidden;"
+                    scrolling="no" frameborder="0" allowtransparency="true">
+            </iframe>
         </div>
     </div>
     
+    <!-- Updated JavaScript with all fixes -->
     <script>
+        // Mobile menu toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('sciNavLinks');
+            const hamburger = document.querySelector('.sci-hamburger');
+            navLinks.classList.toggle('open');
+            hamburger.classList.toggle('open');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.sci-nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                const navLinks = document.getElementById('sciNavLinks');
+                const hamburger = document.querySelector('.sci-hamburger');
+                if (navLinks.classList.contains('open')) {
+                    navLinks.classList.remove('open');
+                    hamburger.classList.remove('open');
+                }
+            });
+        });
+
         // Create floating particles
         document.addEventListener('DOMContentLoaded', function() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
+            const particleCount = 50;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -1048,7 +1127,7 @@
                 particle.style.top = Math.random() * 100 + 'vh';
                 
                 // Random size
-                const size = Math.random() * 4 + 1;
+                const size = Math.random() * 5 + 1;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
                 
@@ -1067,11 +1146,15 @@
             }
         });
         
-        // Smooth scrolling
+        // Improved smooth scrolling for scroll-down button
         document.getElementById('scrollDown').addEventListener('click', function() {
-            window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
+            // Get the first iframe container after the banner
+            const firstIframe = document.querySelector('.iframe-container');
+            
+            // Smooth scroll to the first iframe container
+            firstIframe.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
             });
         });
         
@@ -1099,18 +1182,33 @@
             });
         });
         
-        // Parallax effect enhancement
+        // Navbar scroll effect
         window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('sciNavbar');
+            const scrollProgress = document.getElementById('scrollProgress');
+            
+            // Add scrolled class to navbar
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Update scroll progress bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            scrollProgress.style.width = scrolled + '%';
+            
+            // Parallax effect
             const parallaxSections = document.querySelectorAll('.parallax-section');
             const banner = document.querySelector('.banner');
             const scrollPosition = window.pageYOffset;
             
             // Banner parallax
-            const bannerOffset = banner.offsetTop;
-            // Banner parallax - smoother version
             const bannerHeight = banner.offsetHeight;
             if (scrollPosition <= bannerHeight) {
-                const yPos = scrollPosition * 0.2; // reduced from 0.5 to 0.2
+                const yPos = scrollPosition * 0.2;
                 banner.style.backgroundPositionY = `calc(top + ${yPos}px)`;
             }
             
@@ -1171,14 +1269,22 @@
                 }, 300);
             });
         });
+        
+        // Initialize navbar on load
+        window.addEventListener('load', function() {
+            const navbar = document.getElementById('sciNavbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            }
+        });
     </script>
-<!-- Custom Element Approach for Google Sites -->
-<!-- Embed this code in Google Sites through Insert > Embed > Embed code -->
-    <div style="width:100%; padding:0; margin:0;">
-      <iframe src="https://scitrade-org.github.io/scitrade/Code/footer.html"
-              style="width:100%; height:600px; border:none; overflow:hidden;" 
-              scrolling="no" frameborder="0" allowtransparency="true">
-      </iframe>
+
+    <!-- Footer -->
+    <div class="footer-container">
+        <iframe src="https://scitrade-org.github.io/scitrade/Code/footer.html"
+                style="width:100%; height:600px; border:none; overflow:hidden;" 
+                scrolling="no" frameborder="0" allowtransparency="true">
+        </iframe>
     </div>
 </body>
 </html>
