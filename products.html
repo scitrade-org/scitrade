@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Products Catalog</title>
+    <!-- Import the requested fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        body {
+            font-family: 'rajdhani', sans-serif;
+            background-color: transparent;
+            margin: 0;
+            padding: 20px;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .category {
+            margin-bottom: 50px;
+            display: none; /* Hide all categories by default */
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        .category.active { 
+            display: block; /* Show active category */
+        }
+        h2 {
+            font-family: 'rajdhani', sans-serif;
+            color: #03fcf4;
+            border-bottom: 2px solid #03fcf4;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(3, 252, 244, 0.3);
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background-color: #03fcf4;
+            box-shadow: 0 0 10px rgba(3, 252, 244, 0.7);
+        }
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(3, 252, 244, 0.2), inset 0 0 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(3, 252, 244, 0.2);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        .filter-group {
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .filter-group:hover {
+            transform: translateY(-3px);
+        }
+        .filter-label {
+            font-family: 'rajdhani', sans-serif;
+            color: #ffffff;
+            font-size: 18px;
+            margin-right: 15px;
+            align-self: center;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(3, 252, 244, 0.3);
+        }
+        select {
+            font-family: 'rajdhani', sans-serif;
+            padding: 12px 20px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            border: 1px solid #03fcf4;
+            outline: none;
+            cursor: pointer;
+            font-size: 16px;
+            min-width: 220px;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2303FCF4%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px top 50%;
+            background-size: 12px auto;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            font-weight: 400;
+            box-shadow: 0 0 10px rgba(3, 252, 244, 0.2);
+        }
+        select:hover {
+            border-color: #03fcf4;
+            box-shadow: 0 0 20px rgba(3, 252, 244, 0.6);
+            transform: translateY(-2px);
+            background-color: rgba(20, 0, 0, 0.8);
+        }
+        select:focus {
+            border-color: #03fcf4;
+            box-shadow: 0 0 25px rgba(3, 252, 244, 0.7);
+        }
+        option {
+            background-color: #000000;
+            padding: 10px;
+        }
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }        
+        .product-grid {
+            display: grid;
+            gap: 20px; /* Reduced from 30px */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            perspective: 1000px;
+        }
+        .product-card {
+            border: 1px solid #03fcf4;
+            padding: 15px; /* Reduced from 20px */
+            border-radius: 8px; /* Reduced from 12px */
+            background-color: rgba(0, 0, 0, 0.6);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(3, 252, 244, 0.2);
+            transform-style: preserve-3d;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.6s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(3, 252, 244, 0.1),
+                transparent,
+                rgba(3, 252, 244, 0.1)
+            );
+            transform: rotate(45deg);
+            z-index: -1;
+            transition: all 0.8s ease;
+            opacity: 0;
+        }
+        .product-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(10%, 10%);
+        }
+        .product-card:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(3, 252, 244, 0.5);
+            border-color: #03fcf4;
+        }
+        .product-content {
+            transition: all 0.4s ease;
+            backface-visibility: hidden;
+        }
+        .product-card:hover .product-content {
+            filter: blur(3px);
+            transform: scale(0.95);
+        }
+        
+        .product-image {
+                    filter: hue-rotate(180deg) saturate(2);
+                    width: 90%; 
+                    margin: 0 auto 8px auto; /* Reduced bottom margin
+                    aspect-ratio: 1 / 1; /* Maintains the perfect square */
+                    background-color: rgba(30, 30, 30, 0.7);
+                    border-radius: 8px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #777;
+                    font-family: 'rajdhani', sans-serif;
+                    text-transform: uppercase;
+                    border: 1px solid #ff0000;
+                    position: relative;
+                    overflow: hidden;
+                    transition: all 0.5s ease;
+                    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: skewX(-25deg);
+            transition: all 0.8s ease;
+        }
+        .product-card:hover .product-image::after {
+            animation: shine 1.5s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+        .product-price {
+            font-family: 'rajdhani', sans-serif;
+            font-weight: 600;
+            color: #03fcf4;
+            text-align: right;
+            margin-top: 5px; /* Reduced from 15px to 5px */
+            font-size: 18;
+            text-shadow: 0 0 10px rgba(3, 252, 244, 0.3);
+            transition: all 0.3s ease;
+            margin: 0; /* Removed previous margin */
+        }
+        
+        /* Optional: You can also adjust the height of the product name if needed */
+        .product-name {
+            font-family: 'rajdhani', sans-serif;
+            font-weight: 0;
+            color: #ffffff;
+            font-size: 16px; /* Reduced from 20px */
+            height: 40px; /* Reduced from 55px */
+            margin-bottom: 8px; /* Adjusted spacing */
+            line-height: 1.3; /* Tighter line spacing */
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .product-card:hover .product-price {
+            transform: scale(1.1);
+            text-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
+        }
+        .view-detail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(3px);
+            border-radius: 12px;
+            z-index: 5;
+        }
+        .product-card:hover .view-detail {
+            opacity: 1;
+            animation: pulseBackground 2s infinite;
+        }
+        @keyframes pulseBackground {
+            0% { background-color: rgba(0, 0, 0, 0.7); }
+            50% { background-color: rgba(0, 50, 50, 0.7); }
+            100% { background-color: rgba(0, 0, 0, 0.7); }
+        }
+        .view-btn {
+            padding: 12px 24px;
+            background-color: #03fcf4;
+            color: #ffffff;
+            font-family: 'rajdhani', sans-serif;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(3, 252, 244, 0.5);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .view-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        .view-btn:hover {
+            background-color: #03c5bd;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(3, 252, 244, 0.7);
+        }
+        .view-btn:hover::before {
+            animation: btnShine 1s infinite;
+        }
+        @keyframes btnShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        .note {
+            font-family: 'rajdhani', sans-serif;
+            font-style: italic;
+            margin: 15px 0 30px;
+            font-size: 18px;
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid #03fcf4;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .show-all {
+            text-align: center;
+            margin: 40px 0;
+            perspective: 1000px;
+        }
+        .show-all-btn {
+            background: none;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-family: 'rajdhani', sans-serif;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 18px;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            font-weight: 500;
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .show-all-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #03fcf4;
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        .show-all-btn:hover {
+            color: #ffffff;
+            border-color: #03fcf4;
+            box-shadow: 0 10px 20px rgba(3, 252, 244, 0.5);
+            transform: translateY(-5px) rotateX(10deg);
+        }
+        .show-all-btn:hover::before {
+            width: 100%;
+        }
+        .hidden {
+            display: none !important;
+        }
+        /* Particle background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #03fcf4;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #03c5bd;
+        }
+        /* Loading animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: all 0.5s ease;
+        }
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-content {
+            text-align: center;
+        }
+        .candlestick-loader {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 80px;
+            margin-bottom: 20px;
+            perspective: 1000px;
+        }
+        .candle {
+            position: relative;
+            width: 18px;
+            height: 50px;
+            margin: 0 8px;
+            background: #ffffff;
+            animation: candleAnimation 1.8s infinite ease-in-out;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        .candle::before, .candle::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            background: #ffffff;
+        }
+        .candle::before {
+            top: -15px;
+            height: 15px;
+            transform: translateX(-50%);
+            animation: wickAnimation 1.8s infinite ease-in-out;
+        }
+        .candle::after {
+            bottom: -15px;
+            height: 15px;
+            transform: translateX(-50%);
+            animation: wickAnimation 1.8s infinite ease-in-out;
+        }
+        .candle1 {
+            animation-delay: 0s;
+        }
+        .candle1::before, .candle1::after {
+            animation-delay: 0s;
+        }
+        .candle2 {
+            animation-delay: 0.6s;
+        }
+        .candle2::before, .candle2::after {
+            animation-delay: 0.6s;
+        }
+        .candle3 {
+            animation-delay: 1.2s;
+        }
+        .candle3::before, .candle3::after {
+            animation-delay: 1.2s;
+        }
+        @keyframes candleAnimation {
+            0% {
+                background: #ffffff;
+                transform: scaleY(0.8) translateY(0);
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                background: #03fcf4;
+                transform: scaleY(1.2) translateY(-20px);
+                box-shadow: 0 0 20px rgba(3, 252, 244, 0.7);
+            }
+            100% {
+                background: #ffffff;
+                transform: scaleY(0.8) translateY(0);
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            }
+        }
+        @keyframes wickAnimation {
+            0% {
+                background: #ffffff;
+            }
+            50% {
+                background: #03fcf4;
+            }
+            100% {
+                background: #ffffff;
+            }
+        }
+        .loader-text {
+            color: #ffffff;
+            font-family: 'rajdhani', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(3, 252, 244, 0.3);
+        }
+        }
+  ::selection {
+    background: #03fcf4; /* Cyan highlight */
+    color: white; /* Optional: Set text color for better contrast */
+  }
+  ::-moz-selection {
+    background: #03fcf4; /* For Firefox */
+    color: white;
+  }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="candlestick-loader">
+                <div class="candle candle1"></div>
+                <div class="candle candle2"></div>
+                <div class="candle candle3"></div>
+            </div>
+            <div class="loader-text">Loading Premium Products...</div>
+        </div>
+    </div>
+    
+    <!-- Particle background -->
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <!-- Title removed as requested -->
+        
+        <div class="filter-container">
+            <div class="filter-group">
+                <div class="filter-label">CATEGORY:</div>
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="technical">Technical Indicators</option>
+                    <option value="fundamental">Fundamental Indicators</option>
+                    <option value="ai">AI Indicators</option>
+                    <option value="expert">Expert Advisors</option>
+                    <option value="money">Money Management Tools</option>
+                    <option value="private">Private Coaching</option>
+                    <option value="volume">Volume Indicators</option>
+                </select>
+            </div>
+                        
+            <div class="filter-group">
+                <div class="filter-label">PRICE:</div>
+                <select id="price-filter">
+                    <option value="all">All Prices</option>
+                    <option value="0-29.9">0 - 29.9 $</option>
+                    <option value="30-49.9">30 - 49.9 $</option>
+                    <option value="50-74.99">50 - 74.99 $</option>
+                    <option value="75-99.9">75 - 99.9 $</option>
+                    <option value="100-149.9">100 - 149.9 $</option>
+                    <option value="150-199.9">150 - 199.9 $</option>
+                    <option value="200-249.9">200 - 249.9 $</option>
+                    <option value="250-299.9">250 - 299.9 $</option>
+                    <option value="300-350">300 - 350 $</option>
+                    <option value="350-399">350 - 399 $</option>
+                    <option value="400-499">400 - 499 $</option>
+                    <option value="500-599">450 - 599 $</option>
+                    <option value="600-699">600 - 699 $</option>
+                    <option value="700-799">700 - 799 $</option>
+                    <option value="800-899">800 - 899 $</option>
+                    <option value="900-999">900 - 999 $</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Technical Indicators -->
+        <div id="technical" class="category">
+            <h2>TECHNICAL INDICATORS</h2>
+            <div class="product-grid">
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/triplesupertrendthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-header">
+                            <div class="product-name">Triple Super trend with RSI, BB, Alligator, SMA&EMA Crossover Signals</div>
+                            <div class="product-price">50 $</div>
+                        </div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#technical-product-1" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/smaemadifferencethumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Triple SMA&EMA Difference Chart</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#technical-product-2" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/obvsmadifference.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">OBV & SMA Difference Chart</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#technical-product-3" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <!--<div class="product-card" data-price="50">-->
+                <!--    <div class="product-content">-->
+                <!--        <div class="product-image">Product Image</div>-->
+                <!--        <div class="product-name">Multi-RSI Confirmation Signals</div>-->
+                <!--        <div class="product-price">50 $</div>-->
+                <!--    </div>-->
+                <!--    <div class="view-detail">-->
+                <!--        <a href="#technical-product-4" class="view-btn">VIEW DETAILS</a>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/sltpthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">StopLoss TakeProfit Optimized Indicator</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#technical-product-5" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <!--<div class="product-card" data-price="50">-->
+                <!--    <div class="product-content">-->
+                <!--        <div class="product-image">Product Image</div>-->
+                <!--        <div class="product-name">Volume Profile & Delta</div>-->
+                <!--        <div class="product-price">50 $</div>-->
+                <!--    </div>-->
+                <!--    <div class="view-detail">-->
+                <!--        <a href="#technical-product-6" class="view-btn">VIEW DETAILS</a>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/ultimatecandlepatternindicatorthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Ultimate Candle Pattern Indicator</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#technical-product-7" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fundamental Indicators -->
+        <div id="fundamental" class="category">
+            <h2>FUNDAMENTAL INDICATORS</h2>
+            <div class="product-grid">
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/ainewsanalyzer.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Advanced AI News Analyzer</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#fundamental-product-1" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/generalseasonalanalysis.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Detailed Seasonal Analysis Reports</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#fundamental-product-2" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <!--<div class="product-card" data-price="50">-->
+                <!--    <div class="product-content">-->
+                <!--        <div class="product-image">Product Image</div>-->
+                <!--        <div class="product-name">Forex Factory Scraper</div>-->
+                <!--        <div class="product-price">50 $</div>-->
+                <!--    </div>-->
+                <!--    <div class="view-detail">-->
+                <!--        <a href="#fundamental-product-3" class="view-btn">VIEW DETAILS</a>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/newscalendarthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">News Calendar</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#fundamental-product-4" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <!--<div class="product-card" data-price="50">-->
+                <!--    <div class="product-content">-->
+                <!--        <div class="product-image">Product Image</div>-->
+                <!--        <div class="product-name">Twitter Events Scraper</div>-->
+                <!--        <div class="product-price">50 $</div>-->
+                <!--    </div>-->
+                <!--    <div class="view-detail">-->
+                <!--        <a href="#fundamental-product-5" class="view-btn">VIEW DETAILS</a>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/correlationthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Correlation Indicator</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#fundamental-product-6" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI Indicators -->
+        <div id="ai" class="category">
+            <h2>AI INDICATORS</h2>
+            <div class="product-grid">
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/arimathumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Optimized ARIMA Model</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#ai-product-1" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/lstmthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Multi-Variable-Sequential LSTM Model</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#ai-product-2" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <!--<div class="product-card" data-price="50">-->
+                <!--    <div class="product-content">-->
+                <!--        <div class="product-image">Product Image</div>-->
+                <!--        <div class="product-name">Multi-Variable-Single Prediction LSTM Model</div>-->
+                <!--        <div class="product-price">50 $</div>-->
+                <!--    </div>-->
+                <!--    <div class="view-detail">-->
+                <!--        <a href="#ai-product-3" class="view-btn">VIEW DETAILS</a>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/mvssthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Multi-Variable-Sequential Common Sequence Mathematical Model</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#ai-product-4" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/mvsinglethumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Multi-Variable-Single Mathematical Model</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#ai-product-5" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Expert Advisors -->
+        <div id="expert" class="category">
+            <h2>EXPERT ADVISORS</h2>
+            <div class="product-grid">
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">RSI Breakout</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#expert-product-1" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Long Wick Reversal</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#expert-product-2" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/advancedcandlepatternea.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Candle Streak Reversal & Wick EA</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#expert-product-3" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Triple Super trend</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#expert-product-4" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">ATR Trailing Stop Loss</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#expert-product-5" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">EMA Trailing Stop Loss</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#expert-product-6" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Money Management Tools -->
+        <div id="money" class="category">
+            <h2>MONEY MANAGEMENT TOOLS</h2>
+            <div class="product-grid">
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Risk Management</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#money-product-1" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/riskcalculatorthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Risk calculator</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#money-product-2" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/risksimulator.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Profit simulator</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#money-product-3" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/tradinggamelogo.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-header">    
+                            <div class="product-name">Trading game for polishing skills</div>
+                            <div class="product-price">50 $</div>
+                        </div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#money-product-4" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="9.99">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/traderjournalthumbnail.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">Optimized Journal with heatmaps</div>
+                        <div class="product-price">9.99 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#money-product-5" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Trades Tracker</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#money-product-6" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="50">
+                    <div class="product-content">
+                        <div class="product-image"><img src="https://raw.githubusercontent.com/YoussefBechara/YSFB-Website-Assets/main/Product-Thumbnails/ytvideoanalyser.png" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>
+                        <div class="product-name">YouTube video analyzer</div>
+                        <div class="product-price">50 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#money-product-7" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Private Coaching -->
+        <div id="private" class="category">
+            <h2>PRIVATE COACHING</h2>
+            <div class="product-grid">
+                <div class="product-card" data-price="59.99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Weekly zoom calls</div>
+                        <div class="product-price">59.99$/Month</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-1" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="19.99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Consulting calls</div>
+                        <div class="product-price">19.99$/Hour</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-2" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="149.99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Psychology lessons</div>
+                        <div class="product-price">149.99$/Month</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-3" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99.9">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Technical analysis lessons</div>
+                        <div class="product-price">99.9$/Month</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-4" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99.9">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Fundamental analysis lessons</div>
+                        <div class="product-price">99.9$/Month</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-5" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="199">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Volume analysis lessons</div>
+                        <div class="product-price">199$/Month</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-6" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99.9">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Seasonal analysis lessons</div>
+                        <div class="product-price">99.9$/Month</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-7" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="299">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Edge coaching</div>
+                        <div class="product-price">299$/Month</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-8" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99.9">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Programming lessons</div>
+                        <div class="product-price">99.9$/Month</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-9" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="149.9">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Mathematics lessons</div>
+                        <div class="product-price">149.9$/Month</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#private-product-10" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Volume Indicators -->
+        <div id="volume" class="category">
+            <h2>VOLUME INDICATORS</h2>
+            <div class="note">We don't provide volume data, but we provide ways to download free software & tools for volume analysis. Here is the volume indicators kit we offer for 99$:</div>
+            <div class="product-grid">
+                <div class="product-card" data-price="99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Volume Profile</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#volume-product-1" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">On Balance Volume</div>
+                        <div class="product-price">99 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#volume-product-2" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Chaikin Money Flow Index</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#volume-product-3" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Volume Bars</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#volume-product-4" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">VWAP</div>
+                        <div class="product-price">99 $</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#volume-product-5" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Volume Delta for each candle</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#volume-product-6" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+                <div class="product-card" data-price="99">
+                    <div class="product-content">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Cumulative Volume Delta</div>
+                    </div>
+                    <div class="view-detail">
+                        <a href="#volume-product-7" class="view-btn">VIEW DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="show-all">
+            <button id="show-all-btn" class="show-all-btn">SHOW ALL PRODUCTS</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all categories, filter dropdowns, and product cards
+            const categories = document.querySelectorAll('.category');
+            const categoryFilter = document.getElementById('category-filter');
+            const priceFilter = document.getElementById('price-filter');
+            const showAllBtn = document.getElementById('show-all-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            // Show all categories on page load
+            categories.forEach(category => {
+                category.classList.add('active');
+            });
+            
+            // Function to apply filters
+            function applyFilters() {
+                const selectedCategory = categoryFilter.value;
+                const selectedPrice = priceFilter.value;
+                
+                // First hide all categories
+                categories.forEach(category => {
+                    category.classList.remove('active');
+                });
+                
+                // Show selected category or all categories
+                if (selectedCategory === 'all') {
+                    categories.forEach(category => {
+                        category.classList.add('active');
+                    });
+                } else {
+                    document.getElementById(selectedCategory).classList.add('active');
+                }
+                
+                // Then filter by price
+                productCards.forEach(card => {
+                    const cardPrice = card.getAttribute('data-price');
+                    
+                    // Reset visibility first
+                    card.classList.remove('hidden');
+                    
+                    // Apply category filter if needed
+                    if (selectedCategory !== 'all') {
+                        const cardCategory = card.closest('.category').id;
+                        if (cardCategory !== selectedCategory) {
+                            card.classList.add('hidden');
+                        }
+                    }
+                    
+                    // Apply price filter if needed
+                    if (selectedPrice !== 'all') {
+                        const [min, max] = selectedPrice.split('-').map(Number);
+                        const cardPrice = parseFloat(card.getAttribute('data-price'));
+                        
+                        if (cardPrice < min || cardPrice > max) {
+                            card.classList.add('hidden');
+                        }
+                    }
+                });
+            }
+            
+            // Filter change events
+            categoryFilter.addEventListener('change', applyFilters);
+            priceFilter.addEventListener('change', applyFilters);
+            
+            // Show all button click event
+            showAllBtn.addEventListener('click', function() {
+                // Reset all filters
+                categoryFilter.value = 'all';
+                priceFilter.value = 'all';
+                
+                // Show all categories
+                categories.forEach(category => {
+                    category.classList.add('active');
+                });
+                
+                // Show all products
+                productCards.forEach(card => {
+                    card.classList.remove('hidden');
+                });
+            });
+
+            // Hide loader when page loads
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.querySelector('.loader').classList.add('hidden');
+                }, 1000);
+            });
+        });
+    </script>
+<div style="width:100%; padding:0; margin:0;">
+  <iframe src="https://scitrade-ai.github.io/SciTrade/Code/footer.html" 
+          style="width:100%; height:600px; border:none; overflow:hidden;"
+          scrolling="no" frameborder="0" allowtransparency="true">
+  </iframe>
+</div>
+</body>
+</html>
