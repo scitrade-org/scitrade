@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SciTrade - Frequently Asked Questions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 300;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid rgba(3, 252, 244, 0.3);
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(3, 252, 244, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(3,252,244,0.2) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            animation: floatGlow 15s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(3,252,244,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            animation: floatGlow2 18s infinite ease-in-out;
+            animation-delay: 2s;
+            z-index: -1;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(30px, 30px); }
+            50% { transform: translate(60px, 10px); }
+            75% { transform: translate(20px, 50px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes floatGlow2 {
+            0% { transform: translate(0, 0); }
+            33% { transform: translate(-40px, -30px); }
+            66% { transform: translate(-20px, -50px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(3, 252, 244, 0.5);
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(3,252,244,0), #03fcf4, rgba(3,252,244,0));
+        }
+
+        h1 {
+            color: #03fcf4;
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .introduction {
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h2 {
+            color: #03fcf4;
+            font-size: 24px;
+            margin: 20px 0 10px 0;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #03fcf4;
+            transition: width 0.3s ease;
+        }
+
+        section:hover h2::after {
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 25px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        section:nth-child(odd)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -5px;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(3,252,244,0), #03fcf4, rgba(3,252,244,0));
+            transition: height 0.5s ease;
+        }
+
+        section:nth-child(even)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -5px;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(to bottom, rgba(3,252,244,0), #03fcf4, rgba(3,252,244,0));
+            transition: height 0.5s ease;
+        }
+
+        section:hover::before {
+            height: 100%;
+        }
+
+        section:hover {
+            background: rgba(3, 252, 244, 0.05);
+            transform: translateX(5px);
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        li::before {
+            content: '•';
+            color: #03fcf4;
+            position: absolute;
+            left: -15px;
+        }
+
+        .highlight {
+            color: #03fcf4;
+            font-weight: 400;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000;
+            box-shadow: inset 0 0 5px rgba(3, 252, 244, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #03fcf4, #029994);
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(3, 252, 244, 0.7);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #029994, #03fcf4);
+        }
+
+        /* Custom Text Selection */
+        ::selection {
+            background-color: rgba(3, 252, 244, 0.7);
+            color: #ffffff;
+        }
+
+        .fade-item {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(3, 252, 244, 0.3);
+            font-size: 14px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(3,252,244,0), #03fcf4, rgba(3,252,244,0));
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info a {
+            color: #03fcf4;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #03fcf4;
+            transition: width 0.3s ease;
+        }
+
+        .contact-info a:hover::after {
+            width: 100%;
+        }
+
+        .contact-info a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(3, 252, 244, 0.7);
+        }
+
+        .icon {
+            font-size: 18px;
+            color: #03fcf4;
+        }
+
+        a {
+            color: #03fcf4;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(3, 252, 244, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Frequently Asked Questions</h1>
+        </header>
+
+        <div class="introduction">
+            <p>Welcome to <span class="highlight">SciTrade</span> FAQ section. Here you'll find answers to the most common questions about our forex trading services and products.</p>
+        </div>
+
+        <section class="fade-item">
+            <h2>1. About SciTrade</h2>
+            <p>SciTrade is a leading provider of forex signals and trading education, helping traders make informed decisions in the currency markets.</p>
+            <ul>
+                <li><span class="highlight">What does SciTrade stand for?</span><br>SciTrade stands for "Scientific Trading", reflecting our data-driven approach to market analysis.</li>
+                <li><span class="highlight">How long has SciTrade been operating?</span><br>We have been providing forex signals and education since 2020, with a proven track record of successful trades.</li>
+                <li><span class="highlight">Is SciTrade regulated?</span><br>SciTrade is a signal provider and educational platform, not a broker. We provide trading signals and analysis but do not handle client funds.</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>2. Forex Signals</h2>
+            <p>Our forex signals are carefully analyzed and provided to help you make profitable trading decisions.</p>
+            <ul>
+                <li><span class="highlight">How are signals delivered?</span><br>Signals are delivered through our dedicated Telegram channel and via email for premium subscribers.</li>
+                <li><span class="highlight">What currency pairs do you cover?</span><br>We focus primarily on major pairs (EUR/USD, GBP/USD, USD/JPY, etc.) and select minor pairs with good trading opportunities.</li>
+                <li><span class="highlight">How many signals are sent per day?</span><br>We typically send 3-5 high-quality signals per day, but this may vary based on market conditions. We prioritize quality over quantity.</li>
+                <li><span class="highlight">Do signals include entry point, stop loss, and take profit?</span><br>Yes, all our signals include suggested entry points, stop loss levels, and multiple take profit targets.</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>3. Subscription Plans</h2>
+            <p>We offer various subscription plans to suit different trading needs and budgets.</p>
+            <ul>
+                <li><span class="highlight">What subscription plans are available?</span><br>We offer Weekly ($49), Monthly ($149), Quarterly ($349), and Annual ($999) plans with increasing value for longer commitments.</li>
+                <li><span class="highlight">What's included in a subscription?</span><br>All subscriptions include daily signals, basic market analysis, and access to our Telegram community. Premium plans include additional benefits like one-on-one consultations and advanced strategy guides.</li>
+                <li><span class="highlight">Do you offer a free trial?</span><br>Yes, we offer a 3-day free trial to new subscribers to experience our signal quality before committing.</li>
+                <li><span class="highlight">How can I cancel my subscription?</span><br>You can cancel your subscription anytime through your account dashboard or by contacting our support team.</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>4. Trading Performance</h2>
+            <p>Our track record speaks for itself, with consistent profitability across various market conditions.</p>
+            <ul>
+                <li><span class="highlight">What is your win rate?</span><br>Our average win rate is approximately 76-82%, verified by our transparent performance logs.</li>
+                <li><span class="highlight">How much profit can I expect?</span><br>Results vary based on your trading capital, risk management, and execution. Our average monthly return target is 8-15%.</li>
+                <li><span class="highlight">Do you show verified results?</span><br>Yes, we publish all signal results on our website and Telegram channel, including both winning and losing trades.</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>5. Educational Resources</h2>
+            <p>We believe in empowering traders with knowledge and skills for long-term success.</p>
+            <ul>
+                <li><span class="highlight">What educational materials do you provide?</span><br>We offer video tutorials, strategy guides, market analysis reports, and weekly webinars for subscribers.</li>
+                <li><span class="highlight">Do you offer one-on-one coaching?</span><br>Yes, our Premium and VIP subscribers can schedule personal coaching sessions with our expert traders.</li>
+                <li><span class="highlight">Are educational materials suitable for beginners?</span><br>We have resources for all levels, from complete beginners to advanced traders looking to refine their strategies.</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>6. Trading Strategy</h2>
+            <p>Our trading approach combines technical analysis, fundamental insights, and risk management principles.</p>
+            <ul>
+                <li><span class="highlight">What trading style do you use?</span><br>We primarily use swing trading and day trading approaches, focusing on high-probability setups with favorable risk-reward ratios.</li>
+                <li><span class="highlight">What indicators do you use?</span><br>We use a combination of price action, key support/resistance levels, moving averages, RSI, and proprietary indicators.</li>
+                <li><span class="highlight">What timeframes do you analyze?</span><br>We mainly focus on 1H, 4H, and Daily charts for our analysis, with occasional scalping opportunities on 15M and 5M charts.</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>7. Account & Payment</h2>
+            <p>We make subscribing to our services simple and secure.</p>
+            <ul>
+                <li><span class="highlight">What payment methods do you accept?</span><br>We accept credit/debit cards, PayPal, and major cryptocurrencies (Bitcoin, Ethereum, USDT).</li>
+                <li><span class="highlight">Is my payment information secure?</span><br>Yes, all payments are processed through secure payment gateways with industry-standard encryption.</li>
+                <li><span class="highlight">Do you offer refunds?</span><br>We offer a 7-day money-back guarantee if you're not satisfied with our services, subject to our refund policy terms.</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>8. Getting Started</h2>
+            <p>Ready to improve your forex trading? Here's how to begin:</p>
+            <ul>
+                <li><span class="highlight">How do I sign up?</span><br>Simply visit our website, select your preferred subscription plan, complete the registration form, and make your payment.</li>
+                <li><span class="highlight">How quickly can I access signals after subscribing?</span><br>Access is granted immediately after your payment is confirmed, typically within minutes.</li>
+                <li><span class="highlight">What if I need help setting up?</span><br>Our support team is available 24/5 to help you with any setup issues or questions you might have.</li>
+            </ul>
+        </section>
+
+        <section class="fade-item">
+            <h2>9. Contact & Support</h2>
+            <p>Have questions or need assistance? We're here to help!</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="icon">📧</span> Email: <a href="mailto:sci.trade@gmail.com">sci.trade@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">🌐</span> Website: <a href="https://sites.google.com/view/sci-trade">https://sites.google.com/view/sci-trade</a>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">💬</span> Telegram: <a href="https://t.me/scitrade">https://t.me/scitrade</a>
+                </div>
+            </div>
+            <p style="margin-top: 15px;">Our support team is available Monday through Friday, 24 hours a day. Weekend inquiries will be addressed on the next business day.</p>
+        </section>
+
+        <footer class="fade-item">
+            <p>© 2025 SciTrade. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animation for sections when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeItems = document.querySelectorAll('.fade-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [10, 0],
+                            easing: 'easeOutExpo',
+                            duration: 800,
+                            delay: 100
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeItems.forEach(item => {
+                observer.observe(item);
+            });
+
+            // Title animation
+            anime({
+                targets: 'h1',
+                opacity: [0, 1],
+                translateY: [-20, 0],
+                easing: 'easeOutExpo',
+                duration: 1000,
+                delay: 300
+            });
+
+            // Introduction animation
+            anime({
+                targets: '.introduction',
+                opacity: [0, 1],
+                translateY: [-10, 0],
+                easing: 'easeOutExpo',
+                duration: 1000,
+                delay: 600
+            });
+
+            // Subtle pulsing glow effect for titles
+            anime({
+                targets: 'h1, h2',
+                textShadow: [
+                    '0 0 3px rgba(3, 252, 244, 0.3)',
+                    '0 0 8px rgba(3, 252, 244, 0.7)',
+                    '0 0 3px rgba(3, 252, 244, 0.3)'
+                ],
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutSine',
+                duration: 2000
+            });
+            
+            // Link hover effects
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: link,
+                        color: '#ffffff',
+                        textShadow: '0 0 10px rgba(3, 252, 244, 0.9)',
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    anime({
+                        targets: link,
+                        color: '#03fcf4',
+                        textShadow: '0 0 0px rgba(3, 252, 244, 0)',
+                        duration: 300,
+                        easing: 'easeOutExpo'
+                    });
+                });
+            });
+
+            // Highlight emphasis on important words
+            anime({
+                targets: '.highlight',
+                fontWeight: '400',
+                color: [
+                    '#03fcf4',
+                    '#37fcf4',
+                    '#03fcf4'
+                ],
+                easing: 'easeInOutSine',
+                duration: 3000,
+                direction: 'alternate',
+                loop: true
+            });
+        });
+    </script>
+
+
+<iframe 
+  id="footer-frame"
+  src="https://youssefbechara.github.io/YSFB-Website-Assets/footer.html"
+  style="width:100%; height:100%; border:none; display:block;">
+</iframe>
+
+<script>
+document.getElementById('footer-frame').onload = function() {
+  this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
+  // Remove any residual spacing
+  this.style.margin = '0';
+  this.style.padding = '0';
+};
+</script>
+</body>
+</html>
