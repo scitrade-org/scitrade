@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Reviews</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #03fcf4;
+            --white: #ffffff;
+            --black: #000000;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald', sans-serif;
+            color: var(--white);
+            font-weight: 300;
+        }
+        
+        body {
+            background-color: var(--black);
+            overflow-x: hidden;
+            perspective: 1px;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--red);
+            border-radius: 2px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #03c9c2;
+            box-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
+        }
+        
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .banner {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('https://raw.githubusercontent.com/scitrade-ai/Scitrade/main/Images/reviewscyan.png') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center top;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+        
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 40px 20px;
+        }
+        
+        .title {
+            font-size: 5rem;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            animation: titleFadeIn 2s ease-out forwards;
+        }
+        
+        @keyframes titleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--red);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px var(--red);
+        }
+        
+        .title:hover::after {
+            width: 300px;
+            box-shadow: 0 0 20px var(--red);
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 800px;
+            opacity: 0;
+            animation: subtitleFadeIn 2s ease-out 0.5s forwards;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+        
+        @keyframes subtitleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-down span {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .scroll-down i {
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--white);
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .scroll-down i::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background-color: var(--white);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollDown 2s infinite;
+        }
+        
+        @keyframes scrollDown {
+            0% {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+            80% {
+                transform: translate(-50%, 20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, 0);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+        
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 2px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background-color: var(--red);
+            transition: width 0.5s ease;
+        }
+        
+        .section-title:hover::after {
+            width: 100%;
+            box-shadow: 0 0 12px var(--red);
+        }
+        
+        .content {
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+        
+        .highlight {
+            color: var(--red);
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight:hover {
+            text-shadow: 0 0 15px rgba(3, 252, 244, 0.8);
+            transform: scale(1.05);
+        }
+        
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .card {
+            flex: 1 1 300px;
+            background-color: rgba(20, 20, 20, 0.7);
+            border-left: 3px solid var(--red);
+            padding: 30px;
+            border-radius: 5px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(3, 252, 244, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(3, 252, 244, 0.3);
+            background-color: rgba(30, 30, 30, 0.9);
+        }
+        
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .card-title {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            color: var(--red);
+        }
+        
+        .card-content {
+            font-size: 1.1rem;
+        }
+        
+        .rating {
+            font-size: 36px;
+            color: var(--red);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .star {
+            display: inline-block;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            animation: sparkle 2s infinite;
+            animation-delay: calc(var(--i) * 0.2s);
+        }
+        
+        @keyframes sparkle {
+            0% { text-shadow: 0 0 5px rgba(3, 252, 244, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(3, 252, 244, 1); }
+            100% { text-shadow: 0 0 5px rgba(3, 252, 244, 0.5); }
+        }
+        
+        .star:hover {
+            transform: scale(1.3) rotate(5deg);
+            text-shadow: 0 0 15px var(--red);
+        }
+        
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #333;
+            margin-right: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reviewer-details {
+            flex-grow: 1;
+        }
+        
+        .reviewer-name {
+            font-size: 18px;
+        }
+        
+        .reviewer-date {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        .reviewer-rating {
+            color: var(--red);
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background-color: var(--red);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            margin-top: 40px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #03c9c2;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(3, 252, 244, 0.6);
+            letter-spacing: 4px;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .parallax-section {
+            position: relative;
+            height: 400px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 100px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .parallax-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .parallax-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+        
+        .parallax-title {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .parallax-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: var(--red);
+            transition: width 0.5s ease;
+        }
+        
+        .parallax-title:hover::after {
+            width: 80%;
+            box-shadow: 0 0 8px var(--red);
+        }
+        
+        .parallax-text {
+            font-size: 1.4rem;
+            line-height: 1.6;
+        }
+        
+
+        
+
+   
+        .moving-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, black 70%);
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: var(--red);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.8);
+            margin-top: 100px;
+            position: relative;
+        }
+        
+        .ticker-wrap::before, .ticker-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        .ticker-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, var(--black), transparent);
+        }
+        
+        .ticker-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, var(--black), transparent);
+        }
+        
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker 30s linear infinite;
+        }
+        
+        .ticker-item {
+            display: inline-block;
+            padding: 0 30px;
+            font-size: 1.2rem;
+            color: var(--red);
+        }
+        
+        @keyframes ticker {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .banner {
+                height: 80vh;
+            }
+            
+            .title {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .card-container {
+                flex-direction: column;
+            }
+            
+            .parallax-section {
+                background-attachment: scroll;
+                height: 300px;
+            }
+            
+            .parallax-title {
+                font-size: 2.2rem;
+            }
+            
+            .parallax-text {
+                font-size: 1.2rem;
+            }
+        }
+        
+        ::selection {
+            background: #03fcf4;
+            color: white;
+        }
+        
+        ::-moz-selection {
+            background: #03fcf4;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="moving-bg"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="banner">
+            <div class="header">
+                <h1 class="title">Customer <span class="highlight">Reviews</span></h1>
+                <p class="subtitle">Hear what our traders say about SciTrade</p>
+            </div>
+            <div class="scroll-down" id="scrollDown">
+                <span>SCROLL DOWN</span>
+                <i></i>
+            </div>
+        </div>
+        
+        <div class="content-container">
+            <div class="section" id="section1">
+                <h2 class="section-title">Our Ratings</h2>
+                <div class="content">
+                    <p>We take pride in the quality of our trading tools and education. Here's what our community has to say about their experience with SciTrade.</p>
+                </div>
+                
+                <div class="rating">
+                    <span class="star" style="--i:1">★</span>
+                    <span class="star" style="--i:2">★</span>
+                    <span class="star" style="--i:3">★</span>
+                    <span class="star" style="--i:4">★</span>
+                    <span class="star" style="--i:5">★</span>
+                </div>
+            </div>
+            
+            <div class="section" id="section2">
+                <h2 class="section-title">Client Testimonials</h2>
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-content">
+                            "I recently had the chance to try out the trading indicators, expert advisors, and strategies offered by SciTrade, and I have to say, I'm pretty impressed! As someone who's been dabbling in trading for a while now, finding <span class="highlight">reliable tools</span> can be a bit of a challenge. First off, the user interface is quite friendly. I didn't feel overwhelmed when navigating through their platform."
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar"></div>
+                            <div class="reviewer-details">
+                                <div class="reviewer-name">Michael Thompson</div>
+                                <div class="reviewer-date">April 12, 2025</div>
+                                <div class="reviewer-rating">★★★★★ 5/5</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-content">
+                            "The trading indicators have been straightforward to understand and apply; they provide clear signals that have really helped me refine my approach. The expert advisors are another great addition. They seem to have been <span class="highlight">well-designed</span>, providing solid insights and suggestions based on market conditions."
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar"></div>
+                            <div class="reviewer-details">
+                                <div class="reviewer-name">Emily Rodriguez</div>
+                                <div class="reviewer-date">April 8, 2025</div>
+                                <div class="reviewer-rating">★★★★★ 5/5</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-content">
+                            "What's really stood out to me is the customer support. I had a couple of questions about implementing some of the indicators, and the team was <span class="highlight">quick to respond</span> with helpful guidance. That's something that's not always easy to find in the trading world, so it's definitely a plus in my book."
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar"></div>
+                            <div class="reviewer-details">
+                                <div class="reviewer-name">David Wilson</div>
+                                <div class="reviewer-date">March 29, 2025</div>
+                                <div class="reviewer-rating">★★★★★ 5/5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="parallax-section" style="background-image: url('https://raw.githubusercontent.com/scitrade-ai/Scitrade/main/Images/reviewscyan.png')">
+                <div class="parallax-content">
+                    <h2 class="parallax-title">Real Results</h2>
+                    <p class="parallax-text">Our traders experience tangible improvements in their trading performance and confidence.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="section3">
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-content">
+                            "In terms of costs, I think the pricing is fair for what you get. There are options for different budgets, which I appreciate. The ROI potential is there if you take the time to <span class="highlight">learn the tools</span> and apply them correctly."
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar"></div>
+                            <div class="reviewer-details">
+                                <div class="reviewer-name">Sarah Johnson</div>
+                                <div class="reviewer-date">March 25, 2025</div>
+                                <div class="reviewer-rating">★★★★★ 5/5</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-content">
+                            "I've been using SciTrade's trading tools for about three months now, and I've noticed a definite improvement in my trading decisions. The indicators have been particularly helpful for me as they provide <span class="highlight">clear entry and exit points</span>, which was something I struggled with before."
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar"></div>
+                            <div class="reviewer-details">
+                                <div class="reviewer-name">Robert Chang</div>
+                                <div class="reviewer-date">March 18, 2025</div>
+                                <div class="reviewer-rating">★★★★★ 5/5</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-content">
+                            "Overall, while no trading tool is perfect and it's always important to do your own research and develop your own strategy, I've found SciTrade's offerings to be a <span class="highlight">valuable addition</span> to my trading toolkit."
+                        </div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar"></div>
+                            <div class="reviewer-details">
+                                <div class="reviewer-name">Jennifer Martinez</div>
+                                <div class="reviewer-date">March 10, 2025</div>
+                                <div class="reviewer-rating">★★★★★ 5/5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ticker-wrap">
+                <div class="ticker">
+                    <div class="ticker-item">TRUSTED BY TRADERS WORLDWIDE</div>
+                    <div class="ticker-item">PROVEN TRADING STRATEGIES</div>
+                    <div class="ticker-item">REAL RESULTS. REAL TRADERS.</div>
+                    <div class="ticker-item">JOIN OUR COMMUNITY TODAY</div>
+                    <div class="ticker-item">ELEVATE YOUR TRADING GAME</div>
+                </div>
+            </div>
+            
+            <div class="parallax-section" style="background-image: url('https://raw.githubusercontent.com/scitrade-ai/Scitrade/main/Images/reviewscyan.png')">
+                <div class="parallax-content">
+                    <h2 class="parallax-title">Ready to Transform Your Trading?</h2>
+                    <p class="parallax-text">Join thousands of satisfied traders who have elevated their trading with our professional tools.</p>
+                    <a href="#" class="cta-button">Get Started Today</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Create floating particles
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                
+                // Random size
+                const size = Math.random() * 4 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random opacity
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                
+                // Random animation duration
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = duration + 's';
+                
+                // Random animation delay
+                const delay = Math.random() * 10;
+                particle.style.animationDelay = delay + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+        
+        // Smooth scrolling
+        document.getElementById('scrollDown').addEventListener('click', function() {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Animation for sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const parallaxContent = document.querySelectorAll('.parallax-content');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            parallaxContent.forEach(content => {
+                observer.observe(content);
+            });
+        });
+        
+        // Parallax effect enhancement
+        window.addEventListener('scroll', function() {
+            const parallaxSections = document.querySelectorAll('.parallax-section');
+            const banner = document.querySelector('.banner');
+            const scrollPosition = window.pageYOffset;
+            
+            // Banner parallax
+            const bannerOffset = banner.offsetTop;
+            // Banner parallax - smoother version
+            const bannerHeight = banner.offsetHeight;
+            if (scrollPosition <= bannerHeight) {
+                const yPos = scrollPosition * 0.2; // reduced from 0.5 to 0.2
+                banner.style.backgroundPositionY = `calc(top + ${yPos}px)`;
+            }
+            
+            // Other parallax sections
+            parallaxSections.forEach(section => {
+                const sectionOffset = section.offsetTop;
+                const distanceFromTop = sectionOffset - scrollPosition;
+                
+                if (distanceFromTop > -500 && distanceFromTop < window.innerHeight) {
+                    const yPos = (distanceFromTop - window.innerHeight / 2) * 0.1;
+                    section.style.backgroundPositionY = `calc(50% + ${yPos}px)`;
+                }
+            });
+            
+            // Move particles based on scroll
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                const speed = parseFloat(particle.style.width) * 0.05;
+                const currentX = parseFloat(particle.style.left);
+                const newX = (currentX + scrollPosition * speed * 0.01) % 100;
+                particle.style.left = newX + 'vw';
+            });
+        });
+        
+        // Hover effects enhancement
+        const highlights = document.querySelectorAll('.highlight');
+        highlights.forEach(highlight => {
+            highlight.addEventListener('mouseover', () => {
+                highlight.style.textShadow = '0 0 15px rgba(3, 252, 244, 0.8)';
+            });
+            
+            highlight.addEventListener('mouseout', () => {
+                highlight.style.textShadow = 'none';
+            });
+        });
+        
+        // Add subtle hover effect to cards
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleX = (y - centerY) / 20;
+                const angleY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-15px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 300);
+            });
+        });
+    </script>
+<!-- Custom Element Approach for Google Sites -->
+<!-- Embed this code in Google Sites through Insert > Embed > Embed code -->
+    <div style="width:100%; padding:0; margin:0;">
+      <iframe src="https://scitrade-ai.github.io/SciTrade/Code/footer.html" 
+              style="width:100%; height:600px; border:none; overflow:hidden;"
+              scrolling="no" frameborder="0" allowtransparency="true">
+      </iframe>
+    </div>
+
+</body>
+</html>
