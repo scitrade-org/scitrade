@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Company Header Animation</title>
+    <!-- Import Oswald font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        ::selection {
+          background-color: #03fcf4;
+          color: white; /* Optional: This sets the text color when selected */
+        }
+        
+        /* For Firefox */
+        ::-moz-selection {
+          background-color: #03fcf4;
+          color: white;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Oswald', sans-serif; /* Changed to Oswald */
+            overflow-x: hidden;
+        }
+        
+        .header-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: transparent;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 0 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: contentEntrance 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards 0.5s;
+        }
+        
+        .header-title {
+            font-size: 4.5rem;
+            font-weight: 400; /* Removed bold */
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-transform: uppercase;
+            animation: titleEntrance 2s cubic-bezier(0.19, 1, 0.22, 1) forwards 0.8s;
+            opacity: 0;
+            transform: scale(0.8);
+            text-shadow: 0 0 10px rgba(3, 252, 244, 0.7);
+        }
+        
+        .header-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300; /* Lighter weight */
+            max-width: 800px;
+            margin-bottom: 30px;
+            opacity: 0;
+            color: #ffffff;
+            animation: subtitleEntrance 2s ease forwards 1.2s;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-family: 'Oswald', sans-serif; /* Added Oswald to button */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400; /* Removed bold */
+            color: #ffffff;
+            background-color: #03fcf4;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: buttonEntrance 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards 1.8s;
+            opacity: 0;
+            transform: translateY(20px);
+            text-decoration: none;
+        }
+        
+        .cta-button:hover {
+            background-color: #02ccc5;
+            text-decoration: none;
+        }
+        
+        .cta-button:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+            text-decoration: none;
+        }
+        
+        .cta-button:hover:before {
+            left: 100%;
+            text-decoration: none;
+        }
+        
+        /* Background Elements */
+        .stock-chart {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.7;
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(3, 252, 244, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(3, 252, 244, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 2;
+            opacity: 0.2;
+            animation: gridEntrance 3s ease forwards;
+        }
+        
+        .candlestick {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(3, 252, 244, 0.5);
+            z-index: 2;
+        }
+        
+        .trend-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #03fcf4, transparent);
+            z-index: 2;
+            transform-origin: left center;
+        }
+        
+        .glow-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(3, 252, 244, 0.4) 0%, rgba(3, 252, 244, 0) 70%);
+            z-index: 2;
+            animation: pulse 4s infinite alternate;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 20%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: 3;
+            animation: fadeIn 2s ease forwards;
+        }
+        
+        /* Data visualization element */
+        .data-viz {
+            position: absolute;
+            width: 70%;
+            height: 150px;
+            bottom: 10%;
+            left: 15%;
+            z-index: 4;
+            opacity: 0;
+            animation: vizEntrance 2s ease forwards 1.5s;
+        }
+        
+        .data-line {
+            fill: none;
+            stroke: #03fcf4;
+            stroke-width: 2;
+            opacity: 0.7;
+        }
+        
+        /* Animations */
+        @keyframes titleEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+                letter-spacing: 2px;
+            }
+            50% {
+                letter-spacing: 10px;
+                opacity: 0.9;
+                text-shadow: 0 0 20px rgba(3, 252, 244, 0.9), 0 0 30px rgba(3, 252, 244, 0.3);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                letter-spacing: 4px;
+                text-shadow: 0 0 20px rgba(3, 252, 244, 0.7), 0 0 40px rgba(3, 252, 244, 0.3);
+            }
+        }
+        
+        @keyframes subtitleEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 0.9;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes contentEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes buttonEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                animation: pulse 2s infinite;
+            }
+        }
+        
+        @keyframes gridEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes vizEntrance {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 0.8;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(3, 252, 244, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(3, 252, 244, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(3, 252, 244, 0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes lineDrawing {
+            0% {
+                stroke-dashoffset: 1000;
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0.4;
+            }
+        }
+        
+        /* Modified intro animation for transparent starting state */
+        .header-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /* Changed from black to transparent *//* Added blur effect */
+            z-index: 20;
+            animation: introReveal 1.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+        }
+        
+        @keyframes introReveal {
+            0% {
+                transform: scaleX(1);
+                transform-origin: right;
+            }
+            100% {
+                transform: scaleX(0);
+                transform-origin: right;
+            }
+        }
+        
+        /* Initial reveal flashes */
+        .flash {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(3, 252, 244, 0.2);
+            z-index: 15;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        #flash1 {
+            animation: flashEffect 0.5s ease forwards 1.5s;
+        }
+        
+        #flash2 {
+            animation: flashEffect 0.5s ease forwards 1.7s;
+        }
+        
+        @keyframes flashEffect {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="flash" id="flash1"></div>
+        <div class="flash" id="flash2"></div>
+        <div class="grid-overlay"></div>
+        <div class="overlay"></div>
+        
+        <canvas id="stockChart" class="stock-chart"></canvas>
+        
+        <svg class="data-viz">
+            <path class="data-line" id="dataPath1"></path>
+            <path class="data-line" id="dataPath2" style="stroke: #ffffff; opacity: 0.4;"></path>
+        </svg>
+        
+        <div class="header-content">
+            <h1 class="header-title">SciTrade</h1>
+            <p class="header-subtitle">Trading From The Future</p>
+            <!--<a href="#technical-product-4" class="cta-button">Start Winning Today</a>-->
+        </div>
+    </div>
+
+    <script>
+        // Canvas setup for stock chart animation
+        const canvas = document.getElementById('stockChart');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas dimensions
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Constants
+        const CANDLE_WIDTH = 6;
+        const CANDLE_GAP = 3;
+        const MAX_CANDLES = Math.floor(window.innerWidth / (CANDLE_WIDTH + CANDLE_GAP)) * 1.5;
+        
+        // Particles array
+        let particles = [];
+        const particleCount = 80;
+        
+        // Candlesticks array
+        let candlesticks = [];
+        
+        // Trend lines array
+        let trendLines = [];
+        
+        // Glow effects array
+        let glowEffects = [];
+        
+        // Animation frame counter for candle movement
+        let frameCount = 0;
+        
+        // Generate initial particles
+        function createParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 4 + 1,
+                    speedX: (Math.random() - 0.5) * 1.5,
+                    speedY: (Math.random() - 0.5) * 1.5,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+        }
+        
+        // Generate random price data
+        function generatePriceData(count) {
+            let prices = [];
+            let basePrice = 100;
+            
+            for (let i = 0; i < count; i++) {
+                const changePercent = (Math.random() - 0.5) * 6;
+                basePrice = basePrice * (1 + changePercent / 100);
+                
+                const open = basePrice;
+                const close = open * (1 + (Math.random() - 0.5) * 2 / 100);
+                const high = Math.max(open, close) * (1 + Math.random() * 1 / 100);
+                const low = Math.min(open, close) * (1 - Math.random() * 1 / 100);
+                
+                prices.push({ open, close, high, low });
+            }
+            
+            return prices;
+        }
+        
+        // Generate candlesticks
+        function createCandlesticks() {
+            const prices = generatePriceData(MAX_CANDLES);
+            const maxPrice = Math.max(...prices.map(p => p.high));
+            const minPrice = Math.min(...prices.map(p => p.low));
+            const range = maxPrice - minPrice;
+            const heightFactor = (canvas.height * 0.6) / range;
+            
+            candlesticks = [];
+            
+            // Create three rows of candlesticks at different heights
+            const rowPositions = [0.3, 0.5, 0.7]; // Position on the screen (30%, 50%, 70% from top)
+            
+            rowPositions.forEach((rowPos, rowIndex) => {
+                for (let i = 0; i < prices.length; i++) {
+                    const price = prices[i];
+                    const x = i * (CANDLE_WIDTH + CANDLE_GAP) + canvas.width / 8;
+                    const baseY = canvas.height * rowPos;
+                    const y = baseY - (price.close - minPrice) * heightFactor * 0.5;
+                    const height = Math.abs(price.open - price.close) * heightFactor * 0.5;
+                    const wickTop = baseY - (price.high - minPrice) * heightFactor * 0.5;
+                    const wickBottom = baseY - (price.low - minPrice) * heightFactor * 0.5;
+                    
+                    candlesticks.push({
+                        x,
+                        y: price.close > price.open ? y : y - height,
+                        width: CANDLE_WIDTH,
+                        height: Math.max(1, height),
+                        color: price.close > price.open ? '#03fcf4' : '#ffffff',
+                        wickTop,
+                        wickBottom,
+                        speed: 0.2 + (rowIndex * 0.1), // Different speeds for different rows
+                        opacity: 0.7 - (rowIndex * 0.1) // Different opacities for depth
+                    });
+                }
+            });
+        }
+        
+        // Create trend lines
+        function createTrendLines() {
+            trendLines = [];
+            
+            // Add 4-6 trend lines
+            const lineCount = 4 + Math.floor(Math.random() * 3);
+            
+            for (let i = 0; i < lineCount; i++) {
+                const startX = Math.random() * (canvas.width / 2);
+                const startY = Math.random() * canvas.height;
+                const length = Math.random() * (canvas.width - startX) + canvas.width / 4;
+                const angle = (Math.random() - 0.5) * 20; // -10 to 10 degrees
+                
+                trendLines.push({
+                    x: startX,
+                    y: startY,
+                    length,
+                    angle,
+                    width: Math.random() * 1 + 1,
+                    opacity: Math.random() * 0.3 + 0.1
+                });
+            }
+        }
+        
+        // Create glow effects
+        function createGlowEffects() {
+            glowEffects = [];
+            
+            const effectCount = 7;
+            
+            for (let i = 0; i < effectCount; i++) {
+                glowEffects.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 200 + 100,
+                    opacity: Math.random() * 0.2 + 0.05,
+                    pulseSpeed: Math.random() * 0.01 + 0.005,
+                    pulseDirection: 1,
+                    currentOpacity: 0
+                });
+            }
+        }
+        
+        // Initialize SVG data path animations
+        function initSVGPaths() {
+            const dataViz = document.querySelector('.data-viz');
+            const dataPath1 = document.getElementById('dataPath1');
+            const dataPath2 = document.getElementById('dataPath2');
+            
+            const width = dataViz.clientWidth;
+            const height = dataViz.clientHeight;
+            
+            // Generate SVG path data
+            let path1 = `M0,${height/2}`;
+            let path2 = `M0,${height/2}`;
+            
+            for (let x = 0; x < width; x += 5) {
+                const y1 = height/2 + Math.sin(x/30) * 30 + Math.sin(x/10) * 10;
+                const y2 = height/2 + Math.cos(x/20) * 40;
+                
+                path1 += ` L${x},${y1}`;
+                path2 += ` L${x},${y2}`;
+            }
+            
+            dataPath1.setAttribute('d', path1);
+            dataPath2.setAttribute('d', path2);
+            
+            // Set stroke dasharray and dashoffset for animation
+            const path1Length = dataPath1.getTotalLength();
+            const path2Length = dataPath2.getTotalLength();
+            
+            dataPath1.style.strokeDasharray = path1Length;
+            dataPath1.style.strokeDashoffset = path1Length;
+            dataPath1.style.animation = 'lineDrawing 8s infinite';
+            
+            dataPath2.style.strokeDasharray = path2Length;
+            dataPath2.style.strokeDashoffset = path2Length;
+            dataPath2.style.animation = 'lineDrawing 12s infinite';
+        }
+        
+        // Initialize all animations
+        function init() {
+            createParticles();
+            createCandlesticks();
+            createTrendLines();
+            createGlowEffects();
+            initSVGPaths();
+            
+            // Start animation loop
+            animate();
+            
+            // Refresh data periodically
+            setInterval(() => {
+                createCandlesticks();
+                createTrendLines();
+                
+                // Reposition some glow effects
+                glowEffects.forEach((effect, index) => {
+                    if (index % 2 === 0) {
+                        effect.x = Math.random() * canvas.width;
+                        effect.y = Math.random() * canvas.height;
+                    }
+                });
+            }, 15000);
+        }
+        
+        // Animation function
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            frameCount++;
+            
+            // Draw glow effects with pulsating animation
+            glowEffects.forEach(effect => {
+                // Update pulsating opacity
+                effect.currentOpacity += effect.pulseSpeed * effect.pulseDirection;
+                if (effect.currentOpacity >= effect.opacity) {
+                    effect.pulseDirection = -1;
+                } else if (effect.currentOpacity <= 0.05) {
+                    effect.pulseDirection = 1;
+                }
+                
+                const gradient = ctx.createRadialGradient(
+                    effect.x, effect.y, 0,
+                    effect.x, effect.y, effect.radius
+                );
+                gradient.addColorStop(0, `rgba(3, 252, 244, ${effect.currentOpacity})`);
+                gradient.addColorStop(1, 'rgba(3, 252, 244, 0)');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(effect.x, effect.y, effect.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            // Draw trend lines
+            trendLines.forEach(line => {
+                ctx.save();
+                ctx.translate(line.x, line.y);
+                ctx.rotate(line.angle * Math.PI / 180);
+                
+                const gradient = ctx.createLinearGradient(0, 0, line.length, 0);
+                gradient.addColorStop(0, `rgba(3, 252, 244, 0)`);
+                gradient.addColorStop(0.5, `rgba(3, 252, 244, ${line.opacity})`);
+                gradient.addColorStop(1, `rgba(3, 252, 244, 0)`);
+                
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = line.width;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(line.length, 0);
+                ctx.stroke();
+                ctx.restore();
+            });
+            
+            // Update and draw candlesticks with animation
+            candlesticks.forEach(candle => {
+                // Move candles to the left (animation)
+                candle.x -= candle.speed;
+                
+                // Reset position when candle goes off-screen
+                if (candle.x + candle.width < 0) {
+                    candle.x = canvas.width;
+                }
+                
+                // Draw wick with adjusted opacity
+                ctx.strokeStyle = candle.color;
+                ctx.globalAlpha = candle.opacity;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(candle.x + candle.width / 2, candle.wickTop);
+                ctx.lineTo(candle.x + candle.width / 2, candle.wickBottom);
+                ctx.stroke();
+                
+                // Draw body
+                ctx.fillStyle = candle.color;
+                ctx.fillRect(candle.x, candle.y, candle.width, candle.height);
+                ctx.globalAlpha = 1.0;
+            });
+            
+            // Update and draw particles
+            particles.forEach(particle => {
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+                
+                // Wrap around edges
+                if (particle.x < 0) particle.x = canvas.width;
+                if (particle.x > canvas.width) particle.x = 0;
+                if (particle.y < 0) particle.y = canvas.height;
+                if (particle.y > canvas.height) particle.y = 0;
+                
+                ctx.fillStyle = `rgba(3, 252, 244, ${particle.opacity})`;
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+        
+        // Start the animation when document is loaded
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
