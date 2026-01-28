@@ -395,10 +395,91 @@
         }
 
         /* Footer Styles */
-        .footer-container {
-            width: 100%;
-            margin: 0 auto;
-        }
+/* Footer Styles - UPDATED */
+/* Iframe Container Styles */
+.iframe-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 40px auto;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+}
+
+.iframe-container iframe {
+    width: 100% !important;
+    height: 600px !important;
+    border: none !important;
+    background: #000000 !important;
+    display: block !important;
+    overflow: hidden !important;
+}
+
+/* First iframe (description) - taller height */
+.iframe-container:nth-of-type(1) iframe {
+    height: 700px !important; /* Increased from 600px */
+    min-height: 700px;
+}
+
+/* Footer Container */
+.footer-container {
+    width: 100%;
+    margin: 0px 0 0 0;
+    padding: 0;
+    background-color: var(--black);
+}
+
+.footer-container iframe {
+    width: 100% !important;
+    height: 400px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    display: block !important;
+    background-color: var(--black) !important;
+}
+
+/* Hide all iframe scrollbars */
+iframe {
+    overflow: hidden !important;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+iframe::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .iframe-container iframe {
+        height: 500px !important;
+    }
+    
+    .iframe-container:nth-of-type(1) iframe {
+        height: 600px !important;
+    }
+    
+    .footer-container iframe {
+        height: 500px !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .iframe-container iframe {
+        height: 400px !important;
+    }
+    
+    .iframe-container:nth-of-type(1) iframe {
+        height: 500px !important;
+    }
+    
+    .footer-container iframe {
+        height: 600px !important; /* Taller on mobile if needed */
+    }
+}
 
         /* Responsive Design */
         @media screen and (max-width: 768px) {
@@ -523,7 +604,7 @@
         </div>
 
         <div class="iframe-container">
-            <iframe src="https://scitrade-org.github.io/scitrade/Code/description.html" 
+            <iframe src="https://scitrade.org/description.html" 
                     loading="eager">
             </iframe>
         </div>
@@ -662,11 +743,35 @@
         window.addEventListener('message', function(event) {
             console.log('Iframe message received:', event.data);
         });
+// Fix iframe height dynamically
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        document.querySelectorAll('.iframe-container iframe').forEach(iframe => {
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                if (iframeDoc && iframeDoc.body) {
+                    // Set iframe document to prevent overflow
+                    iframeDoc.body.style.overflow = 'hidden';
+                    iframeDoc.documentElement.style.overflow = 'hidden';
+                    
+                    // Adjust iframe height based on content
+                    const contentHeight = iframeDoc.body.scrollHeight;
+                    if (contentHeight > 0) {
+                        iframe.style.height = Math.min(contentHeight + 50, 800) + 'px';
+                    }
+                }
+            } catch (e) {
+                // Cross-origin error
+                console.log('Cannot access iframe content');
+            }
+        });
+    }, 2000); // Wait for iframes to load
+});
     </script>
 
     <!-- Footer -->
     <div class="footer-container">
-        <iframe src="https://scitrade-org.github.io/scitrade/Code/footer.html"
+        <iframe src="https://scitrade.org/footer.html"
                 loading="lazy">
         </iframe>
     </div>
