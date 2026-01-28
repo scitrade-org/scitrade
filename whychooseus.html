@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Choose SciTrade?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      overflow: hidden;
+      background: transparent;
+    }
+    
+    ::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+    
+    body {
+      font-family: 'Oswald', sans-serif;
+      min-height: 100vh;
+      background: transparent;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Custom selection color */
+    ::selection {
+      background: rgba(3, 252, 244, 0.7);
+      color: white;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+    ::-moz-selection {
+      background: rgba(3, 252, 244, 0.7);
+      color: white;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Main content */
+    .content-wrapper {
+      width: 100%;
+      height: 100vh;
+      margin: 0 auto;
+      padding: 15px 20px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 15px;
+      position: relative;
+      animation: fadeSlideDown 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    .title {
+      font-size: 2.8rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 5px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .title-accent {
+      color: transparent;
+      background: linear-gradient(90deg, #03fcf4, #03fcf4, #03fcf4);
+      background-clip: text;
+      -webkit-background-clip: text;
+      position: relative;
+      display: inline-block;
+      text-shadow: 0 0 25px rgba(3, 252, 244, 0.7);
+      animation: pulsateGlow 2s infinite alternate;
+    }
+
+    .title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #03fcf4, transparent);
+      animation: expandLine 2s infinite alternate;
+    }
+
+    /* Grid layout */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 15px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .reason-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
+      padding: 20px;
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: translateY(40px);
+      opacity: 0;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .reason-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      padding: 1px;
+      background: linear-gradient(130deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.3;
+      transition: opacity 0.3s ease, background 0.3s ease;
+    }
+
+    /* Enhanced hover effects */
+    .reason-item:hover {
+      transform: translateY(-5px);
+      background: rgba(0, 20, 20, 0.3);
+      box-shadow: 0 10px 25px rgba(3, 252, 244, 0.15);
+      z-index: 2;
+    }
+
+    .reason-item:hover::before {
+      opacity: 1;
+      background: linear-gradient(130deg, transparent, rgba(3, 252, 244, 0.8), transparent);
+      animation: rotateBorder 2s linear infinite;
+    }
+
+    .reason-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, transparent 30%, rgba(3, 252, 244, 0));
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .reason-item:hover::after {
+      opacity: 0.15;
+      animation: pulseGlow 1.5s infinite alternate;
+    }
+
+    .reason-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .reason-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      color: #03fcf4;
+      font-size: 14px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .reason-icon::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(3, 252, 244, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .reason-item:hover .reason-icon {
+      color: #03fcf4;
+      text-shadow: 0 0 10px #03fcf4;
+    }
+
+    .reason-item:hover .reason-icon::after {
+      transform: scale(1.2);
+      border-color: rgba(3, 252, 244, 1);
+      box-shadow: 0 0 15px rgba(3, 252, 244, 0.8);
+    }
+
+    .reason-title {
+      font-size: 1.4rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .reason-description {
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.8);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .highlight {
+      color: #03fcf4;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .reason-item:hover .highlight {
+      text-shadow: 0 0 8px rgba(3, 252, 244, 0.8);
+      color: #03fcf4;
+    }
+
+    /* Entrance Animations */
+    @keyframes fadeSlideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInFromLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInFromRight {
+      0% {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      70% {
+        transform: scale(1.05);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        opacity: 0.1;
+      }
+      100% {
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes pulsateGlow {
+      0% {
+        text-shadow: 0 0 10px rgba(3, 252, 244, 0.5);
+      }
+      100% {
+        text-shadow: 0 0 25px rgba(3, 252, 244, 0.9);
+      }
+    }
+
+    @keyframes expandLine {
+      0% {
+        width: 80px;
+        opacity: 0.5;
+      }
+      100% {
+        width: 120px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes rotateBorder {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Cyan focus highlight */
+    .reason-item:focus-within {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(3, 252, 244, 0.5);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .reasons-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .reasons-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, auto);
+      }
+      
+      .title {
+        font-size: 2rem;
+      }
+      
+      .content-wrapper {
+        padding: 15px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="content-wrapper">
+    <header class="header">
+      <h1 class="title">Why <span class="title-accent">choose</span> SciTrade?</h1>
+    </header>
+    
+    <div class="reasons-grid">
+      <!-- Item 1 -->
+      <div class="reason-item" id="item1">
+        <div class="reason-header">
+          <div class="reason-icon">✓</div>
+          <h3 class="reason-title">Proven Performance</h3>
+        </div>
+        <p class="reason-description">Our strategies are built on <span class="highlight">real market data</span>, tested across various conditions, and refined through constant performance tracking. We don't rely on guesswork, just consistent, strategic results.</p>
+      </div>
+      
+      <!-- Item 2 -->
+      <div class="reason-item" id="item2">
+        <div class="reason-header">
+          <div class="reason-icon">✓</div>
+          <h3 class="reason-title">Simple & User-Friendly</h3>
+        </div>
+        <p class="reason-description">Whether you're a beginner or an experienced trader, our approach is <span class="highlight">clear, structured, and easy to follow</span>. No unnecessary complexity, just actionable insights that work.</p>
+      </div>
+      
+      <!-- Item 3 -->
+      <div class="reason-item" id="item3">
+        <div class="reason-header">
+          <div class="reason-icon">✓</div>
+          <h3 class="reason-title">Transparent Risk Management</h3>
+        </div>
+        <p class="reason-description">We believe <span class="highlight">risk control is the foundation</span> of profitable trading. Every strategy includes defined <span class="highlight">stop losses</span>, drawdown limits, and <span class="highlight">capital preservation</span> techniques.</p>
+      </div>
+      
+      <!-- Item 4 -->
+      <div class="reason-item" id="item4">
+        <div class="reason-header">
+          <div class="reason-icon">✓</div>
+          <h3 class="reason-title">Quantitative Approach</h3>
+        </div>
+        <p class="reason-description">Our thinking and strategies are based on <span class="highlight">high-level mathematics</span> with a methodical and organized approach <span class="highlight">optimized for profits</span>. No emotions, just data-driven decisions.</p>
+      </div>
+      
+      <!-- Item 5 -->
+      <div class="reason-item" id="item5">
+        <div class="reason-header">
+          <div class="reason-icon">✓</div>
+          <h3 class="reason-title">Proven Profitability</h3>
+        </div>
+        <p class="reason-description">Our expert advisors let you <span class="highlight">sleep comfortably</span> knowing you'll wake up profitable. Our indicators <span class="highlight">twist the balance</span> to your side in real trading accounts.</p>
+      </div>
+      
+      <!-- Item 6 -->
+      <div class="reason-item" id="item6">
+        <div class="reason-header">
+          <div class="reason-icon">✓</div>
+          <h3 class="reason-title">Ongoing Support</h3>
+        </div>
+        <p class="reason-description">Markets change, and so do our strategies. With <span class="highlight">continuous updates</span> and personal support, you'll always be equipped with the <span class="highlight">latest tools</span> and insights.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Custom cursor
+    document.addEventListener('DOMContentLoaded', () => {
+      const cursorFollower = document.getElementById('cursorFollower');
+      const cursorDot = document.getElementById('cursorDot');
+      
+      // Mouse follower
+      document.addEventListener('mousemove', (e) => {
+        if (cursorFollower) {
+          cursorFollower.style.left = e.clientX + 'px';
+          cursorFollower.style.top = e.clientY + 'px';
+        }
+        
+        if (cursorDot) {
+          cursorDot.style.left = e.clientX + 'px';
+          cursorDot.style.top = e.clientY + 'px';
+        }
+      });
+      
+      // Hover effect on items
+      const items = document.querySelectorAll('.reason-item, .highlight, .title-accent');
+      
+      items.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          if (cursorFollower) {
+            cursorFollower.style.width = '50px';
+            cursorFollower.style.height = '50px';
+            cursorFollower.style.background = 'rgba(3, 252, 244, 0.4)';
+          }
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          if (cursorFollower) {
+            cursorFollower.style.width = '30px';
+            cursorFollower.style.height = '30px';
+            cursorFollower.style.background = 'rgba(3, 252, 244, 0.3)';
+          }
+        });
+      });
+      
+      // Animate items with different entrance animations
+      const animateItems = () => {
+        const items = document.querySelectorAll('.reason-item');
+        const animations = [
+          'fadeIn',
+          'slideInFromLeft',
+          'slideInFromRight',
+          'popIn',
+          'fadeIn',
+          'popIn'
+        ];
+        
+        items.forEach((item, index) => {
+          setTimeout(() => {
+            item.style.animation = `${animations[index]} 0.8s forwards`;
+          }, 300 + (index * 150));
+        });
+      };
+      
+      setTimeout(animateItems, 300);
+    });
+  </script>
+</body>
+</html>
