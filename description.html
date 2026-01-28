@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier Trading Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #03fcf4;
+            --primary-glow: rgba(3, 252, 244, 0.3);
+            --bg-color: #000000;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+        }
+
+        ::selection {
+            background: var(--primary-glow);
+            color: var(--text-color);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 40, 40, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 40, 40, 0.4) 0%, transparent 40%);
+            color: var(--text-color);
+            font-family: 'Oswald', sans-serif;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.2rem;
+            overflow: hidden; /* Added to prevent scrollbar during animations */
+        }
+
+        /* Header Section */
+        header {
+            min-height: 30vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            padding: 2rem 0 0.5rem;
+            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.3s;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            line-height: 1.2;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .intro p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem; /* Reduced from 1rem */
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .highlight:hover {
+            text-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        .highlight:hover::after {
+            width: 100%;
+        }
+
+        /* Chart background */
+        .chart-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .chart-line {
+            stroke: var(--primary-color);
+            stroke-width: 1;
+            fill: none;
+            animation: drawChart 3s forwards;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+        }
+
+        /* Trading Suite Section */
+        .trading-suite {
+            padding: 0.5rem 0; /* Reduced from 1rem */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .suite-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem; /* Reduced from 1rem */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s forwards 0.8s;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .suite-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            z-index: 1;
+            height: 110px; /* Reduced from 130px */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:nth-child(1) { animation: fadeInUp 0.5s forwards 1s; }
+        .card:nth-child(2) { animation: fadeInUp 0.5s forwards 1.1s; }
+        .card:nth-child(3) { animation: fadeInUp 0.5s forwards 1.2s; }
+        .card:nth-child(4) { animation: fadeInUp 0.5s forwards 1.3s; }
+        .card:nth-child(5) { animation: fadeInUp 0.5s forwards 1.4s; }
+        .card:nth-child(6) { animation: fadeInUp 0.5s forwards 1.5s; }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(3, 252, 244, 0.2);
+            z-index: 2;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(3, 252, 244, 0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            transform: scale(0.5);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+            transform: scale(1.5);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.05rem; /* Increased from 1rem */
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-icon {
+            margin-right: 0.5rem;
+            font-size: 1.1rem; /* Increased from 1rem */
+            color: var(--primary-color);
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-description {
+            font-size: 0.85rem; /* Increased from 0.8rem */
+            position: relative;
+            z-index: 2;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .data-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            width: 100%;
+            top: 0;
+            left: -100%;
+            animation: dataLine 6s infinite linear;
+        }
+
+        .data-points {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .data-point {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        /* Floating data elements */
+        .floating-data {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .data-item {
+            position: absolute;
+            font-family: 'Oswald', sans-serif;
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            animation: floatingData 15s infinite linear;
+            white-space: nowrap;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes drawChart {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes dataLine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes pulsePoint {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            70% {
+                transform: scale(3);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatingData {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(30vw);
+                opacity: 0;
+            }
+        }
+
+        /* Particle effect */
+        .particle {
+            position: absolute;
+            background-color: var(--primary-color);
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .card-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Chart background for header -->
+    <div class="chart-bg" id="chartBg"></div>
+    
+    <!-- Floating data elements -->
+    <div class="floating-data" id="floatingData"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="intro">
+                    <h1>
+                        We are a <span class="highlight">premier quantitative</span> trading firm dedicated to empowering traders with cutting-edge tools and <span class="highlight">deep market insights</span>.
+                    </h1>
+                    <p>
+                        Specializing in the <span class="highlight">development</span>, education, and sale of <span class="highlight">advanced</span> trading systems, we combine the power of <span class="highlight">mathematical modeling</span>, <span class="highlight">technical analysis</span>, <span class="highlight">fundamental research</span>, <span class="highlight">seasonal patterns</span>, and <span class="highlight">AI-driven intelligence</span> to deliver high-performance indicators and expert advisors.
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <section class="trading-suite">
+            <h2 class="suite-title">Our Trading Suite</h2>
+            
+            <div class="card-container">
+                <div class="card">
+                    <div class="data-line"></div>
+                    <div class="data-points"></div>
+                    <h3 class="card-title"><span class="card-icon">📈</span> Mathematical Indicators</h3>
+                    <p class="card-description">Grounded in statistical theory and market mechanics to identify high-probability setups.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="data-line"></div>
+                    <div class="data-points"></div>
+                    <h3 class="card-title"><span class="card-icon">🔧</span> Technical Tools</h3>
+                    <p class="card-description">Covering momentum, trend, and volume-based strategies with precision entry and exit points.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="data-line"></div>
+                    <div class="data-points"></div>
+                    <h3 class="card-title"><span class="card-icon">📓</span> Fundamental Analysis</h3>
+                    <p class="card-description">Integrating macroeconomic data and company-specific metrics for comprehensive evaluation.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="data-line"></div>
+                    <div class="data-points"></div>
+                    <h3 class="card-title"><span class="card-icon">☁️</span> Seasonal Strategies</h3>
+                    <p class="card-description">Leveraging time-based patterns and recurring market cycles for predictive advantage.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="data-line"></div>
+                    <div class="data-points"></div>
+                    <h3 class="card-title"><span class="card-icon">🤖</span> AI-Powered Systems</h3>
+                    <p class="card-description">Machine learning algorithms that continuously adapt to evolving market conditions.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="data-line"></div>
+                    <div class="data-points"></div>
+                    <h3 class="card-title"><span class="card-icon">💻</span> Expert Advisors</h3>
+                    <p class="card-description">Fully automated trading bots executing strategies with precision timing and risk management.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Create animated chart background
+        function createChartBackground() {
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "100%");
+            
+            // Create multiple chart lines
+            for (let i = 0; i < 6; i++) {
+                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path.classList.add("chart-line");
+                
+                // Generate random path data representing stock charts
+                let pathData = "M0," + (Math.random() * 100 + 150);
+                for (let x = 50; x < window.innerWidth; x += 50) {
+                    const y = Math.random() * 100 + 150 * (i * 0.5 + 1);
+                    pathData += " L" + x + "," + y;
+                }
+                
+                path.setAttribute("d", pathData);
+                path.style.animationDelay = (i * 0.2) + "s";
+                svg.appendChild(path);
+            }
+            
+            document.getElementById("chartBg").appendChild(svg);
+        }
+        
+        // Create floating data elements
+        function createFloatingData() {
+            const container = document.getElementById('floatingData');
+            const dataTerms = [
+                "RSI: 65.4", "MACD: 0.234", "EMA(13): 412.56", "S&P 500: 4392.21", 
+                "VWAP: 315.67", "BTC/USD: 72431.25", "OBV: 1432563", "ADX: 28.45",
+                "EUR/USD: 1.0843", "GOLD: 2350.12", "FIBONACCI: 0.618", "BOLLINGER: +2σ",
+                "VIX: 17.32", "ATR: 3.45", "SMA(50): 348.12", "CCI: 125.3"
+            ];
+            
+            for (let i = 0; i < 20; i++) {
+                const dataItem = document.createElement('div');
+                dataItem.classList.add('data-item');
+                dataItem.textContent = dataTerms[Math.floor(Math.random() * dataTerms.length)];
+                
+                dataItem.style.left = Math.random() * 100 + 'vw';
+                dataItem.style.top = Math.random() * 100 + 'vh';
+                dataItem.style.animationDelay = (Math.random() * 10) + 's';
+                dataItem.style.animationDuration = (10 + Math.random() * 15) + 's';
+                
+                container.appendChild(dataItem);
+            }
+        }
+        
+        // Create data points animation for cards
+        function createDataPoints() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const dataPointsContainer = card.querySelector('.data-points');
+                
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        if (dataPointsContainer) {
+                            createDataPoint(dataPointsContainer);
+                        }
+                    }, i * 1000);
+                }
+                
+                function createDataPoint(container) {
+                    const point = document.createElement('div');
+                    point.classList.add('data-point');
+                    
+                    const x = Math.random() * 100;
+                    const y = Math.random() * 100;
+                    
+                    point.style.left = x + '%';
+                    point.style.top = y + '%';
+                    point.style.animation = `pulsePoint ${Math.random() * 2 + 2}s forwards`;
+                    
+                    container.appendChild(point);
+                    
+                    setTimeout(() => {
+                        point.remove();
+                        createDataPoint(container);
+                    }, Math.random() * 2000 + 2000);
+                }
+            });
+        }
+        
+        // Particle effect on hover for cards
+        function createParticleEffect() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    createParticle(e, card);
+                });
+            });
+            
+            function createParticle(e, parent) {
+                const x = e.clientX - parent.getBoundingClientRect().left;
+                const y = e.clientY - parent.getBoundingClientRect().top;
+                
+                for (let i = 0; i < 3; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    particle.style.left = x + 'px';
+                    particle.style.top = y + 'px';
+                    
+                    const size = Math.random() * 3 + 1;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    
+                    const destinationX = x + (Math.random() - 0.5) * 50;
+                    const destinationY = y + (Math.random() - 0.5) * 50;
+                    const duration = Math.random() * 1 + 0.5;
+                    const delay = Math.random() * 0.1;
+                    
+                    particle.style.opacity = Math.random() * 0.5 + 0.3;
+                    
+                    particle.style.transition = `all ${duration}s ease-out ${delay}s`;
+                    parent.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        particle.style.transform = `translate(${destinationX - x}px, ${destinationY - y}px)`;
+                        particle.style.opacity = '0';
+                    }, 10);
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                    }, duration * 1000 + delay * 1000);
+                }
+            }
+        }
+        
+        // Enhanced glow effect for highlights
+        function enhanceHighlights() {
+            const highlights = document.querySelectorAll('.highlight');
+            
+            highlights.forEach(highlight => {
+                highlight.addEventListener('mouseenter', () => {
+                    highlight.style.textShadow = '0 0 8px rgba(3, 252, 244, 0.7)';
+                    
+                    // Create pulsing glow effect
+                    const glowEffect = document.createElement('div');
+                    glowEffect.style.position = 'absolute';
+                    glowEffect.style.top = '-10px';
+                    glowEffect.style.left = '-10px';
+                    glowEffect.style.right = '-10px';
+                    glowEffect.style.bottom = '-10px';
+                    glowEffect.style.borderRadius = '50%';
+                    glowEffect.style.background = 'radial-gradient(circle, rgba(3,252,244,0.2) 0%, transparent 70%)';
+                    glowEffect.style.transform = 'scale(0.5)';
+                    glowEffect.style.opacity = '0';
+                    glowEffect.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    glowEffect.style.zIndex = '-1';
+                    
+                    highlight.style.position = 'relative';
+                    highlight.appendChild(glowEffect);
+                    
+                    setTimeout(() => {
+                        glowEffect.style.transform = 'scale(1)';
+                        glowEffect.style.opacity = '1';
+                    }, 10);
+                });
+                
+                highlight.addEventListener('mouseleave', () => {
+                    highlight.style.textShadow = 'none';
+                    
+                    const glowEffect = highlight.querySelector('div');
+                    if (glowEffect) {
+                        glowEffect.style.transform = 'scale(1.5)';
+                        glowEffect.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            glowEffect.remove();
+                        }, 500);
+                    }
+                });
+            });
+        }
+        
+        // Card enhanced hover effects
+        function enhanceCardEffects() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    // Intensify data line animation
+                    const dataLine = card.querySelector('.data-line');
+                    if (dataLine) {
+                        dataLine.style.animation = 'dataLine 3s infinite linear';
+                        dataLine.style.opacity = '1';
+                    }
+                    
+                    // Create more data points
+                    const dataPointsContainer = card.querySelector('.data-points');
+                    if (dataPointsContainer) {
+                        for (let i = 0; i < 3; i++) {
+                            createEnhancedDataPoint(dataPointsContainer);
+                        }
+                    }
+                    
+                    function createEnhancedDataPoint(container) {
+                        const point = document.createElement('div');
+                        point.classList.add('data-point');
+                        
+                        const x = Math.random() * 100;
+                        const y = Math.random() * 100;
+                        
+                        point.style.left = x + '%';
+                        point.style.top = y + '%';
+                        point.style.animation = `pulsePoint ${Math.random() * 1.5 + 1}s forwards`;
+                        
+                        container.appendChild(point);
+                        
+                        setTimeout(() => {
+                            point.remove();
+                        }, 1500);
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    // Reset data line animation
+                    const dataLine = card.querySelector('.data-line');
+                    if (dataLine) {
+                        dataLine.style.animation = 'dataLine 6s infinite linear';
+                    }
+                });
+            });
+        }
+        
+        // Initialize all animations and effects
+        window.addEventListener('load', () => {
+            createChartBackground();
+            createFloatingData();
+            createDataPoints();
+            createParticleEffect();
+            enhanceHighlights();
+            enhanceCardEffects();
+        });
+    </script>
+</body>
+</html>
