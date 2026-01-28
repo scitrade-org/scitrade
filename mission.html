@@ -6,6 +6,8 @@
     <title>SciTrade Mission</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/scitradelogotransp.png">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Import fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
@@ -19,6 +21,7 @@
             --transparent-black: rgba(0, 0, 0, 0.7);
             --red: #03fcf4;
             --gray-bg: #0a0a0a;
+            --card-bg: rgba(20, 20, 20, 0.8);
         }
         
         * {
@@ -37,8 +40,8 @@
 
         /* Custom Scrollbar - LARGER with better hover */
         ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
         }
 
         ::-webkit-scrollbar-track {
@@ -86,6 +89,7 @@
             background-color: transparent;
             transition: all 0.3s ease;
             font-family: 'Rajdhani', sans-serif !important;
+            /* Removed backdrop-filter blur */
         }
 
         .sci-navbar * {
@@ -94,8 +98,9 @@
 
         .sci-navbar.scrolled {
             padding: 10px 0;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(10, 10, 10, 0.98);
             box-shadow: 0 5px 20px rgba(0, 255, 255, 0.15);
+            /* Removed backdrop-filter blur */
         }
 
         .sci-nav-container {
@@ -305,7 +310,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.4) 100%);
             z-index: 1;
         }
         
@@ -320,17 +325,18 @@
         }
         
         .title {
-            font-size: 5rem;
+            font-size: 4.5rem;
             text-transform: uppercase;
             margin-bottom: 30px;
             text-align: center;
             position: relative;
             letter-spacing: 4px;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             animation: titleFadeIn 2s ease-out forwards;
             font-family: 'Oswald', sans-serif;
             color: var(--white);
             font-weight: 300;
+            line-height: 1.1;
         }
         
         @keyframes titleFadeIn {
@@ -350,7 +356,7 @@
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 150px;
             height: 3px;
             background-color: var(--cyan);
             transition: width 0.5s ease;
@@ -363,16 +369,17 @@
         }
         
         .subtitle {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             text-align: center;
             margin-bottom: 40px;
             max-width: 800px;
             opacity: 0;
             animation: subtitleFadeIn 2s ease-out 0.5s forwards;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: var(--white);
             font-weight: 300;
+            line-height: 1.6;
         }
         
         @keyframes subtitleFadeIn {
@@ -397,6 +404,7 @@
             z-index: 2;
             cursor: pointer;
             animation: bounce 2s infinite;
+            text-decoration: none;
         }
         
         .scroll-down span {
@@ -414,6 +422,17 @@
             border: 2px solid var(--white);
             border-radius: 15px;
             position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-down:hover i {
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        .scroll-down:hover span {
+            color: var(--cyan);
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
         }
         
         .scroll-down i::before {
@@ -427,6 +446,10 @@
             border-radius: 50%;
             transform: translateX(-50%);
             animation: scrollDown 2s infinite;
+        }
+        
+        .scroll-down:hover i::before {
+            background-color: var(--cyan);
         }
         
         @keyframes scrollDown {
@@ -457,14 +480,14 @@
         }
         
         .content-container {
-            max-width: 1600px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 40px;
-            background-color: var(--gray-bg);
+            padding: 60px 60px 20px;
+            background-color: var(--black);
         }
         
         .section {
-            margin-bottom: 100px;
+            margin-bottom: 50px;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
@@ -476,15 +499,16 @@
         }
         
         .section-title {
-            font-size: 3rem;
+            font-size: 2.8rem;
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             position: relative;
             display: inline-block;
             letter-spacing: 2px;
             font-family: 'Oswald', sans-serif;
             color: var(--white);
             font-weight: 300;
+            line-height: 1.2;
         }
         
         .section-title::after {
@@ -497,18 +521,23 @@
             background-color: var(--cyan);
             transition: width 0.5s ease;
         }
-        
+
         .section-title:hover::after {
             width: 100%;
             box-shadow: 0 0 12px var(--cyan);
         }
         
         .content {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             line-height: 1.7;
             font-family: 'Roboto', sans-serif;
-            color: var(--white);
+            color: #e0e0e0;
             font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .content p {
+            margin-bottom: 20px;
         }
         
         .highlight {
@@ -516,6 +545,7 @@
             position: relative;
             display: inline-block;
             transition: all 0.3s ease;
+            font-weight: 400;
         }
         
         .highlight:hover {
@@ -527,16 +557,16 @@
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 50px;
+            gap: 25px;
+            margin-top: 40px;
         }
         
         .card {
             flex: 1 1 300px;
-            background-color: rgba(20, 20, 20, 0.7);
+            background-color: var(--card-bg);
             border-left: 3px solid var(--cyan);
-            padding: 30px;
-            border-radius: 5px;
+            padding: 25px;
+            border-radius: 8px;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -555,8 +585,8 @@
         }
         
         .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
             background-color: rgba(30, 30, 30, 0.9);
         }
         
@@ -565,8 +595,8 @@
         }
         
         .card-title {
-            font-size: 1.7rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             color: var(--cyan);
             font-family: 'Oswald', sans-serif;
             font-weight: 300;
@@ -575,21 +605,22 @@
         .card-content {
             font-size: 1.1rem;
             font-family: 'Roboto', sans-serif;
-            color: var(--white);
+            color: #e0e0e0;
             font-weight: 300;
+            line-height: 1.6;
         }
         
         .cta-button {
             display: inline-block;
-            padding: 18px 50px;
-            background-color: var(--cyan);
-            color: var(--white);
+            padding: 15px 40px;
+            background-color: transparent;
+            color: var(--cyan);
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 1.4rem;
-            letter-spacing: 3px;
-            margin-top: 40px;
-            border: none;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            border: 2px solid var(--cyan);
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
@@ -606,15 +637,15 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
             transition: left 0.7s ease;
         }
         
         .cta-button:hover {
-            background-color: #00cccc;
+            background-color: rgba(0, 255, 255, 0.1);
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
-            letter-spacing: 4px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            letter-spacing: 3px;
         }
         
         .cta-button:hover::before {
@@ -623,12 +654,12 @@
         
         .parallax-section {
             position: relative;
-            height: 400px;
+            height: 300px;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            margin: 100px 0;
+            margin: 40px 0 30px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -658,13 +689,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.7) 100%);
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.85) 100%);
             z-index: 1;
         }
         
         .parallax-title {
-            font-size: 3rem;
-            margin-bottom: 25px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             position: relative;
             display: inline-block;
             font-family: 'Oswald', sans-serif;
@@ -690,10 +721,10 @@
         }
         
         .parallax-text {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             line-height: 1.6;
             font-family: 'Roboto', sans-serif;
-            color: var(--white);
+            color: #e0e0e0;
             font-weight: 300;
         }
         
@@ -703,7 +734,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, black 70%);
+            background: radial-gradient(circle at center, rgba(0, 40, 40, 0.3) 0%, black 70%);
             opacity: 0.7;
             z-index: -1;
         }
@@ -750,7 +781,7 @@
             overflow: hidden;
             height: 50px;
             background: rgba(0, 0, 0, 0.8);
-            margin-top: 100px;
+            margin-top: 40px;
             position: relative;
         }
         
@@ -758,7 +789,7 @@
             content: '';
             position: absolute;
             top: 0;
-            width: 200px;
+            width: 150px;
             height: 100%;
             z-index: 2;
         }
@@ -809,6 +840,24 @@
             overflow: hidden;
         }
 
+        /* Footer Container */
+        .footer-container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        .footer-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            overflow: hidden;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
         /* Responsive Design */
         @media screen and (max-width: 768px) {
             .sci-nav-links {
@@ -819,7 +868,6 @@
                 flex-direction: column;
                 align-items: center;
                 background-color: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
                 padding: 20px 0;
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 transition: clip-path 0.5s ease-in-out;
@@ -868,7 +916,7 @@
             }
 
             .subtitle {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
 
             .section-title {
@@ -881,25 +929,30 @@
 
             .parallax-section {
                 background-attachment: scroll;
-                height: 300px;
+                height: 250px;
+                margin: 30px 0 20px;
             }
 
             .parallax-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
             .parallax-text {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             .content-container {
-                padding: 40px 20px;
+                padding: 40px 40px 15px;
+            }
+            
+            .footer-container iframe {
+                height: 450px;
             }
         }
 
         @media screen and (max-width: 480px) {
             .content-container {
-                padding: 30px 15px;
+                padding: 30px 30px 10px;
             }
             
             .banner {
@@ -907,7 +960,24 @@
             }
             
             .title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .footer-container iframe {
+                height: 400px;
             }
         }
     </style>
@@ -1024,7 +1094,7 @@
                     </div>
                 </div>
                 
-                <div class="cta-container" style="text-align: center; margin-top: 70px;">
+                <div class="cta-container" style="text-align: center; margin-top: 40px;">
                     <a href="#" class="cta-button">Join Us Today</a>
                 </div>
             </div>
@@ -1053,11 +1123,8 @@
     </div>
     
     <!-- Footer -->
-    <div style="width:100%; padding:0; margin:0;">
-      <iframe src="https://scitrade-org.github.io/scitrade/Code/footer.html" 
-              style="width:100%; height:600px; border:none; overflow:hidden;"
-              scrolling="no" frameborder="0" allowtransparency="true">
-      </iframe>
+    <div class="footer-container">
+      <iframe src="https://scitrade.org/footer.html" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
     </div>
     
     <script>
@@ -1114,19 +1181,61 @@
             }
         });
         
-        // Improved smooth scrolling for scroll-down button
-        document.getElementById('scrollDown').addEventListener('click', function() {
-            // Get the first section after the banner
-            const firstSection = document.querySelector('.content-container');
+        // FIXED: Smooth scrolling for scroll-down button
+        document.getElementById('scrollDown').addEventListener('click', function(e) {
+            e.preventDefault();
             
-            // Calculate position to scroll to (banner height + navbar height)
-            const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
-            const scrollPosition = window.innerHeight - navbarHeight;
+            // Get the first section after banner
+            const firstSection = document.getElementById('section1');
+            if (firstSection) {
+                const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
+                const targetPosition = firstSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+                
+                // Smooth scroll with custom easing
+                smoothScrollTo(targetPosition, 1000);
+            }
+        });
+        
+        // Smooth scroll function with easing
+        function smoothScrollTo(targetPosition, duration) {
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            let startTime = null;
             
-            // Smooth scroll to just below the banner
-            window.scrollTo({
-                top: scrollPosition,
-                behavior: 'smooth'
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                
+                // Ease in out cubic
+                const easeProgress = progress < 0.5 
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                
+                window.scrollTo(0, startPosition + distance * easeProgress);
+                
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            }
+            
+            requestAnimationFrame(animation);
+        }
+        
+        // Smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    e.preventDefault();
+                    const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+                    
+                    smoothScrollTo(targetPosition, 800);
+                }
             });
         });
         
@@ -1231,7 +1340,7 @@
                 const angleX = (y - centerY) / 20;
                 const angleY = (centerX - x) / 20;
                 
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-15px)`;
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-8px)`;
             });
             
             card.addEventListener('mouseleave', () => {
