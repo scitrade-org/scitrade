@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Trading Footer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-red: #03fcf4;
+      --hover-red: #33fffc;
+      --footer-text: #ffffff;
+      --input-bg: rgba(255, 255, 255, 0.1);
+      --input-text: #ffffff;
+      --accent-color: rgba(3, 252, 244, 0.15);
+      --transition-standard: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background-color: transparent;
+      color: var(--footer-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      line-height: 1.6;
+      letter-spacing: 0.3px;
+    }
+    
+    .footer {
+      background: transparent;
+      padding: 20px 0 20px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .footer-content {
+      width: 90%;
+      max-width: 1200px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+    
+    .footer-logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 32px;
+      font-weight: normal;
+      margin-bottom: 20px;
+      color: #fff;
+      
+      transition: var(--transition-standard);
+      letter-spacing: 1px;
+    }
+    
+    .footer-logo span {
+      color: var(--primary-red);
+    }
+    
+    .footer-logo:hover {
+      transform: translateY(-3px) scale(1.02);
+      text-shadow: 0 0 20px rgba(3, 252, 244, 0.8);
+    }
+    
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 25px;
+      padding: 0 20px;
+      position: relative;
+    }
+    
+
+    
+    .footer-section h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--primary-red);
+      transition: var(--transition-standard);
+    }
+    
+    .footer-section:hover h3::after {
+      width: 100px;
+      box-shadow: 0 0 10px rgba(3, 252, 244, 0.5);
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+        
+    .footer-links a {
+        color: var(--footer-text);
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 300;
+        transition: var(--transition-standard);
+        position: relative;
+    }
+    
+    .footer-links a:hover {
+        
+        font-weight: 300;
+        transform: translateY(-1px);
+        text-shadow: 0 0 8px rgba(3, 252, 244, 0.3);
+    }
+    
+    .footer-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: var(--primary-red);
+        transition: var(--transition-standard);
+    }
+    
+    .footer-links a:hover::after {
+        width: 100%;
+    }
+    
+    .contact-info {
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    
+    .contact-info p {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      transition: var(--transition-standard);
+    }
+    
+    .contact-info p:hover {
+      transform: translateX(5px);
+    }
+    
+    .contact-info i {
+      margin-right: 12px;
+      color: var(--primary-red);
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+      transition: var(--transition-standard);
+    }
+    
+    .contact-info p:hover i {
+      transform: scale(1.2);
+      text-shadow: 0 0 10px rgba(3, 252, 244, 0.5);
+    }
+    
+    .contact-info a {
+      color: var(--footer-text);
+      text-decoration: none;
+      transition: var(--transition-standard);
+      position: relative;
+    }
+    
+    .contact-info a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--primary-red);
+      transition: var(--transition-standard);
+    }
+    
+    .contact-info a:hover {
+      color: var(--primary-red);
+      text-shadow: 0 0 8px rgba(3, 252, 244, 0.3);
+    }
+    
+    .contact-info a:hover::after {
+      width: 100%;
+    }
+    
+    .social-icons {
+      display: flex;
+      margin-top: 25px;
+    }
+    
+    .social-icon {
+      margin-right: 18px;
+      color: var(--footer-text);
+      text-decoration: none;
+      transition: var(--transition-standard);
+      position: relative;
+    }
+    
+    .social-icon i {
+      font-size: 20px;
+      color: var(--primary-red);
+      transition: var(--transition-standard);
+      position: relative;
+      z-index: 2;
+    }
+    
+    .social-icon::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 40px;
+      height: 40px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      transition: var(--transition-standard);
+      z-index: 1;
+    }
+    
+    .social-icon:hover::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-5px);
+    }
+    
+    .social-icon:hover i {
+      color: var(--hover-red);
+      text-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
+    }
+    
+    .newsletter-form {
+      margin-top: 15px;
+      position: relative;
+      max-width: 100%;
+    }
+    
+    .newsletter-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 30px;
+      background-color: var(--input-bg);
+      color: var(--input-text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 14px;
+      transition: var(--transition-standard);
+      letter-spacing: 0.5px;
+    }
+    
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--primary-red);
+      box-shadow: 0 0 15px rgba(3, 252, 244, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .newsletter-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 300;
+    }
+    
+    .newsletter-btn {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      background-color: var(--primary-red);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-standard);
+      overflow: hidden;
+    }
+    
+    .newsletter-btn i {
+      font-size: 16px;
+      position: relative;
+      z-index: 2;
+      transition: var(--transition-standard);
+    }
+    
+    .newsletter-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 100%;
+      height: 100%;
+      background-color: var(--hover-red);
+      border-radius: 50%;
+      transition: var(--transition-standard);
+      z-index: 1;
+    }
+    
+    .newsletter-btn:hover::before {
+      transform: translate(-50%, -50%) scale(1.5);
+    }
+    
+    .newsletter-btn:hover {
+      box-shadow: 0 0 20px rgba(3, 252, 244, 0.6);
+      transform: scale(1.05);
+    }
+    
+    .newsletter-btn:hover i {
+      transform: rotate(-15deg) scale(1.1);
+    }
+    
+    .footer-bottom {
+      width: 90%;
+      max-width: 1200px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 25px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+    
+    .footer-bottom p {
+      margin-bottom: 15px;
+    }
+    
+    .footer-bottom a {
+      color: var(--footer-text);
+      text-decoration: none;
+      transition: var(--transition-standard);
+      margin: 0 15px;
+      position: relative;
+    }
+    
+    .footer-bottom a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--primary-red);
+      transition: var(--transition-standard);
+    }
+    
+    .footer-bottom a:hover {
+      color: var(--primary-red);
+      text-shadow: 0 0 8px rgba(3, 252, 244, 0.3);
+    }
+    
+    .footer-bottom a:hover::after {
+      width: 100%;
+    }
+    
+    .newsletter-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    
+    .thank-you-message {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      border-radius: 30px;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      opacity: 0;
+      z-index: 2;
+      transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      backdrop-filter: blur(3px);
+    }
+    
+    .thank-you-message i {
+      color: #00ffff;
+      margin-right: 8px;
+      font-size: 18px;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .thank-you-message span {
+      animation: fadeIn 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+      letter-spacing: 0.3px;
+      font-weight: 100;
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Change text selection/highlight color */
+    ::selection {
+      background: #00ffff;
+      color: #000000; /* Optional: change text color when selected for better contrast */
+    }
+    
+    /* For Firefox */
+    ::-moz-selection {
+      background: #00ffff;
+      color: #000000;
+    }
+    .form-controls {
+      position: relative;
+      transition: var(--transition-standard);
+    }
+    
+    .form-controls.submitted {
+      filter: blur(3px);
+      opacity: 0.7;
+      transform: scale(0.98);
+    }
+    
+    @media (max-width: 768px) {
+      .footer-content {
+        flex-direction: column;
+      }
+      
+      .footer-section {
+        margin-bottom: 30px;
+        width: 100%;
+      }
+      
+      .footer-section::before {
+        display: none;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div style="flex-grow: 1;"></div>
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h2 class="footer-logo"><span>Sci</span>Trade</h2>
+        <h3>Newsletter</h3>
+        <form class="newsletter-form" id="newsletterForm">
+          <div class="newsletter-wrapper">
+            <div class="form-controls">
+              <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+              <button type="submit" class="newsletter-btn">
+                <i class="fas fa-envelope"></i>
+              </button>
+            </div>
+            <div class="thank-you-message">
+              <i class="fas fa-check-circle"></i>
+              <span>Thank you for subscribing!</span>
+            </div>
+          </div>
+        </form>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/SciTrade/" class="social-icon" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://x.com/SciTrade_FX" class="social-icon" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.youtube.com/@SciTrade" class="social-icon" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://github.com/SciTrade" class="social-icon" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.tiktok.com/@SciTrade.fx" class="social-icon" aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="https://whatsapp.com/channel/0029Vb5VrQLK0IBi7LYKYP2H" class="social-icon" aria-label="WhatsApp Channel">
+            <i class="fas fa-link"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="https://sites.google.com/view/scitrade/home">Home</a></li>
+          <li><a href="https://sites.google.com/view/scitrade/mission">About Us</a></li>
+          <li><a href="https://sites.google.com/view/scitrade/products">Products</a></li>
+          <li><a href="https://sites.google.com/view/scitrade/courses">Courses</a></li>
+          <li><a href="https://sites.google.com/view/scitrade/reviews">Reviews</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Support</h3>
+        <ul class="footer-links">
+          <li><a href="https://sites.google.com/view/scitrade/faq">FAQ</a></li>
+          <li><a href="https://sites.google.com/view/scitrade/results">Results</a></li>
+          <li><a href="https://whatsapp.com/channel/0029Vb5VrQLK0IBi7LYKYP2H">Community</a></li>
+          <li><a href="https://sites.google.com/view/scitrade/contact">Contact Support</a></li>
+          <li><a href="https://sites.google.com/view/scitrade/privacypolicy">Privacy Policy</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <p><i class="fas fa-map-marker-alt"></i> Lebanon</p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:scitrade@gmail.com">scitrade@gmail.com</a></p>
+          <p><i class="fas fa-phone"></i> <a href="tel:+96107506070">+961 07 50 60 70</a></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>SciTrade | Copyright &copy; 2025 | All Rights Reserved</p>
+      <div>
+        <a href="https://sites.google.com/view/scitrade/termsconditions">Terms and Conditions</a>
+        <a href="https://sites.google.com/view/scitrade/privacypolicy">Privacy Policy</a>
+        <a href="https://sites.google.com/view/scitrade/cookiepolicy">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = this;
+      const thankYouMessage = form.querySelector('.thank-you-message');
+      const formControls = form.querySelector('.form-controls');
+      
+      // Apply effects to form controls
+      formControls.classList.add('submitted');
+      
+      // Show thank you message with fade in
+      thankYouMessage.style.display = 'flex';
+      setTimeout(() => {
+        thankYouMessage.style.opacity = '1';
+      }, 10);
+      
+      // Reset form after 3 seconds
+      setTimeout(function() {
+        thankYouMessage.style.opacity = '0';
+        
+        setTimeout(() => {
+          form.reset();
+          thankYouMessage.style.display = 'none';
+          formControls.classList.remove('submitted');
+        }, 500);
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
