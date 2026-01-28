@@ -21,7 +21,7 @@
             --white: #ffffff;
             --black: #000000;
             --transparent-black: rgba(0, 0, 0, 0.7);
-            --red: #03fcf4; /* This is actually cyan, named "red" in original code */
+            --red: #03fcf4;
             --gray-bg: #0a0a0a;
         }
 
@@ -35,12 +35,19 @@
         body {
             background-color: var(--black);
             overflow-x: hidden;
-            perspective: 1px;
             width: 100%;
             font-family: 'Roboto', sans-serif;
         }
 
-        /* Custom Scrollbar - LARGER with better hover */
+        /* Force iframe visibility */
+        iframe {
+            background-color: #000000 !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
             height: 10px;
@@ -64,18 +71,12 @@
             transform: scale(1.1);
         }
 
-        /* Firefox scrollbar */
         * {
             scrollbar-width: thin;
             scrollbar-color: var(--red) var(--black);
         }
 
         ::selection {
-            background: #03fcf4;
-            color: var(--black);
-        }
-
-        ::-moz-selection {
             background: #03fcf4;
             color: var(--black);
         }
@@ -90,11 +91,6 @@
             z-index: 1000;
             background-color: transparent;
             transition: all 0.3s ease;
-            font-family: 'Rajdhani', sans-serif !important;
-        }
-
-        .sci-navbar * {
-            font-family: 'Rajdhani', sans-serif !important;
         }
 
         .sci-navbar.scrolled {
@@ -130,7 +126,7 @@
         }
 
         .sci-brand-name {
-            font-family: 'Rajdhani', sans-serif !important;
+            font-family: 'Rajdhani', sans-serif;
             font-size: 18px;
             font-weight: 500;
             text-decoration: none;
@@ -152,10 +148,6 @@
             margin-left: auto;
         }
 
-        .sci-nav-item {
-            font-family: 'Rajdhani', sans-serif !important;
-        }
-
         .sci-nav-link {
             position: relative;
             padding: 8px 16px;
@@ -165,7 +157,7 @@
             font-size: 18px;
             font-weight: 400;
             transition: all 0.3s ease;
-            font-family: 'Rajdhani', sans-serif !important;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .sci-nav-link::after {
@@ -290,7 +282,7 @@
             margin: 0 auto;
         }
 
-        /* Banner Section - Full width */
+        /* Banner Section */
         .banner {
             position: relative;
             width: 100%;
@@ -298,98 +290,17 @@
             background: url('https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/cyanbannerhome.png') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
-            background-position: center top;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
         }
 
-        .banner iframe {
+        .banner-iframe {
             width: 100% !important;
-            height: 600px !important;
-            border: none;
-            overflow: hidden;
-        }
-
-        .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            padding: 0;
-        }
-
-        .title {
-            font-size: 5rem;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-            letter-spacing: 4px;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-            animation: titleFadeIn 2s ease-out forwards;
-            font-family: 'Oswald', sans-serif;
-            color: var(--white);
-            font-weight: 300;
-        }
-
-        @keyframes titleFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--red);
-            transition: width 0.5s ease;
-            box-shadow: 0 0 10px var(--red);
-        }
-
-        .title:hover::after {
-            width: 300px;
-            box-shadow: 0 0 20px var(--red);
-        }
-
-        .subtitle {
-            font-size: 1.8rem;
-            text-align: center;
-            margin-bottom: 40px;
-            max-width: 800px;
-            opacity: 0;
-            animation: subtitleFadeIn 2s ease-out 0.5s forwards;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-            font-family: 'Oswald', sans-serif;
-            color: var(--white);
-            font-weight: 300;
-        }
-
-        @keyframes subtitleFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            height: 100vh !important;
+            border: none !important;
+            background: transparent !important;
         }
 
         .scroll-down {
@@ -466,423 +377,21 @@
             }
         }
 
-        /* Content Sections with horizontal margins */
-        .content-section {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            background-color: var(--gray-bg);
-        }
-
-        .section {
-            margin-bottom: 100px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            font-size: 3rem;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-            letter-spacing: 2px;
-            font-family: 'Oswald', sans-serif;
-            color: var(--white);
-            font-weight: 300;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50%;
-            height: 2px;
-            background-color: var(--red);
-            transition: width 0.5s ease;
-        }
-
-        .section-title:hover::after {
-            width: 100%;
-            box-shadow: 0 0 12px var(--red);
-        }
-
-        .content {
-            font-size: 1.3rem;
-            line-height: 1.7;
-            font-family: 'Roboto', sans-serif;
-            color: var(--white);
-            font-weight: 300;
-        }
-
-        .highlight {
-            color: var(--red);
-            position: relative;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        .highlight:hover {
-            text-shadow: 0 0 15px rgba(3, 252, 244, 0.8);
-            transform: scale(1.05);
-        }
-
-        /* Card Styles */
-        .card-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .card {
-            flex: 1 1 300px;
-            background-color: rgba(20, 20, 20, 0.7);
-            border-left: 3px solid var(--red);
-            padding: 30px;
-            border-radius: 5px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(3, 252, 244, 0.05), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 30px rgba(3, 252, 244, 0.3);
-            background-color: rgba(30, 30, 30, 0.9);
-        }
-
-        .card:hover::before {
-            transform: translateX(100%);
-        }
-
-        .card-title {
-            font-size: 1.7rem;
-            margin-bottom: 20px;
-            color: var(--red);
-            font-family: 'Oswald', sans-serif;
-            font-weight: 300;
-        }
-
-        .card-content {
-            font-size: 1.1rem;
-            font-family: 'Roboto', sans-serif;
-            color: var(--white);
-            font-weight: 300;
-            line-height: 1.6;
-        }
-
-        /* Rating Section */
-        .rating {
-            font-size: 36px;
-            color: var(--red);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .star {
-            display: inline-block;
-            transition: transform 0.3s ease, text-shadow 0.3s ease;
-            animation: sparkle 2s infinite;
-            animation-delay: calc(var(--i) * 0.2s);
-        }
-
-        @keyframes sparkle {
-            0% {
-                text-shadow: 0 0 5px rgba(3, 252, 244, 0.5);
-            }
-
-            50% {
-                text-shadow: 0 0 20px rgba(3, 252, 244, 1);
-            }
-
-            100% {
-                text-shadow: 0 0 5px rgba(3, 252, 244, 0.5);
-            }
-        }
-
-        .star:hover {
-            transform: scale(1.3) rotate(5deg);
-            text-shadow: 0 0 15px var(--red);
-        }
-
-        .reviewer-info {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .reviewer-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #333;
-            margin-right: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .reviewer-details {
-            flex-grow: 1;
-        }
-
-        .reviewer-name {
-            font-size: 18px;
-            font-family: 'Roboto', sans-serif;
-            color: var(--white);
-            font-weight: 500;
-        }
-
-        .reviewer-date {
-            font-size: 14px;
-            color: #aaa;
-            margin-top: 5px;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 300;
-        }
-
-        .reviewer-rating {
-            color: var(--red);
-            font-size: 16px;
-            margin-top: 5px;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-        }
-
-        /* CTA Button */
-        .cta-button {
-            display: inline-block;
-            padding: 18px 50px;
-            background-color: var(--red);
-            color: var(--white);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 1.4rem;
-            letter-spacing: 3px;
-            margin-top: 40px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border-radius: 3px;
-            font-family: 'Oswald', sans-serif;
-            font-weight: 300;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.7s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #03c9c2;
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(3, 252, 244, 0.6);
-            letter-spacing: 4px;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        /* Parallax Section */
-        .parallax-section {
-            position: relative;
-            height: 400px;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            margin: 100px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .parallax-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 20px;
-            max-width: 800px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .parallax-content.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .parallax-title {
-            font-size: 3rem;
-            margin-bottom: 25px;
-            position: relative;
-            display: inline-block;
-            font-family: 'Oswald', sans-serif;
-            color: var(--white);
-            font-weight: 300;
-        }
-
-        .parallax-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 2px;
-            background-color: var(--red);
-            transition: width 0.5s ease;
-        }
-
-        .parallax-title:hover::after {
-            width: 80%;
-            box-shadow: 0 0 8px var(--red);
-        }
-
-        .parallax-text {
-            font-size: 1.4rem;
-            line-height: 1.6;
-            font-family: 'Roboto', sans-serif;
-            color: var(--white);
-            font-weight: 300;
-        }
-
-        /* Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background-color: var(--red);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float 15s linear infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 0.7;
-            }
-
-            90% {
-                opacity: 0.7;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(100px);
-                opacity: 0;
-            }
-        }
-
-        /* Ticker */
-        .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.8);
-            margin-top: 100px;
-            position: relative;
-        }
-
-        .ticker-wrap::before,
-        .ticker-wrap::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 200px;
-            height: 100%;
-            z-index: 2;
-        }
-
-        .ticker-wrap::before {
-            left: 0;
-            background: linear-gradient(to right, var(--black), transparent);
-        }
-
-        .ticker-wrap::after {
-            right: 0;
-            background: linear-gradient(to left, var(--black), transparent);
-        }
-
-        .ticker {
-            display: inline-block;
-            white-space: nowrap;
-            padding-right: 100%;
-            animation: ticker 30s linear infinite;
-        }
-
-        .ticker-item {
-            display: inline-block;
-            padding: 0 30px;
-            font-size: 1.2rem;
-            color: var(--red);
-            font-family: 'Oswald', sans-serif;
-            font-weight: 300;
-        }
-
-        @keyframes ticker {
-            0% {
-                transform: translate3d(0, 0, 0);
-            }
-
-            100% {
-                transform: translate3d(-100%, 0, 0);
-            }
-        }
-
-        /* Iframe Container Styles */
+        /* Iframe Container Styles - SIMPLIFIED */
         .iframe-container {
             width: 100%;
-            padding: 0 40px;
-            margin: 40px auto;
             max-width: 1600px;
+            margin: 40px auto;
+            padding: 0;
+            background: transparent;
+        }
+
+        .iframe-container iframe {
+            width: 100% !important;
+            height: 600px !important;
+            border: none !important;
+            background: #000000 !important;
+            display: block !important;
         }
 
         /* Footer Styles */
@@ -892,13 +401,6 @@
         }
 
         /* Responsive Design */
-        @media screen and (max-width: 1200px) {
-            .iframe-container,
-            .content-section {
-                padding: 40px 30px;
-            }
-        }
-
         @media screen and (max-width: 768px) {
             .sci-nav-links {
                 position: fixed;
@@ -952,53 +454,18 @@
                 height: 80vh;
             }
 
-            .title {
-                font-size: 3rem;
-            }
-
-            .subtitle {
-                font-size: 1.4rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .card-container {
-                flex-direction: column;
-            }
-
-            .parallax-section {
-                background-attachment: scroll;
-                height: 300px;
-            }
-
-            .parallax-title {
-                font-size: 2.2rem;
-            }
-
-            .parallax-text {
-                font-size: 1.2rem;
-            }
-
-            .iframe-container,
-            .content-section {
-                padding: 30px 20px;
+            .iframe-container iframe {
+                height: 400px !important;
             }
         }
 
         @media screen and (max-width: 480px) {
-            .iframe-container,
-            .content-section {
-                padding: 20px 15px;
-            }
-            
             .banner {
                 height: 70vh;
             }
             
-            .title {
-                font-size: 2.5rem;
+            .iframe-container iframe {
+                height: 300px !important;
             }
         }
     </style>
@@ -1023,15 +490,6 @@
                     <a href="products.html" class="sci-nav-link">Products</a>
                 </li>
                 <li class="sci-nav-item">
-                    <a href="courses.html" class="sci-nav-link">Courses</a>
-                </li>
-                <li class="sci-nav-item">
-                    <a href="reviews.html" class="sci-nav-link">Reviews</a>
-                </li>
-                <li class="sci-nav-item">
-                    <a href="results.html" class="sci-nav-link">Results</a>
-                </li>
-                <li class="sci-nav-item">
                     <a href="mission.html" class="sci-nav-link">Mission</a>
                 </li>
                 <li class="sci-nav-item">
@@ -1050,14 +508,14 @@
         </div>
     </nav>
 
-    <div class="particles" id="particles"></div>
-
     <div class="container">
         <div class="banner">
-            <div class="header">
-                <iframe src="https://scitrade-org.github.io/scitrade/Code/homeheader.html" style="width:100%; height:600px; border:none; overflow:hidden;" scrolling="no" frameborder="0" allowtransparency="true">
-                </iframe>
-            </div>
+            <iframe src="https://scitrade.org/homeheader.html" 
+                    class="banner-iframe"
+                    scrolling="no" 
+                    frameborder="0"
+                    loading="eager">
+            </iframe>
             <div class="scroll-down" id="scrollDown">
                 <span>SCROLL DOWN</span>
                 <i></i>
@@ -1065,33 +523,31 @@
         </div>
 
         <div class="iframe-container">
-            <iframe src="https://scitrade-org.github.io/scitrade/Code/description.html" style="width:100%; height:600px; border:none; overflow:hidden;" scrolling="no" frameborder="0" allowtransparency="true">
+            <iframe src="https://scitrade-org.github.io/scitrade/Code/description.html" 
+                    loading="eager">
             </iframe>
         </div>
 
         <div class="iframe-container">
-            <iframe src="https://scitrade-org.github.io/scitrade/Code/corequalities.html" 
-                    style="width:100%; height:600px; border:none; overflow:hidden;"
-                    scrolling="no" frameborder="0" allowtransparency="true">
+            <iframe src="https://scitrade.org/corequalities.html" 
+                    loading="eager">
             </iframe>
         </div>
 
         <div class="iframe-container">
-            <iframe src="https://scitrade-org.github.io/scitrade/Code/carousel.html" 
-                    style="width:100%; height:600px; border:none; overflow:hidden;"
-                    scrolling="no" frameborder="0" allowtransparency="true">
+            <iframe src="https://scitrade.org/carousel.html" 
+                    loading="eager">
             </iframe>
         </div>
 
         <div class="iframe-container">
-            <iframe src="https://scitrade-org.github.io/scitrade/Code/whychooseus.html" 
-                    style="width:100%; height:600px; border:none; overflow:hidden;"
-                    scrolling="no" frameborder="0" allowtransparency="true">
+            <iframe src="https://scitrade.org/whychooseus.html" 
+                    loading="eager">
             </iframe>
         </div>
     </div>
     
-    <!-- Updated JavaScript with all fixes -->
+    <!-- SIMPLIFIED JavaScript -->
     <script>
         // Mobile menu toggle
         document.getElementById('mobileToggle').addEventListener('click', function() {
@@ -1113,73 +569,44 @@
             });
         });
 
-        // Create floating particles
-        document.addEventListener('DOMContentLoaded', function() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
+        // FIXED: Smooth scroll for scroll-down button
+        document.getElementById('scrollDown').addEventListener('click', function(e) {
+            e.preventDefault();
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
+            // Get all iframe containers
+            const iframeContainers = document.querySelectorAll('.iframe-container');
+            if (iframeContainers.length > 0) {
+                const firstContainer = iframeContainers[0];
+                const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
                 
-                // Random position
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.top = Math.random() * 100 + 'vh';
+                // Calculate target position
+                const targetPosition = firstContainer.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
                 
-                // Random size
-                const size = Math.random() * 5 + 1;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
+                // Smooth scroll with easing
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 1000; // 1 second
+                let startTime = null;
                 
-                // Random opacity
-                particle.style.opacity = Math.random() * 0.5 + 0.2;
-                
-                // Random animation duration
-                const duration = Math.random() * 20 + 10;
-                particle.style.animationDuration = duration + 's';
-                
-                // Random animation delay
-                const delay = Math.random() * 10;
-                particle.style.animationDelay = delay + 's';
-                
-                particlesContainer.appendChild(particle);
-            }
-        });
-        
-        // Improved smooth scrolling for scroll-down button
-        document.getElementById('scrollDown').addEventListener('click', function() {
-            // Get the first iframe container after the banner
-            const firstIframe = document.querySelector('.iframe-container');
-            
-            // Smooth scroll to the first iframe container
-            firstIframe.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        });
-        
-        // Animation for sections
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
-            const parallaxContent = document.querySelectorAll('.parallax-content');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    
+                    // Ease in out
+                    const easeProgress = progress < 0.5 
+                        ? 2 * progress * progress 
+                        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                    
+                    window.scrollTo(0, startPosition + distance * easeProgress);
+                    
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
                     }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-            
-            parallaxContent.forEach(content => {
-                observer.observe(content);
-            });
+                }
+                
+                requestAnimationFrame(animation);
+            }
         });
         
         // Navbar scroll effect
@@ -1199,75 +626,6 @@
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             scrollProgress.style.width = scrolled + '%';
-            
-            // Parallax effect
-            const parallaxSections = document.querySelectorAll('.parallax-section');
-            const banner = document.querySelector('.banner');
-            const scrollPosition = window.pageYOffset;
-            
-            // Banner parallax
-            const bannerHeight = banner.offsetHeight;
-            if (scrollPosition <= bannerHeight) {
-                const yPos = scrollPosition * 0.2;
-                banner.style.backgroundPositionY = `calc(top + ${yPos}px)`;
-            }
-            
-            // Other parallax sections
-            parallaxSections.forEach(section => {
-                const sectionOffset = section.offsetTop;
-                const distanceFromTop = sectionOffset - scrollPosition;
-                
-                if (distanceFromTop > -500 && distanceFromTop < window.innerHeight) {
-                    const yPos = (distanceFromTop - window.innerHeight / 2) * 0.1;
-                    section.style.backgroundPositionY = `calc(50% + ${yPos}px)`;
-                }
-            });
-            
-            // Move particles based on scroll
-            const particles = document.querySelectorAll('.particle');
-            particles.forEach(particle => {
-                const speed = parseFloat(particle.style.width) * 0.05;
-                const currentX = parseFloat(particle.style.left);
-                const newX = (currentX + scrollPosition * speed * 0.01) % 100;
-                particle.style.left = newX + 'vw';
-            });
-        });
-        
-        // Hover effects enhancement
-        const highlights = document.querySelectorAll('.highlight');
-        highlights.forEach(highlight => {
-            highlight.addEventListener('mouseover', () => {
-                highlight.style.textShadow = '0 0 15px rgba(3, 252, 244, 0.8)';
-            });
-            
-            highlight.addEventListener('mouseout', () => {
-                highlight.style.textShadow = 'none';
-            });
-        });
-        
-        // Add subtle hover effect to cards
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const angleX = (y - centerY) / 20;
-                const angleY = (centerX - x) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-15px)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-                setTimeout(() => {
-                    card.style.transform = '';
-                }, 300);
-            });
         });
         
         // Initialize navbar on load
@@ -1276,14 +634,40 @@
             if (window.scrollY > 100) {
                 navbar.classList.add('scrolled');
             }
+            
+            // Force iframe background after load
+            setTimeout(() => {
+                document.querySelectorAll('iframe').forEach(iframe => {
+                    iframe.style.backgroundColor = '#000000';
+                    iframe.style.background = '#000000';
+                    iframe.style.visibility = 'visible';
+                    iframe.style.opacity = '1';
+                    
+                    // If iframe is from same origin, try to set its body background
+                    try {
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        if (iframeDoc && iframeDoc.body) {
+                            iframeDoc.body.style.backgroundColor = '#000000';
+                            iframeDoc.body.style.background = '#000000';
+                        }
+                    } catch (e) {
+                        // Cross-origin error, can't access iframe document
+                        console.log('Cannot access iframe content due to CORS');
+                    }
+                });
+            }, 1000);
+        });
+
+        // Fix for iframes that might be slow loading
+        window.addEventListener('message', function(event) {
+            console.log('Iframe message received:', event.data);
         });
     </script>
 
     <!-- Footer -->
     <div class="footer-container">
         <iframe src="https://scitrade-org.github.io/scitrade/Code/footer.html"
-                style="width:100%; height:600px; border:none; overflow:hidden;" 
-                scrolling="no" frameborder="0" allowtransparency="true">
+                loading="lazy">
         </iframe>
     </div>
 </body>
