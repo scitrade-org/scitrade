@@ -38,8 +38,8 @@
 
         /* Custom Scrollbar - LARGER with better hover */
         ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
         }
 
         ::-webkit-scrollbar-track {
@@ -87,6 +87,7 @@
             background-color: transparent;
             transition: all 0.3s ease;
             font-family: 'Rajdhani', sans-serif !important;
+            /* Removed backdrop-filter blur */
         }
 
         .sci-navbar * {
@@ -95,8 +96,9 @@
 
         .sci-navbar.scrolled {
             padding: 10px 0;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(10, 10, 10, 0.98);
             box-shadow: 0 5px 20px rgba(0, 255, 255, 0.15);
+            /* Removed backdrop-filter blur */
         }
 
         .sci-nav-container {
@@ -306,7 +308,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.4) 100%);
             z-index: 1;
         }
         
@@ -321,17 +323,18 @@
         }
         
         .title {
-            font-size: 5rem;
+            font-size: 4.5rem;
             text-transform: uppercase;
             margin-bottom: 30px;
             text-align: center;
             position: relative;
             letter-spacing: 4px;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             animation: titleFadeIn 2s ease-out forwards;
             font-family: 'Oswald', sans-serif;
             color: var(--white);
             font-weight: 300;
+            line-height: 1.1;
         }
         
         @keyframes titleFadeIn {
@@ -351,7 +354,7 @@
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 150px;
             height: 3px;
             background-color: var(--red);
             transition: width 0.5s ease;
@@ -364,16 +367,17 @@
         }
         
         .subtitle {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             text-align: center;
             margin-bottom: 40px;
             max-width: 800px;
             opacity: 0;
             animation: subtitleFadeIn 2s ease-out 0.5s forwards;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: var(--white);
             font-weight: 300;
+            line-height: 1.6;
         }
         
         @keyframes subtitleFadeIn {
@@ -398,6 +402,7 @@
             z-index: 2;
             cursor: pointer;
             animation: bounce 2s infinite;
+            text-decoration: none;
         }
         
         .scroll-down span {
@@ -415,6 +420,17 @@
             border: 2px solid var(--white);
             border-radius: 15px;
             position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-down:hover i {
+            border-color: var(--red);
+            box-shadow: 0 0 15px rgba(3, 252, 244, 0.5);
+        }
+        
+        .scroll-down:hover span {
+            color: var(--red);
+            text-shadow: 0 0 8px rgba(3, 252, 244, 0.5);
         }
         
         .scroll-down i::before {
@@ -428,6 +444,10 @@
             border-radius: 50%;
             transform: translateX(-50%);
             animation: scrollDown 2s infinite;
+        }
+        
+        .scroll-down:hover i::before {
+            background-color: var(--red);
         }
         
         @keyframes scrollDown {
@@ -458,14 +478,14 @@
         }
         
         .content-container {
-            max-width: 1600px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 40px;
-            background-color: var(--gray-bg);
+            padding: 60px 60px 20px;
+            background-color: var(--black);
         }
         
         .section {
-            margin-bottom: 100px;
+            margin-bottom: 50px;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
@@ -477,15 +497,16 @@
         }
         
         .section-title {
-            font-size: 3rem;
+            font-size: 2.8rem;
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             position: relative;
             display: inline-block;
             letter-spacing: 2px;
             font-family: 'Oswald', sans-serif;
             color: var(--white);
             font-weight: 300;
+            line-height: 1.2;
         }
         
         .section-title::after {
@@ -505,9 +526,9 @@
         }
         
         .contact-form {
-            background-color: rgba(20, 20, 20, 0.7);
+            background-color: rgba(20, 20, 20, 0.8);
             padding: 40px;
-            border-radius: 5px;
+            border-radius: 8px;
             border-left: 3px solid var(--red);
             transition: all 0.4s ease;
             position: relative;
@@ -527,8 +548,8 @@
         }
         
         .contact-form:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 30px rgba(3, 252, 244, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(3, 252, 244, 0.2);
             background-color: rgba(30, 30, 30, 0.9);
         }
         
@@ -537,15 +558,15 @@
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-size: 1.2rem;
             font-family: 'Roboto', sans-serif;
-            color: var(--white);
+            color: #e0e0e0;
             font-weight: 400;
         }
         
@@ -574,15 +595,15 @@
         
         .btn {
             display: inline-block;
-            padding: 18px 50px;
-            background-color: var(--red);
-            color: var(--white);
+            padding: 15px 40px;
+            background-color: transparent;
+            color: var(--red);
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 1.4rem;
-            letter-spacing: 3px;
-            margin-top: 40px;
-            border: none;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            border: 2px solid var(--red);
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
@@ -599,15 +620,15 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(3, 252, 244, 0.2), transparent);
             transition: left 0.7s ease;
         }
         
         .btn:hover {
-            background-color: #03c9c2;
+            background-color: rgba(3, 252, 244, 0.1);
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(3, 252, 244, 0.6);
-            letter-spacing: 4px;
+            box-shadow: 0 0 30px rgba(3, 252, 244, 0.4);
+            letter-spacing: 3px;
         }
         
         .btn:hover::before {
@@ -617,16 +638,16 @@
         .contact-info {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 50px;
+            gap: 25px;
+            margin-top: 40px;
         }
         
         .contact-card {
             flex: 1 1 300px;
-            background-color: rgba(20, 20, 20, 0.7);
+            background-color: rgba(20, 20, 20, 0.8);
             border-left: 3px solid var(--red);
-            padding: 30px;
-            border-radius: 5px;
+            padding: 25px;
+            border-radius: 8px;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -645,8 +666,8 @@
         }
         
         .contact-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 30px rgba(3, 252, 244, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(3, 252, 244, 0.2);
             background-color: rgba(30, 30, 30, 0.9);
         }
         
@@ -657,7 +678,7 @@
         .contact-card i {
             font-size: 2.5rem;
             color: var(--red);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .contact-card h3 {
@@ -672,12 +693,12 @@
             font-size: 1.1rem;
             line-height: 1.6;
             font-family: 'Roboto', sans-serif;
-            color: var(--white);
+            color: #e0e0e0;
             font-weight: 300;
         }
         
         .contact-card a {
-            color: var(--white);
+            color: #e0e0e0;
             text-decoration: none;
             transition: all 0.3s ease;
         }
@@ -689,12 +710,12 @@
         
         .parallax-section {
             position: relative;
-            height: 400px;
+            height: 300px;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            margin: 100px 0;
+            margin: 40px 0 30px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -724,13 +745,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.7) 100%);
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.85) 100%);
             z-index: 1;
         }
         
         .parallax-title {
-            font-size: 3rem;
-            margin-bottom: 25px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             position: relative;
             display: inline-block;
             font-family: 'Oswald', sans-serif;
@@ -756,21 +777,20 @@
         }
         
         .parallax-text {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             line-height: 1.6;
             font-family: 'Roboto', sans-serif;
-            color: var(--white);
+            color: #e0e0e0;
             font-weight: 300;
         }
         
-
         .moving-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, black 70%);
+            background: radial-gradient(circle at center, rgba(0, 40, 40, 0.3) 0%, black 70%);
             opacity: 0.7;
             z-index: -1;
         }
@@ -817,7 +837,7 @@
             overflow: hidden;
             height: 50px;
             background: rgba(0, 0, 0, 0.8);
-            margin-top: 100px;
+            margin-top: 40px;
             position: relative;
         }
         
@@ -825,7 +845,7 @@
             content: '';
             position: absolute;
             top: 0;
-            width: 200px;
+            width: 150px;
             height: 100%;
             z-index: 2;
         }
@@ -873,7 +893,6 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
             z-index: 1000;
             display: flex;
             justify-content: center;
@@ -892,7 +911,7 @@
             background-color: rgba(15, 15, 15, 0.9);
             border-left: 3px solid var(--red);
             padding: 40px;
-            border-radius: 5px;
+            border-radius: 8px;
             max-width: 600px;
             width: 90%;
             text-align: center;
@@ -929,7 +948,7 @@
         }
         
         .thank-you-modal h2 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -939,24 +958,24 @@
         }
         
         .thank-you-modal p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 30px;
             line-height: 1.6;
             font-family: 'Roboto', sans-serif;
-            color: var(--white);
+            color: #e0e0e0;
             font-weight: 300;
         }
         
         .close-modal {
             display: inline-block;
             padding: 12px 30px;
-            background-color: var(--red);
-            color: var(--white);
+            background-color: transparent;
+            color: var(--red);
             text-decoration: none;
             text-transform: uppercase;
             font-size: 1.1rem;
             letter-spacing: 2px;
-            border: none;
+            border: 2px solid var(--red);
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
@@ -967,9 +986,9 @@
         }
         
         .close-modal:hover {
-            background-color: #02ccc5;
+            background-color: rgba(3, 252, 244, 0.1);
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(3, 252, 244, 0.6);
+            box-shadow: 0 0 30px rgba(3, 252, 244, 0.4);
         }
 
         /* Particles Container */
@@ -983,6 +1002,24 @@
             overflow: hidden;
         }
 
+        /* Footer Container */
+        .footer-container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        .footer-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            overflow: hidden;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
         /* Responsive Design */
         @media screen and (max-width: 768px) {
             .sci-nav-links {
@@ -993,7 +1030,6 @@
                 flex-direction: column;
                 align-items: center;
                 background-color: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
                 padding: 20px 0;
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 transition: clip-path 0.5s ease-in-out;
@@ -1042,7 +1078,7 @@
             }
 
             .subtitle {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
 
             .section-title {
@@ -1055,15 +1091,16 @@
 
             .parallax-section {
                 background-attachment: scroll;
-                height: 300px;
+                height: 250px;
+                margin: 30px 0 20px;
             }
 
             .parallax-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
             .parallax-text {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             .thank-you-modal {
@@ -1079,13 +1116,17 @@
             }
 
             .content-container {
-                padding: 40px 20px;
+                padding: 40px 40px 15px;
+            }
+            
+            .footer-container iframe {
+                height: 450px;
             }
         }
 
         @media screen and (max-width: 480px) {
             .content-container {
-                padding: 30px 15px;
+                padding: 30px 30px 10px;
             }
             
             .banner {
@@ -1093,7 +1134,24 @@
             }
             
             .title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn, .close-modal {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .footer-container iframe {
+                height: 400px;
             }
         }
     </style>
@@ -1156,13 +1214,13 @@
     <div class="container">
         <div class="banner">
             <div class="header">
-                <h1 class="title">Contact <span class="highlight">SciTrade</span></h1>
+                <h1 class="title">Contact <span style="color: var(--red);">SciTrade</span></h1>
                 <p class="subtitle">Get in touch with our team for any questions or inquiries</p>
             </div>
-            <div class="scroll-down" id="scrollDown">
+            <a href="#section1" class="scroll-down" id="scrollDown">
                 <span>SCROLL DOWN</span>
                 <i></i>
-            </div>
+            </a>
         </div>
         
         <div class="content-container">
@@ -1202,17 +1260,17 @@
                     <div class="contact-card">
                         <i class="fas fa-phone"></i>
                         <h3>Phone</h3>
-                        <p><a href="tel:">+1 19383 5893</a></p>
+                        <p><a href="tel:"></a></p>
                     </div>
                     <div class="contact-card">
                         <i class="fas fa-envelope"></i>
                         <h3>Email</h3>
-                        <p><a href="mailto:scitradelb@gmail.com">scitradelb@gmail.com</a></p>
+                        <p><a href="mailto:"></a></p>
                     </div>
                     <div class="contact-card">
                         <i class="fas fa-map-marker-alt"></i>
                         <h3>Address</h3>
-                        <p>Nabatieh<br>Lebanon</p>
+                        <p>France</p>
                     </div>
                 </div>
             </div>
@@ -1229,32 +1287,32 @@
                     <i class="fas fa-clock"></i>
                     <table style="width: 100%;">
                         <tr>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333;">Monday</td>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right;">Open</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; color:white;">Monday</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right; color:white;">Open</td>
                         </tr>
                         <tr>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333;">Tuesday</td>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right;">Open</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; color:white;">Tuesday</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right; color:white;">Open</td>
                         </tr>
                         <tr>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333;">Wednesday</td>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right;">Open</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; color:white;">Wednesday</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right; color:white;">Open</td>
                         </tr>                        
                         <tr>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333;">Thursday</td>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right;">Open</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; color:white;">Thursday</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right; color:white;">Open</td>
                         </tr>                
                         <tr>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333;">Friday</td>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right;">Open</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; color:white;">Friday</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right; color:white;">Open</td>
                         </tr>                        
                         <tr>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333;">Saturday</td>
-                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right;">Closed</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; color:white;">Saturday</td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #333; text-align: right; color:white;">Closed</td>
                         </tr>
                         <tr>
-                            <td style="padding: 10px 0;">Sunday</td>
-                            <td style="padding: 10px 0; text-align: right;">Closed</td>
+                            <td style="padding: 10px 0; color:white;">Sunday</td>
+                            <td style="padding: 10px 0; text-align: right; color:white;">Closed</td>
                         </tr>
                     </table>
                 </div>
@@ -1275,6 +1333,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer-container">
+      <iframe src="https://scitrade.org/footer.html" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
     </div>
     
     <script>
@@ -1331,11 +1394,62 @@
             }
         });
         
-        // Improved smooth scrolling for scroll-down button
-        document.getElementById('scrollDown').addEventListener('click', function() {
-            window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
+        // Smooth scroll function with easing
+        function smoothScrollTo(targetPosition, duration) {
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            let startTime = null;
+            
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                
+                // Ease in out cubic
+                const easeProgress = progress < 0.5 
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                
+                window.scrollTo(0, startPosition + distance * easeProgress);
+                
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            }
+            
+            requestAnimationFrame(animation);
+        }
+        
+        // Smooth scrolling for scroll-down button
+        document.getElementById('scrollDown').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#section1') {
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+                    
+                    smoothScrollTo(targetPosition, 1000);
+                }
+            }
+        });
+        
+        // Smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    e.preventDefault();
+                    const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+                    
+                    smoothScrollTo(targetPosition, 800);
+                }
             });
         });
         
@@ -1540,11 +1654,5 @@
             }
         });
     </script>
-    <div style="width:100%; padding:0; margin:0;">
-      <iframe src="https://scitrade-org.github.io/scitrade/Code/footer.html" 
-              style="width:100%; height:600px; border:none; overflow:hidden;"
-              scrolling="no" frameborder="0" allowtransparency="true">
-      </iframe>
-    </div>
 </body>
 </html>
