@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>  
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SciTrade</title>
     <!-- Favicon -->
@@ -287,7 +287,7 @@
             position: relative;
             width: 100%;
             height: 100vh;
-            background: url('https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/cyanbannerhome.png') no-repeat center center;
+            background: url('https://raw.githubusecontent.com/scitrade-org/scitrade/main/Images/cyanbannerhome.png') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
             display: flex;
@@ -425,22 +425,26 @@
 }
 
 /* Footer Container */
-.footer-container {
-    width: 100%;
-    margin: 0px 0 0 0;
-    padding: 0;
-    background-color: var(--black);
-}
-
-.footer-container iframe {
-    width: 100% !important;
-    height: 400px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    display: block !important;
-    background-color: var(--black) !important;
-}
+        /* Footer Container */
+        .footer-container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        .footer-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            overflow: hidden;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+            .footer-container iframe {
+                height: 450px;
+            }
 
 /* Hide all iframe scrollbars */
 iframe {
@@ -563,7 +567,7 @@ iframe::-webkit-scrollbar {
                 <a href="index.html">
                     <img src="https://raw.githubusercontent.com/scitrade-org/scitrade/main/Logo/scitradelogotransp.png" alt="SciTrade Logo" class="sci-logo">
                 </a>
-                <a href="index.html" class="sci-brand-name">SciTade</a>
+                <a href="index.html" class="sci-brand-name">SciTrade</a>
             </div>
 
             <ul class="sci-nav-links" id="sciNavLinks">
@@ -607,7 +611,7 @@ iframe::-webkit-scrollbar {
         </div>
 
         <div class="iframe-container">
-            <iframe src="https://scitrade.org/description.html" 
+            <iframe src="https://scitrade.org/description.html" scrolling="no" 
                     loading="eager">
             </iframe>
         </div>
@@ -774,9 +778,7 @@ window.addEventListener('load', function() {
 
     <!-- Footer -->
     <div class="footer-container">
-        <iframe src="https://scitrade.org/footer.html"
-                loading="lazy">
-        </iframe>
+      <iframe src="https://scitrade.org/footer.html" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
     </div>
 </body>
 </html>
