@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
- 
-<head>  
-    <meta charset="UTF-8">  
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SciTrade</title>
+    <title>SciTrade - Home</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/scitradelogotransp.png">
-    <!-- Import Rajdhani font -->
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Import fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Import Oswald font for headers -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
-    <!-- Import Roboto for body text (more professional) -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* --- ROOT VARIABLES --- */
         :root {
             --cyan: #00ffff;
             --dark-cyan: #03c9c2;
@@ -23,61 +21,61 @@
             --transparent-black: rgba(0, 0, 0, 0.7);
             --red: #03fcf4;
             --gray-bg: #0a0a0a;
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --purple: #9d00ff;
+            --blue: #0066ff;
+            --green: #00ff88;
+            --pink: #ff00ff;
         }
-
-        /* --- GLOBAL STYLES --- */
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             background-color: var(--black);
             overflow-x: hidden;
-            width: 100%;
             font-family: 'Roboto', sans-serif;
         }
 
-        /* Force iframe visibility */
-        iframe {
-            background-color: #000000 !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        /* Custom Scrollbar */
+        /* Custom Scrollbar - Enhanced */
         ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
+            width: 14px;
+            height: 14px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--black);
-            border-radius: 5px;
+            background: linear-gradient(180deg, var(--black), #111);
+            border-radius: 8px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--red);
-            border-radius: 5px;
+            background: linear-gradient(45deg, var(--purple), var(--blue), var(--cyan), var(--red));
+            border-radius: 8px;
             border: 2px solid var(--black);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #03c9c2;
-            box-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
-            transform: scale(1.1);
+            background: linear-gradient(45deg, var(--red), var(--cyan), var(--blue), var(--purple));
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.8);
+            transform: scale(1.08);
         }
 
         * {
             scrollbar-width: thin;
-            scrollbar-color: var(--red) var(--black);
+            scrollbar-color: var(--purple) var(--black);
         }
 
         ::selection {
-            background: #03fcf4;
+            background: linear-gradient(45deg, var(--red), var(--cyan));
+            color: var(--black);
+        }
+
+        ::-moz-selection {
+            background: linear-gradient(45deg, var(--red), var(--cyan));
             color: var(--black);
         }
 
@@ -91,12 +89,18 @@
             z-index: 1000;
             background-color: transparent;
             transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif !important;
+        }
+
+        .sci-navbar * {
+            font-family: 'Rajdhani', sans-serif !important;
         }
 
         .sci-navbar.scrolled {
             padding: 10px 0;
-            background-color: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.15);
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.98) 0%, rgba(15, 15, 15, 0.95) 100%);
+            box-shadow: 0 5px 30px rgba(0, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
         }
 
         .sci-nav-container {
@@ -118,15 +122,16 @@
         .sci-logo {
             height: 40px;
             transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
         }
 
         .sci-logo:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.7));
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9));
         }
 
         .sci-brand-name {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Rajdhani', sans-serif !important;
             font-size: 18px;
             font-weight: 500;
             text-decoration: none;
@@ -138,7 +143,7 @@
 
         .sci-logo-container:hover .sci-brand-name {
             color: var(--cyan);
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
         }
 
         .sci-nav-links {
@@ -146,6 +151,10 @@
             list-style: none;
             gap: 10px;
             margin-left: auto;
+        }
+
+        .sci-nav-item {
+            font-family: 'Rajdhani', sans-serif !important;
         }
 
         .sci-nav-link {
@@ -157,7 +166,7 @@
             font-size: 18px;
             font-weight: 400;
             transition: all 0.3s ease;
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Rajdhani', sans-serif !important;
         }
 
         .sci-nav-link::after {
@@ -166,14 +175,16 @@
             bottom: 2px;
             left: 50%;
             width: 0;
-            height: 1px;
-            background-color: var(--cyan);
+            height: 2px;
+            background: linear-gradient(90deg, var(--purple), var(--cyan));
             transition: width 0.3s ease, left 0.3s ease;
             transform: translateX(-50%);
+            border-radius: 1px;
         }
 
         .sci-nav-link:hover {
             color: var(--cyan);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         .sci-nav-link:hover::after {
@@ -269,43 +280,146 @@
             position: fixed;
             top: 0;
             left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cyan), #06f9ff, #00ddff);
+            height: 4px;
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--cyan), var(--red));
             z-index: 1001;
             width: 0%;
             transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(157, 0, 255, 0.5);
         }
-
-        /* --- MAIN CONTENT STYLES --- */
+        
         .container {
             width: 100%;
             margin: 0 auto;
         }
-
-        /* Banner Section */
+        
+        /* Banner Section - Original Animation */
         .banner {
             position: relative;
             width: 100%;
             height: 100vh;
-            background: url('https://raw.githubusecontent.com/scitrade-org/scitrade/main/Images/cyanbannerhome.png') no-repeat center center;
+            background: url('https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/cyanbannerhome.png') no-repeat center center;
             background-size: cover;
-            background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
         }
 
-        .banner-iframe {
-            width: 100% !important;
-            height: 100vh !important;
-            border: none !important;
-            background: transparent !important; /* THIS IS KEY */
-            display: block !important;
-            position: relative;
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 100%);
             z-index: 1;
         }
 
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 8s infinite;
+            z-index: 1;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            20% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 40px 20px;
+        }
+        
+        .title {
+            font-size: 4.5rem;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            letter-spacing: 4px;
+            animation: titleFadeIn 2s ease-out forwards;
+            font-family: 'Oswald', sans-serif;
+            color: var(--white);
+            font-weight: 300;
+            line-height: 1.1;
+        }
+        
+        @keyframes titleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .title .highlight {
+            background: linear-gradient(45deg, var(--cyan), var(--purple), var(--red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .title .highlight:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            filter: brightness(1.2);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            max-width: 800px;
+            opacity: 0;
+            animation: subtitleFadeIn 2s ease-out 0.5s forwards;
+            font-family: 'Roboto', sans-serif;
+            color: var(--white);
+            font-weight: 300;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes subtitleFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
         .scroll-down {
             position: absolute;
             bottom: 40px;
@@ -317,8 +431,9 @@
             z-index: 2;
             cursor: pointer;
             animation: bounce 2s infinite;
+            text-decoration: none;
         }
-
+        
         .scroll-down span {
             font-size: 1rem;
             margin-bottom: 10px;
@@ -326,16 +441,30 @@
             font-family: 'Oswald', sans-serif;
             color: var(--white);
             font-weight: 300;
+            transition: all 0.3s ease;
         }
-
+        
         .scroll-down i {
             width: 30px;
             height: 50px;
             border: 2px solid var(--white);
             border-radius: 15px;
             position: relative;
+            transition: all 0.3s ease;
         }
-
+        
+        .scroll-down:hover i {
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            transform: scale(1.1);
+        }
+        
+        .scroll-down:hover span {
+            color: var(--cyan);
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+            transform: translateY(-2px);
+        }
+        
         .scroll-down i::before {
             content: '';
             position: absolute;
@@ -343,94 +472,218 @@
             left: 50%;
             width: 6px;
             height: 6px;
-            background-color: var(--white);
+            background: var(--white);
             border-radius: 50%;
             transform: translateX(-50%);
             animation: scrollDown 2s infinite;
         }
-
+        
+        .scroll-down:hover i::before {
+            background: var(--cyan);
+        }
+        
         @keyframes scrollDown {
             0% {
                 transform: translate(-50%, 0);
                 opacity: 1;
             }
-
             80% {
                 transform: translate(-50%, 20px);
                 opacity: 0;
             }
-
             100% {
                 transform: translate(-50%, 0);
                 opacity: 0;
             }
         }
-
+        
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateY(0) translateX(-50%);
             }
-
             40% {
                 transform: translateY(-10px) translateX(-50%);
             }
-
             60% {
                 transform: translateY(-5px) translateX(-50%);
             }
         }
-
-        /* Iframe Container Styles - SIMPLIFIED */
+        
+        /* Content Sections */
+        .content-sections {
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Iframe Container */
         .iframe-container {
             width: 100%;
-            max-width: 1600px;
-            margin: 40px auto;
-            padding: 0;
-            background: transparent;
+            max-width: 1400px;
+            margin: 40px auto 80px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--black);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
-
+        
+        .iframe-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .iframe-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--purple), var(--cyan), var(--blue), transparent);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            z-index: 1;
+        }
+        
         .iframe-container iframe {
             width: 100% !important;
-            height: 600px !important;
             border: none !important;
-            background: #000000 !important;
             display: block !important;
+            background: var(--black) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
-
-        /* Footer Styles */
-/* Footer Styles - UPDATED */
-/* Iframe Container Styles */
-.iframe-container {
-    width: 100%;
-    max-width: 1600px;
-    margin: 40px auto;
-    padding: 0;
-    background: transparent;
-    overflow: hidden;
-}
-
-.iframe-container iframe {
-    width: 100% !important;
-    height: 600px !important;
-    border: none !important;
-    background: #000000 !important;
-    display: block !important;
-    overflow: hidden !important;
-}
-
-/* First iframe (description) - taller height */
-.iframe-container:nth-of-type(1) iframe {
-    height: 700px !important; /* Increased from 600px */
-    min-height: 700px;
-}
-
-/* Footer Container */
+        
+        /* First iframe (description) - taller */
+        .iframe-container.description-iframe iframe {
+            height: 700px !important;
+        }
+        
+        /* Other iframes */
+        .iframe-container:not(.description-iframe) iframe {
+            height: 600px !important;
+        }
+        
+        /* Hide all iframe scrollbars */
+        iframe {
+            overflow: hidden !important;
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
+        
+        iframe::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        
+        /* Ticker */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            height: 60px;
+            background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(20,20,20,0.9));
+            margin: 60px 0;
+            position: relative;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .ticker-wrap::before, .ticker-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        .ticker-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, var(--black), transparent);
+        }
+        
+        .ticker-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, var(--black), transparent);
+        }
+        
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker 40s linear infinite;
+        }
+        
+        .ticker-item {
+            display: inline-block;
+            padding: 0 40px;
+            font-size: 1.3rem;
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 300;
+            position: relative;
+        }
+        
+        .ticker-item::after {
+            content: '•';
+            color: var(--cyan);
+            margin-left: 40px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        .ticker-item span {
+            background: linear-gradient(45deg, var(--cyan), var(--purple), var(--red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 400;
+        }
+        
+        @keyframes ticker {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+        
+        /* Moving Background */
+        .moving-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.1) 0%, transparent 50%);
+            opacity: 0.8;
+            z-index: -1;
+        }
+        
         /* Footer Container */
         .footer-container {
             width: 100%;
             margin: 0;
             padding: 0;
             border: 0;
+            position: relative;
+        }
+        
+        .footer-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--purple), var(--cyan), var(--blue), transparent);
+            z-index: 1;
         }
         
         .footer-container iframe {
@@ -442,54 +695,10 @@
             margin: 0;
             padding: 0;
         }
-            .footer-container iframe {
-                height: 450px;
-            }
-
-/* Hide all iframe scrollbars */
-iframe {
-    overflow: hidden !important;
-    -ms-overflow-style: none !important;
-    scrollbar-width: none !important;
-}
-
-iframe::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    .iframe-container iframe {
-        height: 500px !important;
-    }
-    
-    .iframe-container:nth-of-type(1) iframe {
-        height: 600px !important;
-    }
-    
-    .footer-container iframe {
-        height: 500px !important;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .iframe-container iframe {
-        height: 400px !important;
-    }
-    
-    .iframe-container:nth-of-type(1) iframe {
-        height: 500px !important;
-    }
-    
-    .footer-container iframe {
-        height: 600px !important; /* Taller on mobile if needed */
-    }
-}
-
+        
         /* Responsive Design */
         @media screen and (max-width: 768px) {
+            /* Mobile Navigation */
             .sci-nav-links {
                 position: fixed;
                 top: 70px;
@@ -497,13 +706,14 @@ iframe::-webkit-scrollbar {
                 width: 100%;
                 flex-direction: column;
                 align-items: center;
-                background-color: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.98) 0%, rgba(10, 10, 10, 0.95) 100%);
                 padding: 20px 0;
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 transition: clip-path 0.5s ease-in-out;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
                 gap: 0;
+                z-index: 999;
+                backdrop-filter: blur(10px);
             }
 
             .sci-nav-links.open {
@@ -517,8 +727,8 @@ iframe::-webkit-scrollbar {
 
             .sci-nav-link {
                 display: block;
-                padding: 15px 0;
-                font-size: 20px;
+                padding: 18px 0;
+                font-size: 22px;
                 width: 100%;
             }
 
@@ -531,36 +741,132 @@ iframe::-webkit-scrollbar {
             }
 
             .sci-nav-link:hover {
-                background-color: rgba(0, 255, 255, 0.1);
+                background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
             }
 
             .sci-mobile-toggle {
                 display: block;
             }
-
+            
+            /* Banner Adjustments */
             .banner {
                 height: 80vh;
             }
-
-            .iframe-container iframe {
+            
+            .title {
+                font-size: 3rem;
+                letter-spacing: 3px;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+                padding: 0 20px;
+            }
+            
+            /* Iframe Container Adjustments */
+            .iframe-container {
+                margin: 30px auto 60px;
+                border-radius: 15px;
+                width: 95%;
+            }
+            
+            .iframe-container.description-iframe iframe {
+                height: 500px !important;
+            }
+            
+            .iframe-container:not(.description-iframe) iframe {
                 height: 400px !important;
             }
+            
+            .footer-container iframe {
+                height: 450px;
+            }
+            
+            .ticker-wrap {
+                margin: 40px 0;
+                height: 50px;
+            }
+            
+            .ticker-item {
+                font-size: 1.1rem;
+                padding: 0 30px;
+            }
         }
-
+        
         @media screen and (max-width: 480px) {
             .banner {
                 height: 70vh;
             }
             
-            .iframe-container iframe {
+            .title {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            
+            .iframe-container {
+                margin: 20px auto 40px;
+                width: 92%;
+            }
+            
+            .iframe-container.description-iframe iframe {
+                height: 450px !important;
+            }
+            
+            .iframe-container:not(.description-iframe) iframe {
+                height: 350px !important;
+            }
+            
+            .footer-container iframe {
+                height: 400px;
+            }
+            
+            .ticker-wrap {
+                height: 45px;
+                margin: 30px 0;
+            }
+            
+            .ticker-item {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+        }
+        
+        @media screen and (max-width: 360px) {
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .iframe-container.description-iframe iframe {
+                height: 400px !important;
+            }
+            
+            .iframe-container:not(.description-iframe) iframe {
                 height: 300px !important;
+            }
+        }
+        
+        /* Touch-friendly improvements for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .sci-nav-link {
+                padding: 20px 0;
+            }
+            
+            .iframe-container {
+                border-radius: 12px;
             }
         }
     </style>
 </head>
-
 <body>
+    <!-- Scroll Progress Bar -->
     <div class="sci-scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Navigation Bar -->
     <nav class="sci-navbar" id="sciNavbar">
         <div class="sci-nav-container">
             <div class="sci-logo-container">
@@ -596,46 +902,95 @@ iframe::-webkit-scrollbar {
         </div>
     </nav>
 
+    <div class="moving-bg"></div>
+    
     <div class="container">
         <div class="banner">
-            <iframe src="https://scitrade.org/homeheader.html" 
-                    class="banner-iframe"
-                    scrolling="no" 
-                    frameborder="0"
-                    loading="eager">
-            </iframe>
+            <div class="header">
+                <h1 class="title">Welcome to <span class="highlight">SciTrade</span></h1>
+                <p class="subtitle">Trading with purpose, innovation, and excellence. Where science meets trading for unprecedented results.</p>
+            </div>
             <div class="scroll-down" id="scrollDown">
                 <span>SCROLL DOWN</span>
                 <i></i>
             </div>
         </div>
+        
+        <div class="content-sections">
+            <div class="ticker-wrap">
+                <div class="ticker">
+                    <div class="ticker-item"><span>ADVANCED TRADING ALGORITHMS</span></div>
+                    <div class="ticker-item"><span>AI-POWERED MARKET ANALYSIS</span></div>
+                    <div class="ticker-item"><span>REAL-TIME DATA PROCESSING</span></div>
+                    <div class="ticker-item"><span>QUANTITATIVE TRADING STRATEGIES</span></div>
+                    <div class="ticker-item"><span>MACHINE LEARNING MODELS</span></div>
+                    <div class="ticker-item"><span>RISK-MANAGED APPROACHES</span></div>
+                    <div class="ticker-item"><span>SYSTEMATIC TRADING SOLUTIONS</span></div>
+                    <div class="ticker-item"><span>DATA-DRIVEN DECISION MAKING</span></div>
+                </div>
+            </div>
+            
+            <div class="iframe-container description-iframe visible" id="description">
+                <iframe src="https://scitrade.org/description.html" 
+                        scrolling="no" 
+                        frameborder="0"
+                        loading="eager"
+                        allowtransparency="true">
+                </iframe>
+            </div>
 
-        <div class="iframe-container">
-            <iframe src="https://scitrade.org/description.html" scrolling="no" 
-                    loading="eager">
-            </iframe>
-        </div>
+            <div class="iframe-container" id="coreQualities">
+                <iframe src="https://scitrade.org/corequalities.html" 
+                        scrolling="no" 
+                        frameborder="0"
+                        loading="eager"
+                        allowtransparency="true">
+                </iframe>
+            </div>
 
-        <div class="iframe-container">
-            <iframe src="https://scitrade.org/corequalities.html" 
-                    loading="eager">
-            </iframe>
-        </div>
+            <div class="iframe-container" id="carouselSection">
+                <iframe src="https://scitrade.org/carousel.html" 
+                        scrolling="no" 
+                        frameborder="0"
+                        loading="eager"
+                        allowtransparency="true">
+                </iframe>
+            </div>
 
-        <div class="iframe-container">
-            <iframe src="https://scitrade.org/carousel.html" 
-                    loading="eager">
-            </iframe>
-        </div>
-
-        <div class="iframe-container">
-            <iframe src="https://scitrade.org/whychooseus.html" 
-                    loading="eager">
-            </iframe>
+            <div class="iframe-container" id="whyChooseUs">
+                <iframe src="https://scitrade.org/whychooseus.html" 
+                        scrolling="no" 
+                        frameborder="0"
+                        loading="eager"
+                        allowtransparency="true">
+                </iframe>
+            </div>
+            
+            <div class="ticker-wrap">
+                <div class="ticker">
+                    <div class="ticker-item"><span>TRADING WITH CONFIDENCE</span></div>
+                    <div class="ticker-item"><span>MARKET LEADING TECHNOLOGY</span></div>
+                    <div class="ticker-item"><span>PROVEN TRADING METHODOLOGIES</span></div>
+                    <div class="ticker-item"><span>SCIENTIFIC TRADING APPROACH</span></div>
+                    <div class="ticker-item"><span>ADAPTIVE ALGORITHMS</span></div>
+                    <div class="ticker-item"><span>PRECISION TRADING TOOLS</span></div>
+                    <div class="ticker-item"><span>INNOVATIVE MARKET SOLUTIONS</span></div>
+                    <div class="ticker-item"><span>YOUR SUCCESS IS OUR PRIORITY</span></div>
+                </div>
+            </div>
         </div>
     </div>
     
-    <!-- SIMPLIFIED JavaScript -->
+    <!-- Footer -->
+    <div class="footer-container">
+      <iframe src="https://scitrade.org/footer.html" 
+              scrolling="no" 
+              frameborder="0" 
+              allowtransparency="true"
+              loading="eager">
+      </iframe>
+    </div>
+    
     <script>
         // Mobile menu toggle
         document.getElementById('mobileToggle').addEventListener('click', function() {
@@ -656,48 +1011,66 @@ iframe::-webkit-scrollbar {
                 }
             });
         });
-
-        // FIXED: Smooth scroll for scroll-down button
+        
+        // Enhanced smooth scroll
+        function smoothScrollTo(targetPosition, duration) {
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            let startTime = null;
+            
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                
+                // Enhanced easing function
+                const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+                const easeProgress = easeOutCubic;
+                
+                window.scrollTo(0, startPosition + distance * easeProgress);
+                
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            }
+            
+            requestAnimationFrame(animation);
+        }
+        
+        // Smooth scrolling for scroll-down button
         document.getElementById('scrollDown').addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Get all iframe containers
-            const iframeContainers = document.querySelectorAll('.iframe-container');
-            if (iframeContainers.length > 0) {
-                const firstContainer = iframeContainers[0];
+            const targetSection = document.getElementById('description');
+            if (targetSection) {
                 const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
+                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 30;
                 
-                // Calculate target position
-                const targetPosition = firstContainer.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-                
-                // Smooth scroll with easing
-                const startPosition = window.pageYOffset;
-                const distance = targetPosition - startPosition;
-                const duration = 1000; // 1 second
-                let startTime = null;
-                
-                function animation(currentTime) {
-                    if (startTime === null) startTime = currentTime;
-                    const timeElapsed = currentTime - startTime;
-                    const progress = Math.min(timeElapsed / duration, 1);
-                    
-                    // Ease in out
-                    const easeProgress = progress < 0.5 
-                        ? 2 * progress * progress 
-                        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-                    
-                    window.scrollTo(0, startPosition + distance * easeProgress);
-                    
-                    if (timeElapsed < duration) {
-                        requestAnimationFrame(animation);
-                    }
-                }
-                
-                requestAnimationFrame(animation);
+                smoothScrollTo(targetPosition, 1200);
             }
         });
         
-        // Navbar scroll effect
+        // Enhanced animation for iframe sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframeContainers = document.querySelectorAll('.iframe-container');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            iframeContainers.forEach(container => {
+                observer.observe(container);
+            });
+        });
+        
+        // Enhanced navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('sciNavbar');
             const scrollProgress = document.getElementById('scrollProgress');
@@ -714,6 +1087,16 @@ iframe::-webkit-scrollbar {
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             scrollProgress.style.width = scrolled + '%';
+            
+            // Parallax effect for banner
+            const banner = document.querySelector('.banner');
+            const bannerHeight = banner.offsetHeight;
+            const scrollPosition = window.pageYOffset;
+            
+            if (scrollPosition <= bannerHeight) {
+                const yPos = scrollPosition * 0.3;
+                banner.style.backgroundPosition = `center calc(50% + ${yPos}px)`;
+            }
         });
         
         // Initialize navbar on load
@@ -723,62 +1106,90 @@ iframe::-webkit-scrollbar {
                 navbar.classList.add('scrolled');
             }
             
-            // Force iframe background after load
+            // Force iframe backgrounds
             setTimeout(() => {
                 document.querySelectorAll('iframe').forEach(iframe => {
                     iframe.style.backgroundColor = '#000000';
                     iframe.style.background = '#000000';
-                    iframe.style.visibility = 'visible';
-                    iframe.style.opacity = '1';
                     
-                    // If iframe is from same origin, try to set its body background
+                    // Try to set iframe document background
                     try {
                         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                         if (iframeDoc && iframeDoc.body) {
                             iframeDoc.body.style.backgroundColor = '#000000';
                             iframeDoc.body.style.background = '#000000';
+                            iframeDoc.body.style.overflow = 'hidden';
                         }
                     } catch (e) {
-                        // Cross-origin error, can't access iframe document
+                        // Cross-origin error
                         console.log('Cannot access iframe content due to CORS');
                     }
                 });
-            }, 1000);
+            }, 1500);
         });
-
-        // Fix for iframes that might be slow loading
+        
+        // Adjust iframe heights dynamically for mobile
+        function adjustIframeHeights() {
+            const iframes = document.querySelectorAll('.iframe-container iframe');
+            const isMobile = window.innerWidth <= 768;
+            
+            iframes.forEach((iframe, index) => {
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (iframeDoc && iframeDoc.body) {
+                        const contentHeight = iframeDoc.body.scrollHeight;
+                        
+                        if (isMobile) {
+                            // Mobile heights
+                            if (iframe.closest('.description-iframe')) {
+                                iframe.style.height = '500px';
+                            } else {
+                                iframe.style.height = '400px';
+                            }
+                        } else {
+                            // Desktop heights
+                            if (iframe.closest('.description-iframe')) {
+                                iframe.style.height = '700px';
+                            } else {
+                                iframe.style.height = '600px';
+                            }
+                        }
+                    }
+                } catch (e) {
+                    // Cross-origin error
+                }
+            });
+        }
+        
+        // Adjust on load and resize
+        window.addEventListener('load', adjustIframeHeights);
+        window.addEventListener('resize', adjustIframeHeights);
+        
+        // Add typing effect to banner title
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = document.querySelector('.title');
+            const originalText = title.innerHTML;
+            const words = originalText.split(/(<span.*?>.*?<\/span>|[^<]+)/g).filter(w => w.trim());
+            
+            title.innerHTML = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < words.length) {
+                    title.innerHTML += words[i];
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            
+            // Start typing effect after a delay
+            setTimeout(typeWriter, 1000);
+        });
+        
+        // Fix for iframe loading issues
         window.addEventListener('message', function(event) {
             console.log('Iframe message received:', event.data);
         });
-// Fix iframe height dynamically
-window.addEventListener('load', function() {
-    setTimeout(() => {
-        document.querySelectorAll('.iframe-container iframe').forEach(iframe => {
-            try {
-                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                if (iframeDoc && iframeDoc.body) {
-                    // Set iframe document to prevent overflow
-                    iframeDoc.body.style.overflow = 'hidden';
-                    iframeDoc.documentElement.style.overflow = 'hidden';
-                    
-                    // Adjust iframe height based on content
-                    const contentHeight = iframeDoc.body.scrollHeight;
-                    if (contentHeight > 0) {
-                        iframe.style.height = Math.min(contentHeight + 50, 800) + 'px';
-                    }
-                }
-            } catch (e) {
-                // Cross-origin error
-                console.log('Cannot access iframe content');
-            }
-        });
-    }, 2000); // Wait for iframes to load
-});
     </script>
-
-    <!-- Footer -->
-    <div class="footer-container">
-      <iframe src="https://scitrade.org/footer.html" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
-    </div>
 </body>
 </html>
