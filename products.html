@@ -22,9 +22,7 @@
             --gray-bg: #0a0a0a;
             --purple: #9d00ff;
             --blue: #0066ff;
-            --green: #00ff88;
-            --orange: #ff7700;
-            --pink: #ff00ff;
+            /* Removed green and orange variables */
         }
         
         * {
@@ -42,7 +40,7 @@
             min-height: 100vh;
         }
 
-        /* Enhanced Scrollbar */
+        /* Enhanced Scrollbar - Cyan/Purple only */
         ::-webkit-scrollbar {
             width: 12px;
             height: 12px;
@@ -81,13 +79,13 @@
             color: var(--black);
         }
 
-        /* Enhanced Navigation Bar */
+        /* Enhanced Navigation Bar - Matching Index Page Size */
         .sci-navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 12px 0;
+            padding: 15px 0; /* Increased from 12px */
             z-index: 1001;
             background-color: transparent;
             transition: all 0.3s ease;
@@ -100,9 +98,9 @@
         }
 
         .sci-navbar.scrolled {
-            padding: 8px 0;
+            padding: 10px 0; /* Increased from 8px */
             background: linear-gradient(180deg, rgba(10, 10, 10, 0.98) 0%, rgba(15, 15, 15, 0.95) 100%);
-            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.25);
+            box-shadow: 0 5px 30px rgba(0, 255, 255, 0.25); /* Enhanced shadow */
             backdrop-filter: blur(10px);
         }
 
@@ -111,9 +109,9 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 1400px;
+            max-width: 1600px; /* Increased from 1400px */
             margin: 0 auto;
-            padding: 0 30px;
+            padding: 0 20px; /* Standardized padding */
         }
 
         .sci-logo-container {
@@ -123,36 +121,36 @@
         }
 
         .sci-logo {
-            height: 35px;
+            height: 40px; /* Increased from 35px */
             transition: transform 0.3s ease;
             filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
         }
 
         .sci-logo:hover {
             transform: scale(1.1) rotate(5deg);
-            filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.9));
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9)); /* Enhanced glow */
         }
 
         .sci-brand-name {
             font-family: 'Rajdhani', sans-serif !important;
-            font-size: 16px;
+            font-size: 18px; /* Increased from 16px */
             font-weight: 500;
             text-decoration: none;
             color: var(--white);
-            margin-left: 10px;
+            margin-left: 12px; /* Increased from 10px */
             letter-spacing: 1px;
             transition: all 0.3s ease;
         }
 
         .sci-logo-container:hover .sci-brand-name {
             color: var(--cyan);
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7); /* Enhanced shadow */
         }
 
         .sci-nav-links {
             display: flex;
             list-style: none;
-            gap: 8px;
+            gap: 10px; /* Increased from 8px */
             margin-left: auto;
         }
 
@@ -162,11 +160,11 @@
 
         .sci-nav-link {
             position: relative;
-            padding: 6px 14px;
+            padding: 8px 16px; /* Increased from 6px 14px */
             color: var(--white);
             text-decoration: none;
             letter-spacing: 1px;
-            font-size: 16px;
+            font-size: 18px; /* Increased from 16px */
             font-weight: 400;
             transition: all 0.3s ease;
             font-family: 'Rajdhani', sans-serif !important;
@@ -175,7 +173,7 @@
         .sci-nav-link::after {
             content: '';
             position: absolute;
-            bottom: 1px;
+            bottom: 2px; /* Adjusted from 1px */
             left: 50%;
             width: 0;
             height: 2px;
@@ -187,11 +185,11 @@
 
         .sci-nav-link:hover {
             color: var(--cyan);
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Enhanced shadow */
         }
 
         .sci-nav-link:hover::after {
-            width: calc(100% - 28px);
+            width: calc(100% - 32px); /* Adjusted from 28px */
             left: 50%;
         }
 
@@ -200,7 +198,7 @@
         }
 
         .sci-nav-link.active::after {
-            width: calc(100% - 28px);
+            width: calc(100% - 32px); /* Adjusted from 28px */
             left: 50%;
         }
 
@@ -210,7 +208,7 @@
             background: none;
             border: none;
             color: var(--white);
-            font-size: 22px;
+            font-size: 24px; /* Increased from 22px */
             transition: all 0.3s ease;
         }
 
@@ -219,9 +217,10 @@
             transform: scale(1.1);
         }
 
+        /* Animated hamburger menu - Standardized sizing */
         .sci-hamburger {
-            width: 28px;
-            height: 18px;
+            width: 30px; /* Increased from 28px */
+            height: 20px; /* Increased from 18px */
             position: relative;
             margin: 0 auto;
             transform: rotate(0deg);
@@ -248,15 +247,15 @@
 
         .sci-hamburger span:nth-child(2),
         .sci-hamburger span:nth-child(3) {
-            top: 8px;
+            top: 9px; /* Adjusted from 8px */
         }
 
         .sci-hamburger span:nth-child(4) {
-            top: 16px;
+            top: 18px; /* Adjusted from 16px */
         }
 
         .sci-hamburger.open span:nth-child(1) {
-            top: 8px;
+            top: 9px;
             width: 0%;
             left: 50%;
         }
@@ -272,7 +271,7 @@
         }
 
         .sci-hamburger.open span:nth-child(4) {
-            top: 8px;
+            top: 9px;
             width: 0%;
             left: 50%;
         }
@@ -282,12 +281,12 @@
             position: fixed;
             top: 0;
             left: 0;
-            height: 3px;
+            height: 4px; /* Increased from 3px */
             background: linear-gradient(90deg, var(--purple), var(--blue), var(--cyan), var(--red));
             z-index: 1002;
             width: 0%;
             transition: width 0.1s ease;
-            box-shadow: 0 0 8px rgba(157, 0, 255, 0.5);
+            box-shadow: 0 0 10px rgba(157, 0, 255, 0.5); /* Enhanced shadow */
         }
 
         /* --- MAIN CONTENT STYLES --- */
@@ -391,7 +390,7 @@
             100% {
                 text-shadow: 0 0 25px rgba(0, 255, 255, 0.8),
                              0 0 50px rgba(0, 255, 255, 0.5),
-                             0 0 70px rgba(0, 255, 255, 0.3);
+                             0 0 70px rgba(157, 0, 255, 0.3); /* Added purple glow */
             }
         }
 
@@ -447,7 +446,7 @@
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
-            animation: pulse 2s infinite, rainbow 3s infinite;
+            animation: pulse 2s infinite; /* Removed rainbow animation */
             margin-top: 20px;
             font-family: 'Rajdhani', sans-serif;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
@@ -470,10 +469,7 @@
             }
         }
 
-        @keyframes rainbow {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
+        /* Removed rainbow animation to avoid green/orange hues */
 
         .coming-soon-badge::before {
             content: '';
@@ -813,7 +809,7 @@
         .product-price {
             font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
-            background: linear-gradient(45deg, var(--cyan), var(--green), var(--red));
+            background: linear-gradient(45deg, var(--cyan), var(--purple)); /* Changed from green to purple */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1102,16 +1098,16 @@
         @media screen and (max-width: 768px) {
             .sci-nav-links {
                 position: fixed;
-                top: 60px;
+                top: 70px; /* Adjusted for larger navbar */
                 left: 0;
                 width: 100%;
                 flex-direction: column;
                 align-items: center;
                 background: linear-gradient(180deg, rgba(0, 0, 0, 0.98) 0%, rgba(10, 10, 10, 0.95) 100%);
-                padding: 15px 0;
+                padding: 20px 0; /* Increased padding */
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 transition: clip-path 0.5s ease-in-out;
-                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
                 gap: 0;
                 z-index: 999;
                 backdrop-filter: blur(10px);
@@ -1128,8 +1124,8 @@
 
             .sci-nav-link {
                 display: block;
-                padding: 15px 0;
-                font-size: 18px;
+                padding: 18px 0; /* Increased from 15px */
+                font-size: 22px; /* Increased from 18px */
                 width: 100%;
             }
 
@@ -1163,7 +1159,7 @@
 
             .filter-container {
                 flex-direction: column;
-                top: 70px;
+                top: 90px; /* Adjusted for larger navbar */
                 padding: 20px;
                 margin-left: 15px;
                 margin-right: 15px;
@@ -1209,6 +1205,18 @@
         }
 
         @media screen and (max-width: 480px) {
+            .sci-nav-container {
+                padding: 0 15px;
+            }
+            
+            .sci-logo {
+                height: 35px; /* Slightly smaller on mobile */
+            }
+            
+            .sci-brand-name {
+                font-size: 16px;
+            }
+
             .banner-title {
                 font-size: 1.8rem;
             }
@@ -1374,10 +1382,8 @@
                 <div class="product-card" data-price="50">
                     <div class="product-content">
                         <div class="product-image"></div>
-                        <div class="product-header">
-                            <div class="product-name">Triple Super trend with RSI, BB, Alligator, SMA&EMA Crossover Signals</div>
-                            <div class="product-price">50 $</div>
-                        </div>
+                        <div class="product-name">Triple Super trend with RSI, BB, Alligator, SMA&EMA Crossover Signals</div>
+                        <div class="product-price">50 $</div>
                     </div>
                     <div class="view-detail">
                         <button class="view-btn">COMING SOON</button>
@@ -1756,7 +1762,7 @@
             const navbar = document.getElementById('sciNavbar');
             const scrollProgress = document.getElementById('scrollProgress');
             
-            if (window.scrollY > 80) {
+            if (window.scrollY > 100) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
@@ -1771,7 +1777,7 @@
         // Initialize navbar on load
         window.addEventListener('load', function() {
             const navbar = document.getElementById('sciNavbar');
-            if (window.scrollY > 80) {
+            if (window.scrollY > 100) {
                 navbar.classList.add('scrolled');
             }
         });
@@ -1786,9 +1792,9 @@
             const productCards = document.querySelectorAll('.product-card');
             const viewButtons = document.querySelectorAll('.view-btn');
             
-            // Create enhanced particles and background elements
+            // Create enhanced particles and background elements - Cyan/Purple only
             const particlesContainer = document.getElementById('particles');
-            const colors = ['#03fcf4', '#00ffff', '#9d00ff', '#0066ff', '#00ff88', '#ff7700', '#ff00ff'];
+            const colors = ['#03fcf4', '#00ffff', '#9d00ff', '#0066ff']; // Removed green and orange
             
             for (let i = 0; i < 60; i++) {
                 const particle = document.createElement('div');
@@ -1839,10 +1845,6 @@
             style.textContent = `
                 @keyframes ripple {
                     to { transform: scale(4); opacity: 0; }
-                }
-                @keyframes rainbow {
-                    0% { filter: hue-rotate(0deg); }
-                    100% { filter: hue-rotate(360deg); }
                 }
                 @keyframes float {
                     0% { transform: translateY(0) translateX(0); opacity: 0; }
