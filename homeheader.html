@@ -7,16 +7,26 @@
     <!-- Import Oswald font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
-        ::selection {
-          background-color: #03fcf4;
-          color: white; /* Optional: This sets the text color when selected */
+        :root {
+            --cyan: #00ffff;
+            --dark-cyan: #03c9c2;
+            --white: #ffffff;
+            --black: #000000;
+            --purple: #9d00ff;
+            --blue: #0066ff;
+            --pink: #ff00ff;
         }
         
-        /* For Firefox */
-        ::-moz-selection {
-          background-color: #03fcf4;
-          color: white;
+        ::selection {
+          background-color: var(--cyan);
+          color: var(--black);
         }
+        
+        ::-moz-selection {
+          background-color: var(--cyan);
+          color: var(--black);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -24,8 +34,9 @@
         }
         
         body {
-            font-family: 'Oswald', sans-serif; /* Changed to Oswald */
+            font-family: 'Oswald', sans-serif;
             overflow-x: hidden;
+            background-color: var(--black);
         }
         
         .header-container {
@@ -52,42 +63,54 @@
         }
         
         .header-title {
-            font-size: 4.5rem;
-            font-weight: 400; /* Removed bold */
+            font-size: 5rem;
+            font-weight: 300;
             letter-spacing: 2px;
             margin-bottom: 20px;
-            color: #ffffff;
+            color: var(--white);
             text-transform: uppercase;
             animation: titleEntrance 2s cubic-bezier(0.19, 1, 0.22, 1) forwards 0.8s;
             opacity: 0;
             transform: scale(0.8);
-            text-shadow: 0 0 10px rgba(3, 252, 244, 0.7);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        
+        .header-title .highlight {
+            background: linear-gradient(45deg, var(--cyan), var(--purple), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+            /* Removed pulsing animation - now static */
         }
         
         .header-subtitle {
-            font-size: 1.5rem;
-            font-weight: 300; /* Lighter weight */
+            font-size: 1.8rem;
+            font-weight: 300;
             max-width: 800px;
             margin-bottom: 30px;
             opacity: 0;
-            color: #ffffff;
+            color: var(--white);
             animation: subtitleEntrance 2s ease forwards 1.2s;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
         }
         
         .cta-button {
             display: inline-block;
-            padding: 15px 30px;
-            font-size: 1rem;
-            font-family: 'Oswald', sans-serif; /* Added Oswald to button */
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 400; /* Removed bold */
-            color: #ffffff;
-            background-color: #03fcf4;
+            letter-spacing: 2px;
+            font-weight: 400;
+            color: var(--black);
+            background: linear-gradient(45deg, var(--cyan), var(--purple));
             border: none;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 50px;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -95,11 +118,14 @@
             opacity: 0;
             transform: translateY(20px);
             text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
         }
         
         .cta-button:hover {
-            background-color: #02ccc5;
-            text-decoration: none;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.6);
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, var(--purple), var(--cyan));
         }
         
         .cta-button:before {
@@ -111,12 +137,10 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             transition: 0.5s;
-            text-decoration: none;
         }
         
         .cta-button:hover:before {
             left: 100%;
-            text-decoration: none;
         }
         
         /* Background Elements */
@@ -127,7 +151,7 @@
             top: 0;
             left: 0;
             z-index: 1;
-            opacity: 0.7;
+            opacity: 0.8;
         }
         
         .grid-overlay {
@@ -135,25 +159,25 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(3, 252, 244, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(3, 252, 244, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: 2;
-            opacity: 0.2;
+            opacity: 0.3;
             animation: gridEntrance 3s ease forwards;
         }
         
         .candlestick {
             position: absolute;
             background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(3, 252, 244, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.5);
             z-index: 2;
         }
         
         .trend-line {
             position: absolute;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #03fcf4, transparent);
+            background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), transparent);
             z-index: 2;
             transform-origin: left center;
         }
@@ -161,9 +185,13 @@
         .glow-effect {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(3, 252, 244, 0.4) 0%, rgba(3, 252, 244, 0) 70%);
+            background: radial-gradient(circle, rgba(157, 0, 255, 0.4) 0%, rgba(0, 255, 255, 0) 70%);
             z-index: 2;
             animation: pulse 4s infinite alternate;
+        }
+        
+        .glow-effect-cyan {
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.4) 0%, rgba(0, 255, 255, 0) 70%);
         }
         
         .overlay {
@@ -172,18 +200,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, transparent 20%, rgba(0, 0, 0, 0.4) 100%);
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(157, 0, 255, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 102, 255, 0.3) 0%, transparent 50%);
             z-index: 3;
             animation: fadeIn 2s ease forwards;
         }
         
-        /* Data visualization element */
+        /* Data visualization element - UPDATED TO FULL WIDTH */
         .data-viz {
             position: absolute;
-            width: 70%;
+            width: 100%;
             height: 150px;
             bottom: 10%;
-            left: 15%;
+            left: 0;
             z-index: 4;
             opacity: 0;
             animation: vizEntrance 2s ease forwards 1.5s;
@@ -191,9 +222,13 @@
         
         .data-line {
             fill: none;
-            stroke: #03fcf4;
+            stroke: var(--cyan);
             stroke-width: 2;
             opacity: 0.7;
+        }
+        
+        .data-line-purple {
+            stroke: var(--purple);
         }
         
         /* Animations */
@@ -206,13 +241,16 @@
             50% {
                 letter-spacing: 10px;
                 opacity: 0.9;
-                text-shadow: 0 0 20px rgba(3, 252, 244, 0.9), 0 0 30px rgba(3, 252, 244, 0.3);
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.9), 
+                             0 0 40px rgba(157, 0, 255, 0.5);
             }
             100% {
                 opacity: 1;
                 transform: scale(1);
                 letter-spacing: 4px;
-                text-shadow: 0 0 20px rgba(3, 252, 244, 0.7), 0 0 40px rgba(3, 252, 244, 0.3);
+                /* Static shadow - no pulsing */
+                text-shadow: 0 0 20px rgba(0, 255, 255, 0.7), 
+                             0 0 40px rgba(157, 0, 255, 0.3);
             }
         }
         
@@ -260,7 +298,7 @@
                 transform: scale(1.2);
             }
             100% {
-                opacity: 0.2;
+                opacity: 0.3;
                 transform: scale(1);
             }
         }
@@ -284,15 +322,15 @@
         @keyframes pulse {
             0% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(3, 252, 244, 0.7);
+                box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7);
             }
             70% {
                 transform: scale(1.05);
-                box-shadow: 0 0 0 10px rgba(3, 252, 244, 0);
+                box-shadow: 0 0 0 10px rgba(0, 255, 255, 0);
             }
             100% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(3, 252, 244, 0);
+                box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
             }
         }
         
@@ -339,7 +377,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: transparent; /* Changed from black to transparent *//* Added blur effect */
+            background-color: transparent;
             z-index: 20;
             animation: introReveal 1.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
         }
@@ -362,7 +400,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(3, 252, 244, 0.2);
+            background-color: rgba(0, 255, 255, 0.2);
             z-index: 15;
             opacity: 0;
             pointer-events: none;
@@ -381,6 +419,51 @@
             50% { opacity: 1; }
             100% { opacity: 0; }
         }
+        
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            .header-title {
+                font-size: 3.5rem;
+                letter-spacing: 1px;
+            }
+            
+            .header-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .grid-overlay {
+                background-size: 30px 30px;
+            }
+            
+            .cta-button {
+                padding: 14px 35px;
+                font-size: 1rem;
+            }
+            
+            .data-viz {
+                bottom: 15%;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+            
+            .grid-overlay {
+                background-size: 20px 20px;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -394,12 +477,12 @@
         
         <svg class="data-viz">
             <path class="data-line" id="dataPath1"></path>
-            <path class="data-line" id="dataPath2" style="stroke: #ffffff; opacity: 0.4;"></path>
+            <path class="data-line data-line-purple" id="dataPath2" style="opacity: 0.4;"></path>
         </svg>
         
         <div class="header-content">
-            <h1 class="header-title">SciTrade</h1>
-            <p class="header-subtitle">Trading From The Future</p>
+            <h1 class="header-title">Welcome to <span class="highlight">SciTrade</span></h1>
+            <p class="header-subtitle">Trading with purpose, innovation, and excellence</p>
             <!--<a href="#technical-product-4" class="cta-button">Start Winning Today</a>-->
         </div>
     </div>
@@ -408,6 +491,16 @@
         // Canvas setup for stock chart animation
         const canvas = document.getElementById('stockChart');
         const ctx = canvas.getContext('2d');
+        
+        // Color variables matching CSS
+        const colors = {
+            cyan: '#00ffff',
+            purple: '#9d00ff',
+            blue: '#0066ff',
+            pink: '#ff00ff',
+            white: '#ffffff',
+            black: '#000000'
+        };
         
         // Set canvas dimensions
         function resizeCanvas() {
@@ -425,7 +518,7 @@
         
         // Particles array
         let particles = [];
-        const particleCount = 80;
+        const particleCount = 100;
         
         // Candlesticks array
         let candlesticks = [];
@@ -448,7 +541,8 @@
                     size: Math.random() * 4 + 1,
                     speedX: (Math.random() - 0.5) * 1.5,
                     speedY: (Math.random() - 0.5) * 1.5,
-                    opacity: Math.random() * 0.5 + 0.2
+                    opacity: Math.random() * 0.5 + 0.2,
+                    color: Math.random() > 0.5 ? colors.cyan : colors.purple
                 });
             }
         }
@@ -484,7 +578,7 @@
             candlesticks = [];
             
             // Create three rows of candlesticks at different heights
-            const rowPositions = [0.3, 0.5, 0.7]; // Position on the screen (30%, 50%, 70% from top)
+            const rowPositions = [0.3, 0.5, 0.7];
             
             rowPositions.forEach((rowPos, rowIndex) => {
                 for (let i = 0; i < prices.length; i++) {
@@ -496,16 +590,21 @@
                     const wickTop = baseY - (price.high - minPrice) * heightFactor * 0.5;
                     const wickBottom = baseY - (price.low - minPrice) * heightFactor * 0.5;
                     
+                    // Use cyan for up, purple for down
+                    const isUp = price.close > price.open;
+                    const candleColor = isUp ? colors.cyan : colors.purple;
+                    
                     candlesticks.push({
                         x,
-                        y: price.close > price.open ? y : y - height,
+                        y: isUp ? y : y - height,
                         width: CANDLE_WIDTH,
                         height: Math.max(1, height),
-                        color: price.close > price.open ? '#03fcf4' : '#ffffff',
+                        color: candleColor,
                         wickTop,
                         wickBottom,
-                        speed: 0.2 + (rowIndex * 0.1), // Different speeds for different rows
-                        opacity: 0.7 - (rowIndex * 0.1) // Different opacities for depth
+                        speed: 0.2 + (rowIndex * 0.1),
+                        opacity: 0.7 - (rowIndex * 0.1),
+                        isUp
                     });
                 }
             });
@@ -522,7 +621,8 @@
                 const startX = Math.random() * (canvas.width / 2);
                 const startY = Math.random() * canvas.height;
                 const length = Math.random() * (canvas.width - startX) + canvas.width / 4;
-                const angle = (Math.random() - 0.5) * 20; // -10 to 10 degrees
+                const angle = (Math.random() - 0.5) * 20;
+                const lineColor = Math.random() > 0.5 ? colors.cyan : colors.purple;
                 
                 trendLines.push({
                     x: startX,
@@ -530,7 +630,8 @@
                     length,
                     angle,
                     width: Math.random() * 1 + 1,
-                    opacity: Math.random() * 0.3 + 0.1
+                    opacity: Math.random() * 0.3 + 0.1,
+                    color: lineColor
                 });
             }
         }
@@ -542,6 +643,7 @@
             const effectCount = 7;
             
             for (let i = 0; i < effectCount; i++) {
+                const isCyan = Math.random() > 0.5;
                 glowEffects.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
@@ -549,27 +651,43 @@
                     opacity: Math.random() * 0.2 + 0.05,
                     pulseSpeed: Math.random() * 0.01 + 0.005,
                     pulseDirection: 1,
-                    currentOpacity: 0
+                    currentOpacity: 0,
+                    color: isCyan ? colors.cyan : colors.purple
                 });
             }
         }
         
-        // Initialize SVG data path animations
+        // Initialize SVG data path animations - UPDATED TO EXTEND ACROSS FULL SCREEN
         function initSVGPaths() {
             const dataViz = document.querySelector('.data-viz');
             const dataPath1 = document.getElementById('dataPath1');
             const dataPath2 = document.getElementById('dataPath2');
             
-            const width = dataViz.clientWidth;
-            const height = dataViz.clientHeight;
+            const width = dataViz.clientWidth || window.innerWidth;
+            const height = dataViz.clientHeight || 150;
             
-            // Generate SVG path data
+            // Generate SVG path data that extends across entire screen
             let path1 = `M0,${height/2}`;
             let path2 = `M0,${height/2}`;
             
-            for (let x = 0; x < width; x += 5) {
-                const y1 = height/2 + Math.sin(x/30) * 30 + Math.sin(x/10) * 10;
-                const y2 = height/2 + Math.cos(x/20) * 40;
+            // Create more dramatic up/down waves that go edge-to-edge
+            const segments = 100;
+            const segmentWidth = width / segments;
+            
+            for (let i = 0; i <= segments; i++) {
+                const x = i * segmentWidth;
+                
+                // First line: More dramatic up/down movement
+                const y1 = height/2 + 
+                          Math.sin(x/20) * 40 + 
+                          Math.sin(x/7) * 20 + 
+                          Math.sin(x/50) * 10;
+                
+                // Second line: Different phase for alternating effect
+                const y2 = height/2 + 
+                          Math.cos(x/25) * 50 + 
+                          Math.cos(x/12) * 25 + 
+                          Math.cos(x/60) * 15;
                 
                 path1 += ` L${x},${y1}`;
                 path2 += ` L${x},${y2}`;
@@ -584,11 +702,11 @@
             
             dataPath1.style.strokeDasharray = path1Length;
             dataPath1.style.strokeDashoffset = path1Length;
-            dataPath1.style.animation = 'lineDrawing 8s infinite';
+            dataPath1.style.animation = 'lineDrawing 15s infinite';
             
             dataPath2.style.strokeDasharray = path2Length;
             dataPath2.style.strokeDashoffset = path2Length;
-            dataPath2.style.animation = 'lineDrawing 12s infinite';
+            dataPath2.style.animation = 'lineDrawing 18s infinite';
         }
         
         // Initialize all animations
@@ -638,8 +756,8 @@
                     effect.x, effect.y, 0,
                     effect.x, effect.y, effect.radius
                 );
-                gradient.addColorStop(0, `rgba(3, 252, 244, ${effect.currentOpacity})`);
-                gradient.addColorStop(1, 'rgba(3, 252, 244, 0)');
+                gradient.addColorStop(0, `${effect.color}${Math.floor(effect.currentOpacity * 255).toString(16).padStart(2, '0')}`);
+                gradient.addColorStop(1, `${effect.color}00`);
                 
                 ctx.fillStyle = gradient;
                 ctx.beginPath();
@@ -647,16 +765,16 @@
                 ctx.fill();
             });
             
-            // Draw trend lines
+            // Draw trend lines with gradient
             trendLines.forEach(line => {
                 ctx.save();
                 ctx.translate(line.x, line.y);
                 ctx.rotate(line.angle * Math.PI / 180);
                 
                 const gradient = ctx.createLinearGradient(0, 0, line.length, 0);
-                gradient.addColorStop(0, `rgba(3, 252, 244, 0)`);
-                gradient.addColorStop(0.5, `rgba(3, 252, 244, ${line.opacity})`);
-                gradient.addColorStop(1, `rgba(3, 252, 244, 0)`);
+                gradient.addColorStop(0, `${line.color}00`);
+                gradient.addColorStop(0.5, `${line.color}${Math.floor(line.opacity * 255).toString(16).padStart(2, '0')}`);
+                gradient.addColorStop(1, `${line.color}00`);
                 
                 ctx.strokeStyle = gradient;
                 ctx.lineWidth = line.width;
@@ -686,8 +804,21 @@
                 ctx.lineTo(candle.x + candle.width / 2, candle.wickBottom);
                 ctx.stroke();
                 
-                // Draw body
-                ctx.fillStyle = candle.color;
+                // Draw body with gradient
+                const gradient = ctx.createLinearGradient(
+                    candle.x, candle.y, 
+                    candle.x, candle.y + candle.height
+                );
+                
+                if (candle.isUp) {
+                    gradient.addColorStop(0, `${colors.cyan}${Math.floor(candle.opacity * 255).toString(16).padStart(2, '0')}`);
+                    gradient.addColorStop(1, `${colors.cyan}00`);
+                } else {
+                    gradient.addColorStop(0, `${colors.purple}${Math.floor(candle.opacity * 255).toString(16).padStart(2, '0')}`);
+                    gradient.addColorStop(1, `${colors.purple}00`);
+                }
+                
+                ctx.fillStyle = gradient;
                 ctx.fillRect(candle.x, candle.y, candle.width, candle.height);
                 ctx.globalAlpha = 1.0;
             });
@@ -703,7 +834,7 @@
                 if (particle.y < 0) particle.y = canvas.height;
                 if (particle.y > canvas.height) particle.y = 0;
                 
-                ctx.fillStyle = `rgba(3, 252, 244, ${particle.opacity})`;
+                ctx.fillStyle = `${particle.color}${Math.floor(particle.opacity * 255).toString(16).padStart(2, '0')}`;
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -712,6 +843,11 @@
         
         // Start the animation when document is loaded
         window.addEventListener('load', init);
+        
+        // Reinitialize SVG paths on resize
+        window.addEventListener('resize', () => {
+            setTimeout(initSVGPaths, 100);
+        });
     </script>
 </body>
 </html>
