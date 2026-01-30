@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Why Choose SciTrade?</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* Reset and base styles */
+    :root {
+      --cyan: #00ffff;
+      --purple: #9d00ff;
+      --dark-bg: #050505;
+      --card-bg: rgba(10, 10, 10, 0.6);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -19,7 +25,8 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
       overflow: hidden;
-      background: transparent;
+      height: 100%;
+      width: 100%;
     }
     
     ::-webkit-scrollbar {
@@ -30,470 +37,481 @@
     
     body {
       font-family: 'Oswald', sans-serif;
-      min-height: 100vh;
-      background: transparent;
+      background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
       color: #ffffff;
       position: relative;
       overflow: hidden;
     }
 
-    /* Custom selection color */
-    ::selection {
-      background: rgba(3, 252, 244, 0.7);
-      color: white;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-    }
-    ::-moz-selection {
-      background: rgba(3, 252, 244, 0.7);
-      color: white;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(157, 0, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    /* Main content */
+    ::selection {
+      background: rgba(0, 255, 255, 0.4);
+      color: white;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    }
+
     .content-wrapper {
       width: 100%;
       height: 100vh;
       margin: 0 auto;
-      padding: 15px 20px;
+      padding: 20px;
       position: relative;
       z-index: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
     }
 
     .header {
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 30px;
       position: relative;
-      animation: fadeSlideDown 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      animation: fadeSlideDown 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     }
 
     .title {
-      font-size: 2.8rem;
-      font-weight: 400;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 300;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 5px;
+      letter-spacing: 4px;
+      margin-bottom: 10px;
       position: relative;
       display: inline-block;
     }
 
     .title-accent {
-      color: transparent;
-      background: linear-gradient(90deg, #03fcf4, #03fcf4, #03fcf4);
-      background-clip: text;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
       -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 500;
       position: relative;
-      display: inline-block;
-      text-shadow: 0 0 25px rgba(3, 252, 244, 0.7);
-      animation: pulsateGlow 2s infinite alternate;
+      filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.3));
     }
 
     .title::after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 100px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #03fcf4, transparent);
-      animation: expandLine 2s infinite alternate;
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), transparent);
+      border-radius: 2px;
     }
 
-    /* Grid layout */
+    /* Grid layout - Optimized for no-scroll visibility */
     .reasons-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, auto);
-      gap: 15px;
+      gap: 20px;
       width: 100%;
       max-width: 1200px;
-      margin: 0 auto;
+      height: calc(100vh - 140px);
+      max-height: 600px;
     }
 
     .reason-item {
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
-      backdrop-filter: blur(5px);
-      padding: 20px;
+      background: linear-gradient(135deg, rgba(20, 20, 20, 0.8), rgba(5, 5, 5, 0.9));
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      padding: 25px;
       position: relative;
-      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform: translateY(40px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
+      transform: translateY(30px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
 
     .reason-item::before {
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 8px;
-      padding: 1px;
-      background: linear-gradient(130deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      border-radius: 12px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, transparent, rgba(0, 255, 255, 0.3), transparent);
       -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
         linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
-      opacity: 0.3;
-      transition: opacity 0.3s ease, background 0.3s ease;
-    }
-
-    /* Enhanced hover effects */
-    .reason-item:hover {
-      transform: translateY(-5px);
-      background: rgba(0, 20, 20, 0.3);
-      box-shadow: 0 10px 25px rgba(3, 252, 244, 0.15);
-      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .reason-item:hover::before {
       opacity: 1;
-      background: linear-gradient(130deg, transparent, rgba(3, 252, 244, 0.8), transparent);
-      animation: rotateBorder 2s linear infinite;
+      background: linear-gradient(135deg, var(--cyan), var(--purple), var(--cyan));
+      background-size: 200% 200%;
+      animation: gradientMove 3s ease infinite;
     }
 
-    .reason-item::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, transparent 30%, rgba(3, 252, 244, 0));
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      pointer-events: none;
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
-    .reason-item:hover::after {
-      opacity: 0.15;
-      animation: pulseGlow 1.5s infinite alternate;
+    .reason-item:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.15), 0 0 60px rgba(157, 0, 255, 0.1);
+      border-color: rgba(0, 255, 255, 0.2);
+      z-index: 2;
     }
 
     .reason-header {
       display: flex;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      gap: 12px;
     }
 
     .reason-icon {
-      width: 24px;
-      height: 24px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 10px;
-      color: #03fcf4;
-      font-size: 14px;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .reason-icon::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(157, 0, 255, 0.1));
+      border: 1px solid rgba(0, 255, 255, 0.3);
       border-radius: 50%;
-      border: 1px solid rgba(3, 252, 244, 0.5);
+      color: var(--cyan);
+      font-size: 16px;
+      font-weight: 700;
+      position: relative;
+      flex-shrink: 0;
       transition: all 0.3s ease;
     }
 
     .reason-item:hover .reason-icon {
-      color: #03fcf4;
-      text-shadow: 0 0 10px #03fcf4;
-    }
-
-    .reason-item:hover .reason-icon::after {
-      transform: scale(1.2);
-      border-color: rgba(3, 252, 244, 1);
-      box-shadow: 0 0 15px rgba(3, 252, 244, 0.8);
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(157, 0, 255, 0.3));
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+      transform: scale(1.1);
+      border-color: var(--cyan);
     }
 
     .reason-title {
-      font-size: 1.4rem;
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
       font-weight: 400;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      position: relative;
-      transition: all 0.3s ease;
+      letter-spacing: 1.5px;
+      background: linear-gradient(90deg, #fff, #e0e0e0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
     }
 
     .reason-description {
       font-weight: 300;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: rgba(255, 255, 255, 0.8);
-      transition: all 0.4s ease;
-      position: relative;
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      flex: 1;
     }
 
     .highlight {
-      color: #03fcf4;
+      color: var(--cyan);
+      font-weight: 400;
       position: relative;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
       transition: all 0.3s ease;
     }
 
     .reason-item:hover .highlight {
-      text-shadow: 0 0 8px rgba(3, 252, 244, 0.8);
-      color: #03fcf4;
+      color: #fff;
+      text-shadow: 0 0 15px var(--cyan), 0 0 30px rgba(157, 0, 255, 0.5);
     }
 
-    /* Entrance Animations */
+    /* Animations */
     @keyframes fadeSlideDown {
-      0% {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes slideInFromLeft {
-      0% {
-        opacity: 0;
-        transform: translateX(-50px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slideInFromRight {
-      0% {
-        opacity: 0;
-        transform: translateX(50px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes popIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      70% {
-        transform: scale(1.05);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes pulseGlow {
-      0% {
-        opacity: 0.1;
-      }
-      100% {
-        opacity: 0.3;
-      }
-    }
-
-    @keyframes pulsateGlow {
-      0% {
-        text-shadow: 0 0 10px rgba(3, 252, 244, 0.5);
-      }
-      100% {
-        text-shadow: 0 0 25px rgba(3, 252, 244, 0.9);
-      }
-    }
-
-    @keyframes expandLine {
-      0% {
-        width: 80px;
-        opacity: 0.5;
-      }
-      100% {
-        width: 120px;
-        opacity: 1;
-      }
-    }
-
-    @keyframes rotateBorder {
-      0% {
-        background-position: 0% 50%;
-      }
-      100% {
-        background-position: 100% 50%;
-      }
-    }
-
-    /* Cyan focus highlight */
-    .reason-item:focus-within {
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(3, 252, 244, 0.5);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 992px) {
+    /* Tablet */
+    @media (max-width: 1024px) {
       .reasons-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, auto);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 15px;
+        max-height: 700px;
+      }
+      
+      .reason-item {
+        padding: 20px;
       }
     }
 
-    @media (max-width: 576px) {
-      .reasons-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(6, auto);
+    /* Mobile */
+    @media (max-width: 768px) {
+      .content-wrapper {
+        padding: 15px;
+        justify-content: flex-start;
+        padding-top: 40px;
+      }
+      
+      .header {
+        margin-bottom: 20px;
       }
       
       .title {
-        font-size: 2rem;
+        letter-spacing: 2px;
       }
       
+      .reasons-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, minmax(auto, 1fr));
+        gap: 10px;
+        height: auto;
+        max-height: calc(100vh - 100px);
+        overflow: visible;
+      }
+      
+      .reason-item {
+        padding: 15px;
+        transform: translateY(20px);
+        min-height: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+      }
+      
+      .reason-header {
+        flex-direction: column;
+        margin-bottom: 0;
+        min-width: 60px;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+      }
+      
+      .reason-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+      }
+      
+      .reason-title {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        white-space: nowrap;
+      }
+      
+      .reason-description {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        flex: 1;
+      }
+    }
+
+    /* Small Mobile */
+    @media (max-width: 380px) {
+      .reason-item {
+        padding: 12px;
+        gap: 12px;
+      }
+      
+      .reason-description {
+        font-size: 0.85rem;
+      }
+      
+      .reason-title {
+        font-size: 0.7rem;
+      }
+    }
+
+    /* Touch device optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .reason-item:hover {
+        transform: none;
+        box-shadow: 0 5px 20px rgba(0, 255, 255, 0.1);
+      }
+      
+      .reason-item:active {
+        transform: scale(0.98);
+        background: rgba(0, 255, 255, 0.05);
+      }
+    }
+
+    /* Landscape mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
       .content-wrapper {
-        padding: 15px 15px;
+        padding: 10px;
+        justify-content: center;
+      }
+      
+      .header {
+        margin-bottom: 15px;
+      }
+      
+      .title {
+        font-size: 1.5rem;
+      }
+      
+      .reasons-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 10px;
+        max-height: 80vh;
+      }
+      
+      .reason-item {
+        padding: 12px;
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .reason-header {
+        flex-direction: row;
+        writing-mode: horizontal-tb;
+        transform: none;
+      }
+      
+      .reason-title {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 0.9rem;
+      }
+      
+      .reason-description {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 <body>
-  
   <div class="content-wrapper">
     <header class="header">
       <h1 class="title">Why <span class="title-accent">choose</span> SciTrade?</h1>
     </header>
     
     <div class="reasons-grid">
-      <!-- Item 1 -->
-      <div class="reason-item" id="item1">
+      <div class="reason-item" style="animation: fadeInUp 0.6s forwards 0.1s;">
         <div class="reason-header">
           <div class="reason-icon">✓</div>
           <h3 class="reason-title">Proven Performance</h3>
         </div>
-        <p class="reason-description">Our strategies are built on <span class="highlight">real market data</span>, tested across various conditions, and refined through constant performance tracking. We don't rely on guesswork, just consistent, strategic results.</p>
+        <p class="reason-description">Our strategies are built on <span class="highlight">real market data</span>, tested across various conditions, and refined through constant performance tracking. No guesswork, just results.</p>
       </div>
       
-      <!-- Item 2 -->
-      <div class="reason-item" id="item2">
+      <div class="reason-item" style="animation: fadeInUp 0.6s forwards 0.2s;">
         <div class="reason-header">
           <div class="reason-icon">✓</div>
-          <h3 class="reason-title">Simple & User-Friendly</h3>
+          <h3 class="reason-title">Simple & Friendly</h3>
         </div>
-        <p class="reason-description">Whether you're a beginner or an experienced trader, our approach is <span class="highlight">clear, structured, and easy to follow</span>. No unnecessary complexity, just actionable insights that work.</p>
+        <p class="reason-description">Whether you're a beginner or experienced trader, our approach is <span class="highlight">clear and structured</span>. No unnecessary complexity, just actionable insights.</p>
       </div>
       
-      <!-- Item 3 -->
-      <div class="reason-item" id="item3">
+      <div class="reason-item" style="animation: fadeInUp 0.6s forwards 0.3s;">
         <div class="reason-header">
           <div class="reason-icon">✓</div>
-          <h3 class="reason-title">Transparent Risk Management</h3>
+          <h3 class="reason-title">Risk Management</h3>
         </div>
-        <p class="reason-description">We believe <span class="highlight">risk control is the foundation</span> of profitable trading. Every strategy includes defined <span class="highlight">stop losses</span>, drawdown limits, and <span class="highlight">capital preservation</span> techniques.</p>
+        <p class="reason-description">We believe <span class="highlight">risk control is the foundation</span> of profitable trading. Every strategy includes defined <span class="highlight">stop losses</span> and <span class="highlight">capital preservation</span>.</p>
       </div>
       
-      <!-- Item 4 -->
-      <div class="reason-item" id="item4">
+      <div class="reason-item" style="animation: fadeInUp 0.6s forwards 0.4s;">
         <div class="reason-header">
           <div class="reason-icon">✓</div>
           <h3 class="reason-title">Quantitative Approach</h3>
         </div>
-        <p class="reason-description">Our thinking and strategies are based on <span class="highlight">high-level mathematics</span> with a methodical and organized approach <span class="highlight">optimized for profits</span>. No emotions, just data-driven decisions.</p>
+        <p class="reason-description">Our strategies are based on <span class="highlight">high-level mathematics</span> with a methodical approach <span class="highlight">optimized for profits</span>. No emotions, just data.</p>
       </div>
       
-      <!-- Item 5 -->
-      <div class="reason-item" id="item5">
+      <div class="reason-item" style="animation: fadeInUp 0.6s forwards 0.5s;">
         <div class="reason-header">
           <div class="reason-icon">✓</div>
           <h3 class="reason-title">Proven Profitability</h3>
         </div>
-        <p class="reason-description">Our expert advisors let you <span class="highlight">sleep comfortably</span> knowing you'll wake up profitable. Our indicators <span class="highlight">twist the balance</span> to your side in real trading accounts.</p>
+        <p class="reason-description">Our expert advisors let you <span class="highlight">sleep comfortably</span> knowing you'll wake up profitable. Our indicators <span class="highlight">twist the balance</span> to your side.</p>
       </div>
       
-      <!-- Item 6 -->
-      <div class="reason-item" id="item6">
+      <div class="reason-item" style="animation: fadeInUp 0.6s forwards 0.6s;">
         <div class="reason-header">
           <div class="reason-icon">✓</div>
           <h3 class="reason-title">Ongoing Support</h3>
         </div>
-        <p class="reason-description">Markets change, and so do our strategies. With <span class="highlight">continuous updates</span> and personal support, you'll always be equipped with the <span class="highlight">latest tools</span> and insights.</p>
+        <p class="reason-description">Markets change, and so do our strategies. With <span class="highlight">continuous updates</span> and personal support, you'll always have the <span class="highlight">latest tools</span>.</p>
       </div>
     </div>
   </div>
 
   <script>
-    // Custom cursor
     document.addEventListener('DOMContentLoaded', () => {
-      const cursorFollower = document.getElementById('cursorFollower');
-      const cursorDot = document.getElementById('cursorDot');
-      
-      // Mouse follower
-      document.addEventListener('mousemove', (e) => {
-        if (cursorFollower) {
-          cursorFollower.style.left = e.clientX + 'px';
-          cursorFollower.style.top = e.clientY + 'px';
-        }
-        
-        if (cursorDot) {
-          cursorDot.style.left = e.clientX + 'px';
-          cursorDot.style.top = e.clientY + 'px';
-        }
-      });
-      
-      // Hover effect on items
-      const items = document.querySelectorAll('.reason-item, .highlight, .title-accent');
-      
-      items.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-          if (cursorFollower) {
-            cursorFollower.style.width = '50px';
-            cursorFollower.style.height = '50px';
-            cursorFollower.style.background = 'rgba(3, 252, 244, 0.4)';
-          }
-        });
-        
-        item.addEventListener('mouseleave', () => {
-          if (cursorFollower) {
-            cursorFollower.style.width = '30px';
-            cursorFollower.style.height = '30px';
-            cursorFollower.style.background = 'rgba(3, 252, 244, 0.3)';
-          }
-        });
-      });
-      
-      // Animate items with different entrance animations
-      const animateItems = () => {
-        const items = document.querySelectorAll('.reason-item');
-        const animations = [
-          'fadeIn',
-          'slideInFromLeft',
-          'slideInFromRight',
-          'popIn',
-          'fadeIn',
-          'popIn'
-        ];
-        
-        items.forEach((item, index) => {
-          setTimeout(() => {
-            item.style.animation = `${animations[index]} 0.8s forwards`;
-          }, 300 + (index * 150));
-        });
+      // Intersection Observer for mobile scroll into view animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px'
       };
       
-      setTimeout(animateItems, 300);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+      
+      document.querySelectorAll('.reason-item').forEach(item => {
+        observer.observe(item);
+      });
+
+      // 3D tilt effect for desktop
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        document.querySelectorAll('.reason-item').forEach(card => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const xPercent = x / rect.width - 0.5;
+            const yPercent = y / rect.height - 0.5;
+            
+            card.style.transform = `perspective(1000px) rotateX(${yPercent * -5}deg) rotateY(${xPercent * 5}deg) translateY(-5px) scale(1.02)`;
+          });
+          
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+          });
+        });
+      }
     });
   </script>
 </body>
