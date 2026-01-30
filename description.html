@@ -2,102 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Premier Trading Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --cyan: #00ffff;
+            --purple: #9d00ff;
+            --cyan-glow: rgba(0, 255, 255, 0.4);
+            --purple-glow: rgba(157, 0, 255, 0.4);
+            --bg-color: #000000;
+            --card-bg: rgba(10, 10, 15, 0.7);
+            --text-color: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-color: #03fcf4;
-            --primary-glow: rgba(3, 252, 244, 0.3);
-            --bg-color: #000000;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --text-color: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
+        html, body {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            background: #000;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
         }
 
         ::selection {
-            background: var(--primary-glow);
-            color: var(--text-color);
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            color: #000;
+            text-shadow: none;
         }
 
         body {
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 40, 40, 0.4) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 40, 40, 0.4) 0%, transparent 40%);
-            color: var(--text-color);
             font-family: 'Oswald', sans-serif;
-            overflow-x: hidden;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background: radial-gradient(ellipse at top, rgba(0, 40, 40, 0.3) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(60, 0, 100, 0.2) 0%, transparent 40%),
+                        radial-gradient(ellipse at bottom left, rgba(0, 100, 100, 0.2) 0%, transparent 40%),
+                        #000;
+            color: var(--text-color);
+            overflow: hidden;
+            position: relative;
         }
 
-        body::-webkit-scrollbar {
-            display: none;
+        /* Animated background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(157, 0, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 1.2rem;
-            overflow: hidden; /* Added to prevent scrollbar during animations */
-        }
-
-        /* Header Section */
-        header {
-            min-height: 30vh;
+            padding: 0 1.5rem;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             position: relative;
-            padding: 2rem 0 0.5rem;
-            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
         }
 
-        .header-content {
+        /* Header Section */
+        header {
+            flex-shrink: 0;
+            margin-bottom: 1.5rem;
             position: relative;
-            z-index: 2;
         }
 
         .intro {
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s forwards 0.3s;
-            max-width: 900px;
         }
 
         h1 {
             font-family: 'Oswald', sans-serif;
-            font-size: 2rem;
-            line-height: 1.2;
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            line-height: 1.3;
             font-weight: 300;
             margin-bottom: 1rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .intro p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 0.5rem; /* Reduced from 1rem */
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            line-height: 1.6;
             font-weight: 300;
             color: var(--text-secondary);
+            max-width: 900px;
         }
 
         .highlight {
-            color: var(--primary-color);
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             position: relative;
+            font-weight: 400;
             display: inline-block;
-            transition: all 0.3s ease;
         }
 
         .highlight::after {
@@ -105,18 +131,17 @@
             position: absolute;
             bottom: -2px;
             left: 0;
-            width: 0;
-            height: 1px;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .highlight:hover {
-            text-shadow: 0 0 8px var(--primary-glow);
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .highlight:hover::after {
-            width: 100%;
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         /* Chart background */
@@ -126,63 +151,71 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
-            opacity: 0.05;
+            z-index: 0;
+            opacity: 0.1;
             pointer-events: none;
         }
 
         .chart-line {
-            stroke: var(--primary-color);
-            stroke-width: 1;
+            stroke: url(#gradient);
+            stroke-width: 1.5;
             fill: none;
             animation: drawChart 3s forwards;
             stroke-dasharray: 1000;
             stroke-dashoffset: 1000;
+            filter: drop-shadow(0 0 3px var(--cyan));
         }
 
         /* Trading Suite Section */
         .trading-suite {
-            padding: 0.5rem 0; /* Reduced from 1rem */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             position: relative;
             overflow: hidden;
+            min-height: 0;
         }
 
         .suite-title {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.8rem; /* Reduced from 1rem */
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            margin-bottom: 1.5rem;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s forwards 0.8s;
             font-weight: 300;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
             position: relative;
             display: inline-block;
+            color: #fff;
         }
 
         .suite-title::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
             left: 0;
             width: 60px;
-            height: 2px;
-            background: var(--primary-color);
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            box-shadow: 0 0 10px var(--cyan);
         }
 
         .card-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 0.8rem;
-            margin-top: 0.8rem;
+            gap: 1.2rem;
+            width: 100%;
+            overflow: visible;
         }
 
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 1rem;
-            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(157, 0, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             position: relative;
@@ -190,9 +223,9 @@
             opacity: 0;
             transform: translateY(30px);
             z-index: 1;
-            height: 110px; /* Reduced from 130px */
             display: flex;
             flex-direction: column;
+            backdrop-filter: blur(10px);
         }
 
         .card:nth-child(1) { animation: fadeInUp 0.5s forwards 1s; }
@@ -202,82 +235,104 @@
         .card:nth-child(5) { animation: fadeInUp 0.5s forwards 1.4s; }
         .card:nth-child(6) { animation: fadeInUp 0.5s forwards 1.5s; }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(3, 252, 244, 0.2);
-            z-index: 2;
-        }
-
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(3, 252, 244, 0.15), transparent);
+            inset: 0;
+            border-radius: 12px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple), var(--cyan));
+            background-size: 200% 200%;
+            animation: gradientRotate 3s linear infinite;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
             opacity: 0;
             transition: opacity 0.4s ease;
-            transform: scale(0.5);
+        }
+
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .card:hover::before {
             opacity: 1;
-            transform: scale(1.5);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.15),
+                        0 0 60px rgba(157, 0, 255, 0.1);
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(157, 0, 255, 0.1));
+            border-color: transparent;
         }
 
         .card::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transform: scale(0.5);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
         }
 
         .card:hover::after {
             opacity: 1;
+            transform: scale(1);
         }
 
         .card-title {
-            color: var(--primary-color);
             font-family: 'Oswald', sans-serif;
-            font-size: 1.05rem; /* Increased from 1rem */
-            margin-bottom: 0.5rem;
+            font-size: clamp(1rem, 1.3vw, 1.2rem);
+            margin-bottom: 0.8rem;
             font-weight: 400;
             position: relative;
             z-index: 2;
             display: flex;
             align-items: center;
+            gap: 0.8rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .card-icon {
-            margin-right: 0.5rem;
-            font-size: 1.1rem; /* Increased from 1rem */
-            color: var(--primary-color);
-            position: relative;
-            z-index: 2;
+            font-size: 1.3rem;
+            filter: drop-shadow(0 0 8px var(--cyan-glow));
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.2) rotate(5deg);
         }
 
         .card-description {
-            font-size: 0.85rem; /* Increased from 0.8rem */
+            font-size: clamp(0.85rem, 1.1vw, 0.95rem);
             position: relative;
             z-index: 2;
             color: var(--text-secondary);
-            line-height: 1.4;
+            line-height: 1.5;
+            font-weight: 300;
         }
 
         .data-line {
             position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), transparent);
             width: 100%;
             top: 0;
             left: -100%;
-            animation: dataLine 6s infinite linear;
+            opacity: 0.6;
+            animation: dataLine 4s infinite linear;
         }
 
         .data-points {
@@ -288,44 +343,47 @@
             left: 0;
             z-index: 1;
             overflow: hidden;
+            pointer-events: none;
         }
 
         .data-point {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background-color: var(--primary-color);
+            width: 4px;
+            height: 4px;
+            background: var(--cyan);
             border-radius: 50%;
             opacity: 0;
+            box-shadow: 0 0 10px var(--cyan);
         }
 
         /* Floating data elements */
         .floating-data {
-            position: absolute;
+            position: fixed;
             z-index: 0;
-            opacity: 0.1;
+            opacity: 0.08;
             pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
         .data-item {
             position: absolute;
             font-family: 'Oswald', sans-serif;
-            color: var(--primary-color);
-            font-size: 0.8rem;
-            animation: floatingData 15s infinite linear;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 0.9rem;
+            font-weight: 300;
+            animation: floatingData 20s infinite linear;
             white-space: nowrap;
+            letter-spacing: 1px;
         }
 
         /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -340,12 +398,8 @@
         }
 
         @keyframes dataLine {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         @keyframes pulsePoint {
@@ -358,24 +412,24 @@
                 opacity: 0.3;
             }
             100% {
-                transform: scale(4);
+                transform: scale(5);
                 opacity: 0;
             }
         }
 
         @keyframes floatingData {
             0% {
-                transform: translateY(0) translateX(0);
+                transform: translateY(110vh) translateX(0);
                 opacity: 0;
             }
             10% {
-                opacity: 1;
+                opacity: 0.5;
             }
             90% {
-                opacity: 1;
+                opacity: 0.5;
             }
             100% {
-                transform: translateY(-100vh) translateX(30vw);
+                transform: translateY(-10vh) translateX(20vw);
                 opacity: 0;
             }
         }
@@ -383,31 +437,122 @@
         /* Particle effect */
         .particle {
             position: absolute;
-            background-color: var(--primary-color);
-            width: 2px;
-            height: 2px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            width: 3px;
+            height: 3px;
             border-radius: 50%;
             pointer-events: none;
+            box-shadow: 0 0 6px var(--cyan);
         }
 
         /* Responsive */
         @media (max-width: 1200px) {
             .card-container {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .card {
+                padding: 1.2rem;
             }
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.5rem;
+            .container {
+                padding: 1rem;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                overflow-y: auto;
             }
+            
+            header {
+                margin-bottom: 1rem;
+            }
+            
             .card-container {
                 grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            
+            .card {
+                padding: 1rem;
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .card-title {
+                margin-bottom: 0.3rem;
+                font-size: 0.95rem;
+            }
+            
+            .card-description {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+            
+            .card-icon {
+                font-size: 1.5rem;
+                margin-right: 0;
+            }
+            
+            .suite-title {
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-height: 700px) and (min-width: 769px) {
+            .card-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.8rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 0.5rem;
+            }
+            .intro p {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .card:hover {
+                transform: none;
+            }
+            .card:active {
+                transform: scale(0.98);
+                background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(157, 0, 255, 0.15));
+            }
+            .highlight::after {
+                display: none;
+            }
+        }
+
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 <body>
+    <!-- SVG Definitions for gradients -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#00ffff;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#9d00ff;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+    
     <!-- Chart background for header -->
     <div class="chart-bg" id="chartBg"></div>
     
@@ -436,7 +581,7 @@
                     <div class="data-line"></div>
                     <div class="data-points"></div>
                     <h3 class="card-title"><span class="card-icon">📈</span> Mathematical Indicators</h3>
-                    <p class="card-description">Grounded in statistical theory and market mechanics to identify high-probability setups.</p>
+                    <p class="card-description">Grounded in statistical theory and market mechanics to identify high-probability setups with precision.</p>
                 </div>
                 
                 <div class="card">
@@ -483,21 +628,25 @@
             const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             svg.setAttribute("width", "100%");
             svg.setAttribute("height", "100%");
+            svg.style.position = "absolute";
+            svg.style.top = "0";
+            svg.style.left = "0";
             
-            // Create multiple chart lines
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 5; i++) {
                 const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
                 path.classList.add("chart-line");
                 
-                // Generate random path data representing stock charts
-                let pathData = "M0," + (Math.random() * 100 + 150);
-                for (let x = 50; x < window.innerWidth; x += 50) {
-                    const y = Math.random() * 100 + 150 * (i * 0.5 + 1);
-                    pathData += " L" + x + "," + y;
+                let pathData = "M0," + (Math.random() * 50 + 100);
+                let currentY = Math.random() * 50 + 100;
+                
+                for (let x = 100; x < window.innerWidth; x += 100) {
+                    const change = (Math.random() - 0.5) * 40;
+                    currentY = Math.max(50, Math.min(200, currentY + change));
+                    pathData += " L" + x + "," + currentY;
                 }
                 
                 path.setAttribute("d", pathData);
-                path.style.animationDelay = (i * 0.2) + "s";
+                path.style.animationDelay = (i * 0.3) + "s";
                 svg.appendChild(path);
             }
             
@@ -508,21 +657,19 @@
         function createFloatingData() {
             const container = document.getElementById('floatingData');
             const dataTerms = [
-                "RSI: 65.4", "MACD: 0.234", "EMA(13): 412.56", "S&P 500: 4392.21", 
-                "VWAP: 315.67", "BTC/USD: 72431.25", "OBV: 1432563", "ADX: 28.45",
-                "EUR/USD: 1.0843", "GOLD: 2350.12", "FIBONACCI: 0.618", "BOLLINGER: +2σ",
-                "VIX: 17.32", "ATR: 3.45", "SMA(50): 348.12", "CCI: 125.3"
+                "RSI: 65.4", "MACD: 0.234", "EMA: 412.56", "S&P: 4392.21", 
+                "VWAP: 315.67", "BTC: 72431", "OBV: 14325", "ADX: 28.45",
+                "EUR: 1.0843", "GOLD: 2350", "FIB: 0.618", "VIX: 17.32"
             ];
             
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 15; i++) {
                 const dataItem = document.createElement('div');
                 dataItem.classList.add('data-item');
                 dataItem.textContent = dataTerms[Math.floor(Math.random() * dataTerms.length)];
                 
                 dataItem.style.left = Math.random() * 100 + 'vw';
-                dataItem.style.top = Math.random() * 100 + 'vh';
-                dataItem.style.animationDelay = (Math.random() * 10) + 's';
-                dataItem.style.animationDuration = (10 + Math.random() * 15) + 's';
+                dataItem.style.animationDelay = (Math.random() * 15) + 's';
+                dataItem.style.animationDuration = (15 + Math.random() * 10) + 's';
                 
                 container.appendChild(dataItem);
             }
@@ -532,18 +679,11 @@
         function createDataPoints() {
             const cards = document.querySelectorAll('.card');
             
-            cards.forEach(card => {
+            cards.forEach((card, index) => {
                 const dataPointsContainer = card.querySelector('.data-points');
                 
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        if (dataPointsContainer) {
-                            createDataPoint(dataPointsContainer);
-                        }
-                    }, i * 1000);
-                }
-                
-                function createDataPoint(container) {
+                function createPoint() {
+                    if (!dataPointsContainer) return;
                     const point = document.createElement('div');
                     point.classList.add('data-point');
                     
@@ -554,13 +694,20 @@
                     point.style.top = y + '%';
                     point.style.animation = `pulsePoint ${Math.random() * 2 + 2}s forwards`;
                     
-                    container.appendChild(point);
+                    dataPointsContainer.appendChild(point);
                     
                     setTimeout(() => {
                         point.remove();
-                        createDataPoint(container);
-                    }, Math.random() * 2000 + 2000);
+                    }, 4000);
                 }
+                
+                // Initial points
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(createPoint, i * 800);
+                }
+                
+                // Continuous generation
+                setInterval(createPoint, 2000 + (index * 300));
             });
         }
         
@@ -569,140 +716,75 @@
             const cards = document.querySelectorAll('.card');
             
             cards.forEach(card => {
+                let particleInterval;
+                
+                card.addEventListener('mouseenter', () => {
+                    particleInterval = setInterval(() => {
+                        createParticle(card);
+                    }, 100);
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    clearInterval(particleInterval);
+                });
+                
                 card.addEventListener('mousemove', (e) => {
-                    createParticle(e, card);
+                    if (Math.random() > 0.7) createParticle(e, card);
                 });
             });
             
             function createParticle(e, parent) {
-                const x = e.clientX - parent.getBoundingClientRect().left;
-                const y = e.clientY - parent.getBoundingClientRect().top;
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
                 
-                for (let i = 0; i < 3; i++) {
-                    const particle = document.createElement('div');
-                    particle.classList.add('particle');
-                    particle.style.left = x + 'px';
-                    particle.style.top = y + 'px';
-                    
-                    const size = Math.random() * 3 + 1;
-                    particle.style.width = size + 'px';
-                    particle.style.height = size + 'px';
-                    
-                    const destinationX = x + (Math.random() - 0.5) * 50;
-                    const destinationY = y + (Math.random() - 0.5) * 50;
-                    const duration = Math.random() * 1 + 0.5;
-                    const delay = Math.random() * 0.1;
-                    
-                    particle.style.opacity = Math.random() * 0.5 + 0.3;
-                    
-                    particle.style.transition = `all ${duration}s ease-out ${delay}s`;
-                    parent.appendChild(particle);
-                    
-                    setTimeout(() => {
-                        particle.style.transform = `translate(${destinationX - x}px, ${destinationY - y}px)`;
-                        particle.style.opacity = '0';
-                    }, 10);
-                    
-                    setTimeout(() => {
-                        particle.remove();
-                    }, duration * 1000 + delay * 1000);
-                }
+                const rect = parent.getBoundingClientRect();
+                const x = e.clientX ? e.clientX - rect.left : Math.random() * rect.width;
+                const y = e.clientY ? e.clientY - rect.top : Math.random() * rect.height;
+                
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                
+                const destinationX = (Math.random() - 0.5) * 60;
+                const destinationY = (Math.random() - 0.5) * 60;
+                const duration = Math.random() * 1 + 0.5;
+                
+                particle.style.transition = `all ${duration}s ease-out`;
+                parent.appendChild(particle);
+                
+                requestAnimationFrame(() => {
+                    particle.style.transform = `translate(${destinationX}px, ${destinationY}px)`;
+                    particle.style.opacity = '0';
+                });
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
             }
         }
         
-        // Enhanced glow effect for highlights
-        function enhanceHighlights() {
-            const highlights = document.querySelectorAll('.highlight');
+        // 3D tilt effect for desktop cards
+        function initTiltEffect() {
+            if (window.matchMedia('(pointer: coarse)').matches) return;
             
-            highlights.forEach(highlight => {
-                highlight.addEventListener('mouseenter', () => {
-                    highlight.style.textShadow = '0 0 8px rgba(3, 252, 244, 0.7)';
-                    
-                    // Create pulsing glow effect
-                    const glowEffect = document.createElement('div');
-                    glowEffect.style.position = 'absolute';
-                    glowEffect.style.top = '-10px';
-                    glowEffect.style.left = '-10px';
-                    glowEffect.style.right = '-10px';
-                    glowEffect.style.bottom = '-10px';
-                    glowEffect.style.borderRadius = '50%';
-                    glowEffect.style.background = 'radial-gradient(circle, rgba(3,252,244,0.2) 0%, transparent 70%)';
-                    glowEffect.style.transform = 'scale(0.5)';
-                    glowEffect.style.opacity = '0';
-                    glowEffect.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    glowEffect.style.zIndex = '-1';
-                    
-                    highlight.style.position = 'relative';
-                    highlight.appendChild(glowEffect);
-                    
-                    setTimeout(() => {
-                        glowEffect.style.transform = 'scale(1)';
-                        glowEffect.style.opacity = '1';
-                    }, 10);
-                });
-                
-                highlight.addEventListener('mouseleave', () => {
-                    highlight.style.textShadow = 'none';
-                    
-                    const glowEffect = highlight.querySelector('div');
-                    if (glowEffect) {
-                        glowEffect.style.transform = 'scale(1.5)';
-                        glowEffect.style.opacity = '0';
-                        
-                        setTimeout(() => {
-                            glowEffect.remove();
-                        }, 500);
-                    }
-                });
-            });
-        }
-        
-        // Card enhanced hover effects
-        function enhanceCardEffects() {
             const cards = document.querySelectorAll('.card');
             
             cards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    // Intensify data line animation
-                    const dataLine = card.querySelector('.data-line');
-                    if (dataLine) {
-                        dataLine.style.animation = 'dataLine 3s infinite linear';
-                        dataLine.style.opacity = '1';
-                    }
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
                     
-                    // Create more data points
-                    const dataPointsContainer = card.querySelector('.data-points');
-                    if (dataPointsContainer) {
-                        for (let i = 0; i < 3; i++) {
-                            createEnhancedDataPoint(dataPointsContainer);
-                        }
-                    }
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
                     
-                    function createEnhancedDataPoint(container) {
-                        const point = document.createElement('div');
-                        point.classList.add('data-point');
-                        
-                        const x = Math.random() * 100;
-                        const y = Math.random() * 100;
-                        
-                        point.style.left = x + '%';
-                        point.style.top = y + '%';
-                        point.style.animation = `pulsePoint ${Math.random() * 1.5 + 1}s forwards`;
-                        
-                        container.appendChild(point);
-                        
-                        setTimeout(() => {
-                            point.remove();
-                        }, 1500);
-                    }
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
                 });
                 
                 card.addEventListener('mouseleave', () => {
-                    // Reset data line animation
-                    const dataLine = card.querySelector('.data-line');
-                    if (dataLine) {
-                        dataLine.style.animation = 'dataLine 6s infinite linear';
-                    }
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
                 });
             });
         }
@@ -713,8 +795,17 @@
             createFloatingData();
             createDataPoints();
             createParticleEffect();
-            enhanceHighlights();
-            enhanceCardEffects();
+            initTiltEffect();
+        });
+        
+        // Handle resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                document.getElementById('chartBg').innerHTML = '';
+                createChartBackground();
+            }, 250);
         });
     </script>
 </body>
