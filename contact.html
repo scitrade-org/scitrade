@@ -2,27 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Contact Us - SciTrade</title>
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/scitradelogotransp.png">
-    <!-- Import fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --cyan: #00ffff;
-            --dark-cyan: #03c9c2;
-            --white: #ffffff;
+            --cyan-muted: #3ab8b8;
+            --purple-muted: #7b5ea7;
+            --cyan-dim: rgba(58, 184, 184, 0.12);
+            --purple-dim: rgba(123, 94, 167, 0.12);
             --black: #000000;
-            --transparent-black: rgba(0, 0, 0, 0.7);
-            --red: #03fcf4;
+            --white: #ffffff;
             --gray-bg: #0a0a0a;
-            --purple: #9d00ff;
-            --blue: #0066ff;
-            --green: #00ff88;
+            --card-bg: #0c0c0c;
         }
         
         * {
@@ -31,51 +27,41 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: auto;
+        }
+        
         body {
             background-color: var(--black);
             overflow-x: hidden;
-            perspective: 1px;
             width: 100%;
             font-family: 'Roboto', sans-serif;
         }
 
-        /* Custom Scrollbar - LARGER with better hover */
         ::-webkit-scrollbar {
-            width: 14px;
-            height: 14px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
             background: var(--black);
-            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, var(--red), var(--cyan), var(--purple));
+            background: #1a1a1a;
             border-radius: 5px;
-            border: 2px solid var(--black);
-            transition: all 0.3s ease;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, var(--cyan), var(--red), var(--blue));
-            box-shadow: 0 0 15px rgba(3, 252, 244, 0.9);
-            transform: scale(1.05);
+            background: #2a2a2a;
         }
 
-        /* Firefox scrollbar */
         * {
             scrollbar-width: thin;
-            scrollbar-color: var(--red) var(--black);
+            scrollbar-color: #1a1a1a var(--black);
         }
 
         ::selection {
-            background: #03fcf4;
-            color: var(--black);
-        }
-
-        ::-moz-selection {
-            background: #03fcf4;
+            background: var(--cyan-muted);
             color: var(--black);
         }
 
@@ -88,18 +74,14 @@
             padding: 15px 0;
             z-index: 1000;
             background-color: transparent;
-            transition: all 0.3s ease;
-            font-family: 'Rajdhani', sans-serif !important;
-        }
-
-        .sci-navbar * {
-            font-family: 'Rajdhani', sans-serif !important;
+            transition: background 0.25s ease, padding 0.25s ease;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .sci-navbar.scrolled {
             padding: 10px 0;
-            background-color: rgba(10, 10, 10, 0.98);
-            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.15);
+            background: rgba(8, 8, 8, 0.98);
+            border-bottom: 1px solid #1a1a1a;
         }
 
         .sci-nav-container {
@@ -107,120 +89,79 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         .sci-logo-container {
             display: flex;
             align-items: center;
-            margin-right: auto;
         }
 
         .sci-logo {
-            height: 40px;
-            transition: transform 0.3s ease;
+            height: 36px;
+            transition: opacity 0.2s ease;
         }
 
         .sci-logo:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.9));
+            opacity: 0.8;
         }
 
         .sci-brand-name {
-            font-family: 'Rajdhani', sans-serif !important;
+            font-family: 'Rajdhani', sans-serif;
             font-size: 18px;
             font-weight: 500;
             text-decoration: none;
             color: var(--white);
             margin-left: 12px;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
+            transition: color 0.2s ease;
         }
 
         .sci-logo-container:hover .sci-brand-name {
-            color: var(--cyan);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            color: var(--cyan-muted);
         }
 
         .sci-nav-links {
             display: flex;
             list-style: none;
-            gap: 10px;
-            margin-left: auto;
-        }
-
-        .sci-nav-item {
-            font-family: 'Rajdhani', sans-serif !important;
+            gap: 8px;
         }
 
         .sci-nav-link {
             position: relative;
             padding: 8px 16px;
-            color: var(--white);
+            color: #c0c0c0;
             text-decoration: none;
             letter-spacing: 1px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 400;
-            transition: all 0.3s ease;
-            font-family: 'Rajdhani', sans-serif !important;
-        }
-
-        .sci-nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--red), var(--cyan));
-            transition: width 0.3s ease, left 0.3s ease;
-            transform: translateX(-50%);
+            transition: color 0.2s ease;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .sci-nav-link:hover {
-            color: var(--cyan);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .sci-nav-link:hover::after {
-            width: calc(100% - 32px);
-            left: 50%;
+            color: var(--cyan-muted);
         }
 
         .sci-nav-link.active {
-            color: var(--cyan);
-        }
-
-        .sci-nav-link.active::after {
-            width: calc(100% - 32px);
-            left: 50%;
+            color: var(--cyan-muted);
+            border-bottom: 1px solid var(--cyan-dim);
         }
 
         .sci-mobile-toggle {
             display: none;
-            cursor: pointer;
             background: none;
             border: none;
-            color: var(--white);
-            font-size: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .sci-mobile-toggle:hover {
-            color: var(--cyan);
-            transform: scale(1.1);
+            cursor: pointer;
+            padding: 8px;
         }
 
         .sci-hamburger {
-            width: 30px;
-            height: 20px;
+            width: 24px;
+            height: 18px;
             position: relative;
-            margin: 0 auto;
-            transform: rotate(0deg);
-            transition: .5s ease-in-out;
-            cursor: pointer;
         }
 
         .sci-hamburger span {
@@ -228,58 +169,41 @@
             position: absolute;
             height: 2px;
             width: 100%;
-            background: var(--white);
-            border-radius: 9px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
-            transition: .25s ease-in-out;
+            background: #c0c0c0;
+            border-radius: 2px;
+            transition: 0.2s ease;
         }
 
-        .sci-hamburger span:nth-child(1) {
-            top: 0px;
-        }
+        .sci-hamburger span:nth-child(1) { top: 0; }
+        .sci-hamburger span:nth-child(2), 
+        .sci-hamburger span:nth-child(3) { top: 8px; }
+        .sci-hamburger span:nth-child(4) { top: 16px; }
 
-        .sci-hamburger span:nth-child(2),
-        .sci-hamburger span:nth-child(3) {
-            top: 9px;
-        }
-
-        .sci-hamburger span:nth-child(4) {
-            top: 18px;
-        }
-
-        .sci-hamburger.open span:nth-child(1) {
-            top: 9px;
-            width: 0%;
-            left: 50%;
+        .sci-hamburger.open span:nth-child(1),
+        .sci-hamburger.open span:nth-child(4) {
+            opacity: 0;
         }
 
         .sci-hamburger.open span:nth-child(2) {
             transform: rotate(45deg);
-            background: var(--cyan);
+            background: var(--cyan-muted);
         }
 
         .sci-hamburger.open span:nth-child(3) {
             transform: rotate(-45deg);
-            background: var(--cyan);
-        }
-
-        .sci-hamburger.open span:nth-child(4) {
-            top: 9px;
-            width: 0%;
-            left: 50%;
+            background: var(--cyan-muted);
         }
 
         .sci-scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--purple), var(--blue), var(--cyan), var(--red));
+            height: 2px;
+            background: var(--cyan-muted);
             z-index: 1001;
             width: 0%;
             transition: width 0.1s ease;
+            box-shadow: 0 0 6px rgba(58, 184, 184, 0.4);
         }
         
         .container {
@@ -290,17 +214,16 @@
         .banner {
             position: relative;
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(157, 0, 255, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 20% 30%, var(--purple-dim) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--cyan-dim) 0%, transparent 50%),
                 url('https://raw.githubusercontent.com/scitrade-org/scitrade/main/assets/contactpagebackground.png') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
         
         .banner::before {
@@ -310,7 +233,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.3) 100%);
+            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.3) 100%);
             z-index: 1;
         }
         
@@ -321,21 +244,15 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
             animation: shine 8s infinite;
             z-index: 1;
         }
         
         @keyframes shine {
-            0% {
-                left: -100%;
-            }
-            20% {
-                left: 100%;
-            }
-            100% {
-                left: 100%;
-            }
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
         }
         
         .header {
@@ -345,89 +262,44 @@
             position: relative;
             z-index: 2;
             width: 100%;
-            padding: 40px 20px;
+            padding: 100px 24px 40px;
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .title {
-            font-size: 4.5rem;
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             text-align: center;
-            position: relative;
-            letter-spacing: 4px;
-            animation: titleFadeIn 2s ease-out forwards, glow 3s ease-in-out infinite alternate;
+            letter-spacing: 3px;
             font-family: 'Oswald', sans-serif;
             color: var(--white);
-            font-weight: 300;
-            line-height: 1.1;
+            font-weight: 400;
+            line-height: 1.2;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            animation: titleGlow 3s ease-in-out infinite alternate;
         }
         
-        @keyframes titleFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        @keyframes glow {
-            0% {
-                text-shadow: 0 0 20px rgba(3, 252, 244, 0.5),
-                             0 0 40px rgba(3, 252, 244, 0.3);
-            }
-            100% {
-                text-shadow: 0 0 30px rgba(3, 252, 244, 0.8),
-                             0 0 60px rgba(3, 252, 244, 0.5),
-                             0 0 80px rgba(3, 252, 244, 0.3);
-            }
-        }
-        
-        .title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--purple), var(--blue), var(--cyan), var(--red));
-            transition: width 0.5s ease;
-            box-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
-            border-radius: 2px;
-        }
-        
-        .title:hover::after {
-            width: 300px;
-            box-shadow: 0 0 25px rgba(3, 252, 244, 0.9);
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 15px rgba(58, 184, 184, 0.2), 0 2px 20px rgba(0, 0, 0, 0.5); }
+            100% { text-shadow: 0 0 25px rgba(58, 184, 184, 0.4), 0 2px 20px rgba(0, 0, 0, 0.5); }
         }
         
         .subtitle {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
             text-align: center;
             margin-bottom: 40px;
             max-width: 800px;
-            opacity: 0;
-            animation: subtitleFadeIn 2s ease-out 0.5s forwards;
             font-family: 'Roboto', sans-serif;
-            color: var(--white);
+            color: #d0d0d0;
             font-weight: 300;
             line-height: 1.6;
-            position: relative;
-            z-index: 2;
-        }
-        
-        @keyframes subtitleFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
         }
         
         .scroll-down {
@@ -440,40 +312,34 @@
             align-items: center;
             z-index: 2;
             cursor: pointer;
-            animation: bounce 2s infinite;
             text-decoration: none;
         }
         
         .scroll-down span {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            letter-spacing: 3px;
             font-family: 'Oswald', sans-serif;
-            color: var(--white);
-            font-weight: 300;
-            transition: all 0.3s ease;
+            color: #b0b0b0;
+            transition: color 0.2s ease;
         }
         
         .scroll-down i {
-            width: 30px;
-            height: 50px;
-            border: 2px solid var(--white);
-            border-radius: 15px;
+            width: 28px;
+            height: 46px;
+            border: 1px solid #505050;
+            border-radius: 14px;
             position: relative;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(3, 252, 244, 0.3);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
         
         .scroll-down:hover i {
-            border-color: var(--red);
-            box-shadow: 0 0 20px rgba(3, 252, 244, 0.7);
-            transform: scale(1.1);
+            border-color: var(--cyan-muted);
+            box-shadow: 0 0 12px rgba(58, 184, 184, 0.2);
         }
         
         .scroll-down:hover span {
-            color: var(--red);
-            text-shadow: 0 0 8px rgba(3, 252, 244, 0.7);
-            transform: translateY(-2px);
+            color: var(--cyan-muted);
         }
         
         .scroll-down i::before {
@@ -481,68 +347,34 @@
             position: absolute;
             top: 8px;
             left: 50%;
-            width: 6px;
-            height: 6px;
-            background: linear-gradient(45deg, var(--cyan), var(--red));
+            width: 4px;
+            height: 4px;
+            background: var(--cyan-muted);
             border-radius: 50%;
             transform: translateX(-50%);
-            animation: scrollDown 2s infinite;
+            animation: scrollDot 2s infinite;
+            box-shadow: 0 0 6px var(--cyan-muted);
         }
         
-        .scroll-down:hover i::before {
-            background: linear-gradient(45deg, var(--red), var(--cyan));
-        }
-        
-        @keyframes scrollDown {
-            0% {
-                transform: translate(-50%, 0);
-                opacity: 1;
-            }
-            80% {
-                transform: translate(-50%, 25px);
-                opacity: 0;
-            }
-            100% {
-                transform: translate(-50%, 0);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) translateX(-50%);
-            }
-            40% {
-                transform: translateY(-10px) translateX(-50%);
-            }
-            60% {
-                transform: translateY(-5px) translateX(-50%);
-            }
+        @keyframes scrollDot {
+            0% { transform: translate(-50%, 0); opacity: 1; }
+            80% { transform: translate(-50%, 20px); opacity: 0; }
+            100% { transform: translate(-50%, 0); opacity: 0; }
         }
         
         .content-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 60px 20px;
+            padding: 60px 24px 30px;
             background-color: var(--black);
             position: relative;
         }
         
-        .content-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--cyan), var(--red), var(--purple), transparent);
-        }
-        
         .section {
-            margin-bottom: 80px;
+            margin-bottom: 70px;
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(24px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
         .section.visible {
@@ -551,321 +383,163 @@
         }
         
         .section-title {
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             text-transform: uppercase;
-            margin-bottom: 30px;
-            position: relative;
+            margin-bottom: 28px;
             display: inline-block;
             letter-spacing: 2px;
             font-family: 'Oswald', sans-serif;
             color: var(--white);
-            font-weight: 300;
-            line-height: 1.2;
-            animation: textGlow 4s ease-in-out infinite alternate;
-        }
-        
-        @keyframes textGlow {
-            0% {
-                text-shadow: 0 0 10px rgba(3, 252, 244, 0.3);
-            }
-            100% {
-                text-shadow: 0 0 20px rgba(3, 252, 244, 0.6);
-            }
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--red), var(--cyan), var(--blue));
-            transition: width 0.5s ease;
-            border-radius: 2px;
-        }
-        
-        .section-title:hover::after {
-            width: 100%;
-            box-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
+            font-weight: 400;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 12px;
         }
         
         .contact-form {
-            background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.9));
-            padding: 50px;
-            border-radius: 15px;
-            border-left: 4px solid var(--red);
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .contact-form::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(3, 252, 244, 0.05), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.8s ease;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid #181818;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
         }
         
         .contact-form:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(3, 252, 244, 0.3);
-            background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.95));
-        }
-        
-        .contact-form:hover::before {
-            transform: translateX(100%);
-        }
-        
-        .contact-form::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--red), var(--cyan), var(--blue), var(--purple));
-            z-index: -1;
-            border-radius: 16px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        .contact-form:hover::after {
-            opacity: 1;
-            animation: rotate 4s linear infinite;
-        }
-        
-        @keyframes rotate {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-            100% {
-                filter: hue-rotate(360deg);
-            }
+            border-color: var(--cyan-dim);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
         }
         
         .form-group {
-            margin-bottom: 25px;
-            position: relative;
+            margin-bottom: 24px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-size: 1rem;
             font-family: 'Roboto', sans-serif;
-            color: #e0e0e0;
+            color: #c0c0c0;
             font-weight: 400;
-            transition: color 0.3s ease;
         }
         
         .form-control {
             width: 100%;
-            padding: 18px;
-            background-color: rgba(15, 15, 15, 0.8);
-            border: 1px solid #333;
+            padding: 14px 16px;
+            background-color: #0a0a0a;
+            border: 1px solid #222;
             color: var(--white);
-            font-size: 1.1rem;
-            border-radius: 8px;
-            transition: all 0.4s ease;
+            font-size: 1rem;
+            border-radius: 6px;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
             font-family: 'Roboto', sans-serif;
         }
         
         .form-control:focus {
             outline: none;
-            border-color: var(--red);
-            box-shadow: 0 0 0 3px rgba(3, 252, 244, 0.2),
-                        0 0 20px rgba(3, 252, 244, 0.5);
-            background-color: rgba(25, 25, 25, 0.9);
-            transform: translateY(-2px);
-        }
-        
-        .form-control:focus + .focus-border {
-            transform: scaleX(1);
-            opacity: 1;
-        }
-        
-        .focus-border {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--red), var(--cyan));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease, opacity 0.4s ease;
-            opacity: 0;
+            border-color: var(--cyan-muted);
+            box-shadow: 0 0 0 2px rgba(58, 184, 184, 0.1);
         }
         
         textarea.form-control {
-            min-height: 180px;
+            min-height: 150px;
             resize: vertical;
         }
         
         .btn {
             display: inline-block;
-            padding: 18px 50px;
-            background: linear-gradient(45deg, var(--red), var(--cyan));
-            color: var(--black);
+            padding: 14px 40px;
+            background: transparent;
+            color: var(--cyan-muted);
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            margin-top: 30px;
-            border: none;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-top: 16px;
+            border: 1px solid var(--cyan-muted);
             cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            border-radius: 50px;
+            transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+            border-radius: 4px;
             font-family: 'Oswald', sans-serif;
             font-weight: 400;
-            box-shadow: 0 5px 15px rgba(3, 252, 244, 0.4);
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s ease;
         }
         
         .btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(3, 252, 244, 0.6);
-            letter-spacing: 3px;
-            background: linear-gradient(45deg, var(--cyan), var(--red));
+            background: var(--cyan-muted);
+            color: var(--black);
+            box-shadow: 0 0 20px rgba(58, 184, 184, 0.3);
         }
         
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn:active {
-            transform: translateY(-1px) scale(1.02);
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
         
         .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 32px;
         }
         
         .contact-card {
-            flex: 1 1 300px;
-            background: linear-gradient(145deg, rgba(20, 20, 20, 0.9), rgba(30, 30, 30, 0.9));
-            border-left: 4px solid var(--red);
-            padding: 35px;
-            border-radius: 15px;
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(3, 252, 244, 0.05), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
+            background: var(--card-bg);
+            border: 1px solid #181818;
+            border-radius: 10px;
+            padding: 32px 24px;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
         }
         
         .contact-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 20px 40px rgba(3, 252, 244, 0.3);
-            background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.95));
-        }
-        
-        .contact-card:hover::before {
-            transform: translateX(100%);
+            border-color: var(--cyan-dim);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            transform: translateY(-3px);
         }
         
         .contact-card i {
-            font-size: 3rem;
-            color: var(--red);
+            font-size: 2.2rem;
+            color: var(--cyan-muted);
             margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-card:hover i {
-            transform: scale(1.2) rotate(5deg);
-            color: var(--cyan);
         }
         
         .contact-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
             font-family: 'Oswald', sans-serif;
             color: var(--white);
-            font-weight: 300;
+            font-weight: 400;
         }
         
         .contact-card p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.6;
             font-family: 'Roboto', sans-serif;
-            color: #e0e0e0;
+            color: #a8a8a8;
             font-weight: 300;
         }
         
         .contact-card a {
-            color: #e0e0e0;
+            color: #a8a8a8;
             text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .contact-card a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, var(--red), var(--cyan));
-            transition: width 0.3s ease;
+            transition: color 0.2s ease;
         }
         
         .contact-card a:hover {
-            color: var(--cyan);
-            text-shadow: 0 0 10px rgba(3, 252, 244, 0.5);
-        }
-        
-        .contact-card a:hover::after {
-            width: 100%;
+            color: var(--cyan-muted);
         }
         
         .parallax-section {
             position: relative;
-            height: 400px;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
+            height: 350px;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--purple-dim) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--cyan-dim) 0%, transparent 50%),
+                url('https://raw.githubusercontent.com/scitrade-org/scitrade/main/assets/contactpagebackground.png') no-repeat center center;
             background-size: cover;
-            margin: 60px 0 40px;
+            background-attachment: fixed;
+            margin: 50px 0 30px;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            border-radius: 15px;
+            border-radius: 10px;
         }
         
         .parallax-content {
@@ -875,8 +549,8 @@
             padding: 40px;
             max-width: 900px;
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         
         .parallax-content.visible {
@@ -891,171 +565,52 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.9) 100%);
+            background: rgba(0, 0, 0, 0.75);
             z-index: 1;
-        }
-        
-        .parallax-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(3, 252, 244, 0.1), rgba(157, 0, 255, 0.1));
-            z-index: 1;
-            opacity: 0.5;
-        }
-        
-        .parallax-title {
-            font-size: 3rem;
-            margin-bottom: 25px;
-            position: relative;
-            display: inline-block;
-            font-family: 'Oswald', sans-serif;
-            color: var(--white);
-            font-weight: 300;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        .parallax-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--red), var(--cyan));
-            transition: width 0.5s ease;
-            border-radius: 2px;
-        }
-        
-        .parallax-title:hover::after {
-            width: 80%;
-            box-shadow: 0 0 15px rgba(3, 252, 244, 0.7);
-        }
-        
-        .parallax-text {
-            font-size: 1.3rem;
-            line-height: 1.6;
-            font-family: 'Roboto', sans-serif;
-            color: #e0e0e0;
-            font-weight: 300;
-        }
-        
-        .moving-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(157, 0, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.05) 0%, transparent 50%);
-            opacity: 0.8;
-            z-index: -1;
-        }
-        
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background-color: var(--red);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float 15s linear infinite;
-        }
-        
-        .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            height: 60px;
-            background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(20,20,20,0.9));
-            margin-top: 60px;
-            position: relative;
             border-radius: 10px;
         }
         
-        .ticker-wrap::before, .ticker-wrap::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 150px;
-            height: 100%;
-            z-index: 2;
-        }
-        
-        .ticker-wrap::before {
-            left: 0;
-            background: linear-gradient(to right, var(--black), transparent);
-        }
-        
-        .ticker-wrap::after {
-            right: 0;
-            background: linear-gradient(to left, var(--black), transparent);
-        }
-        
-        .ticker {
-            display: inline-block;
-            white-space: nowrap;
-            padding-right: 100%;
-            animation: ticker 40s linear infinite;
-        }
-        
-        .ticker-item {
-            display: inline-block;
-            padding: 0 40px;
-            font-size: 1.3rem;
-            color: var(--white);
+        .parallax-title {
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            margin-bottom: 20px;
             font-family: 'Oswald', sans-serif;
+            color: var(--white);
+            font-weight: 400;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .parallax-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
+            color: #c8c8c8;
             font-weight: 300;
-            position: relative;
         }
         
-        .ticker-item::after {
-            content: '•';
-            color: var(--red);
-            margin-left: 40px;
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
         }
         
-        .ticker-item span {
-            background: linear-gradient(45deg, var(--red), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .hours-table tr {
+            border-bottom: 1px solid #1a1a1a;
         }
         
-        @keyframes ticker {
-            0% {
-                transform: translate3d(0, 0, 0);
-            }
-            100% {
-                transform: translate3d(-100%, 0, 0);
-            }
+        .hours-table tr:last-child {
+            border-bottom: none;
         }
-
-        /* Thank You Modal Styles */
+        
+        .hours-table td {
+            padding: 14px 0;
+            color: #b0b0b0;
+            font-size: 1rem;
+        }
+        
+        .hours-table td:last-child {
+            text-align: right;
+            color: var(--cyan-muted);
+        }
+        
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1063,13 +618,13 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
+            z-index: 2000;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.5s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
         
         .modal-overlay.show {
@@ -1078,198 +633,97 @@
         }
         
         .thank-you-modal {
-            background: linear-gradient(145deg, rgba(15, 15, 15, 0.95), rgba(25, 25, 25, 0.95));
-            border-left: 4px solid var(--red);
-            padding: 60px;
-            border-radius: 20px;
-            max-width: 700px;
+            background: var(--card-bg);
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 48px;
+            max-width: 500px;
             width: 90%;
             text-align: center;
-            position: relative;
-            transform: translateY(50px) scale(0.9);
-            transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 0 50px rgba(3, 252, 244, 0.5);
-            overflow: hidden;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
         }
         
         .modal-overlay.show .thank-you-modal {
-            transform: translateY(0) scale(1);
-        }
-        
-        .thank-you-modal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(3, 252, 244, 0.1), transparent);
-            transform: translateX(-100%);
-            animation: shine 3s ease-in-out infinite;
+            transform: translateY(0);
         }
         
         .thank-you-modal i {
-            font-size: 6rem;
-            background: linear-gradient(45deg, var(--red), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 30px;
-            animation: pulse 2s infinite, rotate 10s linear infinite;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 10px rgba(3, 252, 244, 0.5));
-            }
-            50% {
-                transform: scale(1.1);
-                filter: drop-shadow(0 0 20px rgba(3, 252, 244, 0.8));
-            }
-            100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 10px rgba(3, 252, 244, 0.5));
-            }
+            font-size: 4rem;
+            color: var(--cyan-muted);
+            margin-bottom: 24px;
         }
         
         .thank-you-modal h2 {
-            font-size: 3rem;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            font-size: 2.2rem;
+            margin-bottom: 16px;
             font-family: 'Oswald', sans-serif;
             color: var(--white);
-            font-weight: 300;
-            animation: textGlow 3s ease-in-out infinite alternate;
+            font-weight: 400;
         }
         
         .thank-you-modal p {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 32px;
             font-family: 'Roboto', sans-serif;
-            color: #e0e0e0;
-            font-weight: 300;
+            color: #b0b0b0;
         }
         
         .close-modal {
             display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, var(--red), var(--cyan));
-            color: var(--black);
-            text-decoration: none;
+            padding: 12px 36px;
+            background: transparent;
+            color: var(--cyan-muted);
+            border: 1px solid var(--cyan-muted);
+            border-radius: 4px;
+            font-size: 1rem;
             text-transform: uppercase;
-            font-size: 1.2rem;
             letter-spacing: 2px;
-            border: none;
             cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            border-radius: 50px;
+            transition: background 0.25s ease, color 0.25s ease;
             font-family: 'Oswald', sans-serif;
-            font-weight: 400;
-            box-shadow: 0 5px 15px rgba(3, 252, 244, 0.4);
         }
         
         .close-modal:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(3, 252, 244, 0.6);
-            letter-spacing: 3px;
-            background: linear-gradient(45deg, var(--cyan), var(--red));
-        }
-        
-        /* Business Hours Table */
-        .hours-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 20px;
-        }
-        
-        .hours-table tr {
-            transition: all 0.3s ease;
-        }
-        
-        .hours-table tr:hover {
-            background: rgba(3, 252, 244, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .hours-table td {
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .hours-table tr:hover td {
-            color: var(--cyan);
-            border-bottom-color: var(--red);
-        }
-        
-        .hours-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .hours-table td:first-child {
-            text-align: left;
-            font-weight: 500;
-        }
-        
-        .hours-table td:last-child {
-            text-align: right;
-            font-weight: 400;
+            background: var(--cyan-muted);
+            color: var(--black);
         }
 
-        /* Footer Container */
         .footer-container {
             width: 100%;
             margin: 0;
             padding: 0;
-            border: 0;
-            position: relative;
-        }
-        
-        .footer-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--cyan), var(--red), var(--purple), transparent);
-            z-index: 1;
+            background: #080808;
+            border-top: 1px solid #151515;
         }
         
         .footer-container iframe {
             width: 100%;
-            height: 500px;
+            height: 480px;
             border: none;
-            overflow: hidden;
             display: block;
-            margin: 0;
-            padding: 0;
         }
 
-        /* Responsive Design */
+        /* Mobile Styles */
         @media screen and (max-width: 768px) {
+            .sci-nav-container {
+                padding: 0 20px;
+            }
+
             .sci-nav-links {
                 position: fixed;
-                top: 70px;
+                top: 66px;
                 left: 0;
                 width: 100%;
                 flex-direction: column;
                 align-items: center;
-                background-color: rgba(0, 0, 0, 0.98);
+                background: #080808;
                 padding: 20px 0;
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-                transition: clip-path 0.5s ease-in-out;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+                transition: clip-path 0.3s ease;
                 gap: 0;
                 z-index: 999;
+                border-bottom: 1px solid #151515;
             }
 
             .sci-nav-links.open {
@@ -1283,21 +737,14 @@
 
             .sci-nav-link {
                 display: block;
-                padding: 18px 0;
-                font-size: 22px;
+                padding: 16px 0;
+                font-size: 20px;
                 width: 100%;
             }
 
-            .sci-nav-link::after {
-                bottom: 5px;
-            }
-
-            .sci-nav-link:hover::after {
-                width: 50%;
-            }
-
-            .sci-nav-link:hover {
-                background-color: rgba(0, 255, 255, 0.1);
+            .sci-nav-link.active {
+                border-bottom: none;
+                background: rgba(58, 184, 184, 0.05);
             }
 
             .sci-mobile-toggle {
@@ -1305,117 +752,86 @@
             }
 
             .banner {
-                height: 80vh;
+                min-height: 90vh;
+                background-attachment: scroll;
             }
 
-            .title {
-                font-size: 3rem;
-            }
-
-            .subtitle {
-                font-size: 1.3rem;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
+            .header {
+                padding: 80px 20px 40px;
             }
 
             .contact-info {
-                flex-direction: column;
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
             .parallax-section {
                 background-attachment: scroll;
                 height: 300px;
-                margin: 40px 0 30px;
-            }
-
-            .parallax-title {
-                font-size: 2.2rem;
-            }
-
-            .parallax-text {
-                font-size: 1.1rem;
-            }
-
-            .thank-you-modal {
-                padding: 40px;
-            }
-
-            .thank-you-modal h2 {
-                font-size: 2.2rem;
-            }
-
-            .thank-you-modal p {
-                font-size: 1.2rem;
+                margin: 40px 0 20px;
             }
 
             .content-container {
-                padding: 40px 40px 15px;
+                padding: 40px 20px 20px;
             }
             
             .footer-container iframe {
-                height: 450px;
+                height: 520px;
             }
             
             .contact-form {
-                padding: 30px;
+                padding: 28px;
+            }
+            
+            .thank-you-modal {
+                padding: 36px;
             }
         }
 
         @media screen and (max-width: 480px) {
             .content-container {
-                padding: 30px 30px 10px;
+                padding: 30px 16px 15px;
             }
             
             .banner {
-                height: 70vh;
-            }
-            
-            .title {
-                font-size: 2.2rem;
-            }
-            
-            .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .btn, .close-modal {
-                padding: 15px 35px;
-                font-size: 1.1rem;
-            }
-            
-            .footer-container iframe {
-                height: 400px;
+                min-height: 85vh;
             }
             
             .contact-form {
                 padding: 20px;
             }
             
+            .footer-container iframe {
+                height: 560px;
+            }
+            
+            .section {
+                margin-bottom: 50px;
+            }
+            
             .thank-you-modal {
-                padding: 30px;
+                padding: 28px;
             }
             
             .thank-you-modal h2 {
                 font-size: 1.8rem;
             }
+        }
+
+        @media screen and (min-width: 1400px) {
+            .content-container {
+                max-width: 1300px;
+            }
             
-            .thank-you-modal p {
-                font-size: 1.1rem;
+            .sci-nav-container {
+                max-width: 1500px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Scroll Progress Bar -->
     <div class="sci-scroll-progress" id="scrollProgress"></div>
     
-    <!-- Navigation Bar -->
     <nav class="sci-navbar" id="sciNavbar">
         <div class="sci-nav-container">
             <div class="sci-logo-container">
@@ -1450,11 +866,7 @@
             </button>
         </div>
     </nav>
-
-    <div class="moving-bg"></div>
-    <div class="particles" id="particles"></div>
     
-    <!-- Thank You Modal -->
     <div class="modal-overlay" id="thankYouModal">
         <div class="thank-you-modal">
             <i class="fas fa-check-circle"></i>
@@ -1467,11 +879,11 @@
     <div class="container">
         <div class="banner">
             <div class="header">
-                <h1 class="title">Contact <span style="background: linear-gradient(45deg, var(--red), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">SciTrade</span></h1>
+                <h1 class="title">Contact <span style="color: var(--cyan-muted);">SciTrade</span></h1>
                 <p class="subtitle">Get in touch with our team for any questions or inquiries about our trading solutions and services</p>
             </div>
             <a href="#section1" class="scroll-down" id="scrollDown">
-                <span>SCROLL DOWN</span>
+                <span>SCROLL</span>
                 <i></i>
             </a>
         </div>
@@ -1483,31 +895,27 @@
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
-                        <div class="focus-border"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
                         <input type="email" class="form-control" id="email" name="email" required>
-                        <div class="focus-border"></div>
                     </div>
                     <div class="form-group">
                         <label for="subject">Subject</label>
                         <input type="text" class="form-control" id="subject" name="subject" required>
-                        <div class="focus-border"></div>
                     </div>
                     <div class="form-group">
                         <label for="message">Your Message</label>
                         <textarea class="form-control" id="message" name="message" required></textarea>
-                        <div class="focus-border"></div>
                     </div>
                     <button type="submit" class="btn" id="submitBtn">Send Message</button>
                 </form>
             </div>
             
-            <div class="parallax-section" style="background-image: url('https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/SciTadeBanner.png')">
+            <div class="parallax-section">
                 <div class="parallax-content">
                     <h2 class="parallax-title">Need Assistance?</h2>
-                    <p class="parallax-text">Our dedicated support team is here to answer any questions you may have about our trading solutions, services, or collaborative opportunities. We pride ourselves on quick response times and expert guidance.</p>
+                    <p class="parallax-text">Our dedicated support team is here to answer any questions you may have about our trading solutions, services, or collaborative opportunities.</p>
                 </div>
             </div>
             
@@ -1532,466 +940,212 @@
                 </div>
             </div>
             
-            <div class="parallax-section" style="background-image: url('https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/SciTadeBanner.png')">
+            <div class="parallax-section">
                 <div class="parallax-content">
                     <h2 class="parallax-title">How Can We Support You?</h2>
-                    <p class="parallax-text">Whether you're exploring our trading programs, services, or potential partnerships, our knowledgeable team is ready to provide the guidance you need to achieve your financial goals.</p>
+                    <p class="parallax-text">Whether you're exploring our trading programs, services, or potential partnerships, our knowledgeable team is ready to provide guidance.</p>
                 </div>
             </div>
             
             <div class="section" id="section3">
                 <h2 class="section-title">Business Hours</h2>
                 <div class="contact-card">
-                    <i class="fas fa-clock"></i>
+                    <i class="fas fa-clock" style="display: block; margin-bottom: 20px;"></i>
                     <table class="hours-table">
-                        <tr>
-                            <td>Monday</td>
-                            <td>24/7 Support Available</td>
-                        </tr>
-                        <tr>
-                            <td>Tuesday</td>
-                            <td>24/7 Support Available</td>
-                        </tr>
-                        <tr>
-                            <td>Wednesday</td>
-                            <td>24/7 Support Available</td>
-                        </tr>                        
-                        <tr>
-                            <td>Thursday</td>
-                            <td>24/7 Support Available</td>
-                        </tr>                
-                        <tr>
-                            <td>Friday</td>
-                            <td>24/7 Support Available</td>
-                        </tr>                        
-                        <tr>
-                            <td>Saturday</td>
-                            <td>24/7 Support Available</td>
-                        </tr>
-                        <tr>
-                            <td>Sunday</td>
-                            <td>24/7 Support Available</td>
-                        </tr>
+                        <tr><td>Monday</td><td>24/7 Support</td></tr>
+                        <tr><td>Tuesday</td><td>24/7 Support</td></tr>
+                        <tr><td>Wednesday</td><td>24/7 Support</td></tr>
+                        <tr><td>Thursday</td><td>24/7 Support</td></tr>
+                        <tr><td>Friday</td><td>24/7 Support</td></tr>
+                        <tr><td>Saturday</td><td>24/7 Support</td></tr>
+                        <tr><td>Sunday</td><td>24/7 Support</td></tr>
                     </table>
                 </div>
             </div>
             
-            <div class="parallax-section" style="background-image: url('https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/SciTadeBanner.png')">
+            <div class="parallax-section">
                 <div class="parallax-content">
                     <h2 class="parallax-title">We're Here to Help</h2>
-                    <p class="parallax-text">Our team is ready to assist you with any questions about our trading programs, services, or partnerships. Contact us today to start your journey with SciTrade.</p>
-                </div>
-            </div>            
-            
-            <div class="ticker-wrap">
-                <div class="ticker">
-                    <div class="ticker-item"><span>READY TO HELP 24/7</span></div>
-                    <div class="ticker-item"><span>FAST RESPONSE TIMES</span></div>
-                    <div class="ticker-item"><span>EXPERT TRADING SUPPORT</span></div>
-                    <div class="ticker-item"><span>DEDICATED ACCOUNT MANAGERS</span></div>
-                    <div class="ticker-item"><span>YOUR SUCCESS IS OUR PRIORITY</span></div>
+                    <p class="parallax-text">Our team is ready to assist you with any questions about our trading programs, services, or partnerships.</p>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Footer -->
     <div class="footer-container">
       <iframe src="https://scitrade.org/footer.html" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
     </div>
     
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobileToggle').addEventListener('click', function() {
+        (function() {
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobileToggle');
             const navLinks = document.getElementById('sciNavLinks');
             const hamburger = document.querySelector('.sci-hamburger');
-            navLinks.classList.toggle('open');
-            hamburger.classList.toggle('open');
-        });
+            
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('open');
+                    hamburger.classList.toggle('open');
+                });
+            }
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.sci-nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                const navLinks = document.getElementById('sciNavLinks');
-                const hamburger = document.querySelector('.sci-hamburger');
-                if (navLinks.classList.contains('open')) {
-                    navLinks.classList.remove('open');
-                    hamburger.classList.remove('open');
-                }
+            document.querySelectorAll('.sci-nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navLinks.classList.contains('open')) {
+                        navLinks.classList.remove('open');
+                        hamburger.classList.remove('open');
+                    }
+                });
             });
-        });
 
-        // Create enhanced floating particles
-        document.addEventListener('DOMContentLoaded', function() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 100;
-            const colors = ['#03fcf4', '#00ffff', '#9d00ff', '#0066ff', '#00ff88'];
+            // Navbar scroll effect
+            const navbar = document.getElementById('sciNavbar');
+            const scrollProgress = document.getElementById('scrollProgress');
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random position
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.top = Math.random() * 100 + 'vh';
-                
-                // Random size
-                const size = Math.random() * 8 + 2;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                
-                // Random color
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Random opacity
-                particle.style.opacity = Math.random() * 0.7 + 0.2;
-                
-                // Random animation
-                const duration = Math.random() * 25 + 15;
-                particle.style.animationDuration = duration + 's';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                
-                particlesContainer.appendChild(particle);
-            }
-        });
-        
-        // Smooth scroll with enhanced easing
-        function smoothScrollTo(targetPosition, duration) {
-            const startPosition = window.pageYOffset;
-            const distance = targetPosition - startPosition;
-            let startTime = null;
-            
-            function animation(currentTime) {
-                if (startTime === null) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const progress = Math.min(timeElapsed / duration, 1);
-                
-                // Enhanced easing function
-                const easeOutCubic = 1 - Math.pow(1 - progress, 3);
-                const easeProgress = easeOutCubic;
-                
-                window.scrollTo(0, startPosition + distance * easeProgress);
-                
-                if (timeElapsed < duration) {
-                    requestAnimationFrame(animation);
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
                 }
-            }
-            
-            requestAnimationFrame(animation);
-        }
-        
-        // Enhanced smooth scrolling
-        document.getElementById('scrollDown').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#section1') {
-                const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
-                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 30;
+                
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                scrollProgress.style.width = scrolled + '%';
+            });
+
+            // Smooth scroll function
+            function smoothScrollTo(target, offset = 0) {
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 800;
+                let startTime = null;
+                
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
                     
-                    smoothScrollTo(targetPosition, 1200);
+                    const easeInOutCubic = progress < 0.5 
+                        ? 4 * progress * progress * progress 
+                        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                    
+                    window.scrollTo(0, startPosition + distance * easeInOutCubic);
+                    
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
+                    }
                 }
-            }
-        });
-        
-        // Enhanced smooth scrolling for all anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
                 
-                const targetElement = document.querySelector(href);
-                if (targetElement) {
+                requestAnimationFrame(animation);
+            }
+
+            // Smooth scroll for scroll-down button
+            const scrollDownBtn = document.getElementById('scrollDown');
+            if (scrollDownBtn) {
+                scrollDownBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 30;
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        smoothScrollTo(targetSection, navbar.offsetHeight + 20);
+                    }
+                });
+            }
+
+            // Smooth scroll for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#' || href === '') return;
                     
-                    smoothScrollTo(targetPosition, 1000);
-                }
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        e.preventDefault();
+                        smoothScrollTo(targetElement, navbar.offsetHeight + 20);
+                    }
+                });
             });
-        });
-        
-        // Enhanced animation for sections
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
-            const parallaxContent = document.querySelectorAll('.parallax-content');
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -30px 0px'
+            };
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        
-                        // Add extra animation for form
-                        if (entry.target.id === 'section1') {
-                            const formElements = entry.target.querySelectorAll('.form-group');
-                            formElements.forEach((el, index) => {
-                                setTimeout(() => {
-                                    el.style.transform = 'translateX(0)';
-                                    el.style.opacity = '1';
-                                }, index * 100);
-                            });
-                        }
                     }
                 });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
+            }, observerOptions);
             
-            sections.forEach(section => {
-                observer.observe(section);
+            document.querySelectorAll('.section, .parallax-content').forEach(el => {
+                observer.observe(el);
             });
-            
-            parallaxContent.forEach(content => {
-                observer.observe(content);
-            });
-        });
-        
-        // Enhanced navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('sciNavbar');
-            const scrollProgress = document.getElementById('scrollProgress');
-            
-            // Add scrolled class to navbar with debounce
-            if (window.scrollY > 100) {
+
+            // Initialize navbar on load
+            if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
             }
             
-            // Update scroll progress bar with gradient movement
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            scrollProgress.style.width = scrolled + '%';
-            
-            // Enhanced parallax effect
-            const parallaxSections = document.querySelectorAll('.parallax-section');
-            const banner = document.querySelector('.banner');
-            const scrollPosition = window.pageYOffset;
-            
-            // Banner parallax with multiple layers
-            const bannerHeight = banner.offsetHeight;
-            if (scrollPosition <= bannerHeight) {
-                const yPos = scrollPosition * 0.3;
-                const xPos = scrollPosition * 0.1;
-                banner.style.backgroundPosition = `calc(50% + ${xPos}px) calc(top + ${yPos}px)`;
-            }
-            
-            // Enhanced particles movement
-            const particles = document.querySelectorAll('.particle');
-            particles.forEach(particle => {
-                const speed = parseFloat(particle.style.width) * 0.02;
-                const currentX = parseFloat(particle.style.left);
-                const currentY = parseFloat(particle.style.top);
-                
-                const newX = (currentX + scrollPosition * speed * 0.01 + Math.sin(scrollPosition * 0.001) * 5) % 100;
-                const newY = (currentY + scrollPosition * speed * 0.005) % 100;
-                
-                particle.style.left = newX + 'vw';
-                particle.style.top = newY + 'vh';
-            });
-        });
-        
-        // Enhanced form submission (NO EMAIL SENDING)
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            console.log("%c Form submitted - showing thank you message (no emails sent)", "color: #00ff88; font-weight: bold; font-size: 16px");
-            
-            const submitBtn = document.getElementById('submitBtn');
-            if (!submitBtn) {
-                console.error("Submit button not found");
-                return;
-            }
-            
-            // Disable button and show loading
-            submitBtn.disabled = true;
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            
-            // Create confetti effect
-            createConfetti();
-            
-            // Show success modal after delay (simulating processing)
             setTimeout(() => {
-                document.getElementById('thankYouModal').classList.add('show');
-                
-                // Reset form
-                document.getElementById('contactForm').reset();
-                
-                // Re-enable button
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-                
-                // Add success animation to form
-                const form = document.getElementById('contactForm');
-                form.style.animation = 'none';
-                setTimeout(() => {
-                    form.style.animation = 'pulse 0.5s ease';
-                }, 10);
-                
-                // Log success
-                console.log("%c ✔ Thank you message shown successfully", "color: #00ff88; font-weight: bold");
-            }, 1500); // Simulated processing time
-        });
-        
-        // Create confetti effect for form submission
-        function createConfetti() {
-            const confettiCount = 150;
-            const colors = ['#03fcf4', '#00ffff', '#9d00ff', '#0066ff', '#00ff88'];
-            
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('particle');
-                confetti.style.position = 'fixed';
-                confetti.style.zIndex = '9999';
-                
-                // Random position at top
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.top = '-10px';
-                
-                // Random size and shape
-                const size = Math.random() * 15 + 5;
-                confetti.style.width = size + 'px';
-                confetti.style.height = size + 'px';
-                
-                // Random shape
-                if (Math.random() > 0.5) {
-                    confetti.style.borderRadius = '50%';
-                } else {
-                    confetti.style.borderRadius = '2px';
-                }
-                
-                // Random color
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Random rotation
-                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                
-                // Animation
-                const duration = Math.random() * 3 + 2;
-                const delay = Math.random() * 0.5;
-                const xMovement = (Math.random() - 0.5) * 200;
-                
-                confetti.style.transition = `all ${duration}s cubic-bezier(0.1, 0.8, 0.3, 1) ${delay}s`;
-                document.body.appendChild(confetti);
-                
-                // Trigger animation
-                setTimeout(() => {
-                    confetti.style.transform = `translate(${xMovement}px, 100vh) rotate(${Math.random() * 720}deg)`;
-                    confetti.style.opacity = '0';
-                }, 10);
-                
-                // Remove after animation
-                setTimeout(() => {
-                    if (confetti.parentNode) {
-                        confetti.parentNode.removeChild(confetti);
+                document.querySelectorAll('.section, .parallax-content').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.85) {
+                        el.classList.add('visible');
                     }
-                }, (duration + delay) * 1000);
-            }
-        }
-        
-        // Close modal functionality
-        document.getElementById('closeModal').addEventListener('click', function() {
-            const modal = document.getElementById('thankYouModal');
-            modal.classList.remove('show');
+                });
+            }, 100);
             
-            // Scroll to top of form
-            setTimeout(() => {
-                const formSection = document.getElementById('section1');
-                const navbarHeight = document.getElementById('sciNavbar').offsetHeight;
-                const targetPosition = formSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 30;
-                smoothScrollTo(targetPosition, 800);
-            }, 300);
-        });
-        
-        // Close modal when clicking outside
-        document.getElementById('thankYouModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('show');
-            }
-        });
-        
-        // Close modal with ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
+            // Form submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                
+                setTimeout(() => {
+                    document.getElementById('thankYouModal').classList.add('show');
+                    document.getElementById('contactForm').reset();
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }, 1200);
+            });
+            
+            // Modal close
+            document.getElementById('closeModal').addEventListener('click', function() {
                 document.getElementById('thankYouModal').classList.remove('show');
-            }
-        });
-        
-        // Initialize navbar on load
-        window.addEventListener('load', function() {
-            const navbar = document.getElementById('sciNavbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            }
+            });
             
-            // Add initial animation to form
-            setTimeout(() => {
-                const formElements = document.querySelectorAll('.form-group');
-                formElements.forEach((el, index) => {
-                    el.style.transform = 'translateX(0)';
-                    el.style.opacity = '1';
+            document.getElementById('thankYouModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('show');
+                }
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.getElementById('thankYouModal').classList.remove('show');
+                }
+            });
+            
+            // Iframe detection
+            if (window.self !== window.top) {
+                document.querySelectorAll('a[href]').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('//') && !href.startsWith('#')) {
+                        link.setAttribute('target', '_top');
+                    }
                 });
-            }, 500);
-        });
-        
-        // Add hover effects to buttons
-        document.querySelectorAll('.btn, .close-modal').forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.05)';
-            });
-            
-            button.addEventListener('mouseleave', function() {
-                if (!this.disabled) {
-                    this.style.transform = 'translateY(0) scale(1)';
-                }
-            });
-        });
-        
-        // Add ripple effect to buttons
-        document.querySelectorAll('.btn, .close-modal').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.7);
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    pointer-events: none;
-                `;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-        
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
             }
-        `;
-        document.head.appendChild(style);
+        })();
     </script>
 </body>
 </html>
