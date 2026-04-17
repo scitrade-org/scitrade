@@ -3,28 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premium Trading Footer - SciTrade</title>
+  <title>Premium Trading Footer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --cyan: #00ffff;
-      --dark-cyan: #03c9c2;
-      --white: #ffffff;
+      --cyan-muted: #2d8f8f;
+      --purple-muted: #6b3f8f;
+      --cyan-dim: rgba(45, 143, 143, 0.2);
+      --purple-dim: rgba(107, 63, 143, 0.2);
       --black: #000000;
-      --purple: #9d00ff;
-      --blue: #0066ff;
-      --red: #03fcf4;
-      --green: #00ff88;
-      --orange: #ff7700;
-      --pink: #ff00ff;
-      --footer-bg: rgba(10, 10, 10, 0.98);
-      --footer-text: #ffffff;
-      --input-bg: rgba(255, 255, 255, 0.05);
-      --input-border: rgba(0, 255, 255, 0.2);
-      --accent-color: rgba(0, 255, 255, 0.1);
-      --transition-standard: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      --footer-bg: #080808;
     }
     
     * {
@@ -33,72 +24,35 @@
       box-sizing: border-box;
     }
     
-    /* GLOBAL FOCUS OUTLINE REMOVAL - HIGHEST PRIORITY */
-    *,
-    *::before,
-    *::after,
     *:focus,
     *:focus-visible,
-    *:focus-within,
-    *:active,
-    a,
-    a:focus,
-    a:focus-visible,
-    a:active,
-    button,
-    button:focus,
-    button:focus-visible,
-    button:active,
-    input,
-    input:focus,
-    input:focus-visible,
-    input:active {
+    *:active {
       outline: none !important;
-      outline-width: 0 !important;
-      outline-style: none !important;
-      outline-color: transparent !important;
       -webkit-tap-highlight-color: transparent !important;
     }
     
     body {
       font-family: 'Rajdhani', sans-serif;
-      background: linear-gradient(180deg, var(--black) 0%, #0a0a0a 50%, #000 100%);
-      color: var(--footer-text);
+      background: var(--black);
+      color: #ffffff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-end;
       line-height: 1.6;
       letter-spacing: 0.3px;
       overflow-x: hidden;
     }
     
     .footer {
-      background: linear-gradient(180deg, rgba(5, 5, 5, 0.98) 0%, rgba(15, 15, 15, 0.98) 100%);
+      background: var(--footer-bg);
       padding: 40px 0 25px;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
-      border-top: 2px solid transparent;
-      border-image: linear-gradient(90deg, transparent 0%, var(--purple) 20%, var(--cyan) 50%, var(--blue) 80%, transparent 100%) 1;
-      box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.7), 0 -5px 15px rgba(157, 0, 255, 0.1);
-    }
-    
-    .footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(ellipse at 15% 25%, rgba(157, 0, 255, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 85% 75%, rgba(0, 255, 255, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(0, 102, 255, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      /* Removed border-top - no separator line */
     }
     
     .footer-content {
@@ -123,41 +77,18 @@
       font-size: 36px;
       font-weight: 700;
       margin-bottom: 15px;
-      color: var(--white);
+      color: #ffffff;
       text-decoration: none;
-      transition: var(--transition-standard);
+      transition: color 0.25s ease;
       letter-spacing: 1.5px;
-      position: relative;
-      display: inline-block;
     }
     
     .footer-logo span {
-      background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
-    }
-    
-    .footer-logo::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple), var(--blue));
-      transition: width 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      color: var(--cyan-muted);
     }
     
     .footer-logo:hover {
-      transform: translateY(-3px);
-      filter: drop-shadow(0 5px 15px rgba(0, 255, 255, 0.4));
-    }
-    
-    .footer-logo:hover::after {
-      width: 100%;
+      color: #e0e0e0;
     }
     
     .footer-description {
@@ -168,41 +99,16 @@
       max-width: 320px;
     }
     
-    .footer-section {
-      position: relative;
-    }
-    
     .footer-section h3 {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 19px;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: 500;
       margin-bottom: 18px;
-      position: relative;
-      padding-bottom: 10px;
+      padding-bottom: 8px;
       text-transform: uppercase;
       letter-spacing: 2px;
-      background: linear-gradient(135deg, var(--cyan) 0%, var(--white) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .footer-section h3::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 50px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--cyan) 0%, var(--purple) 100%);
-      transition: var(--transition-standard);
-      box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
-      border-radius: 2px;
-    }
-    
-    .footer-section:hover h3::after {
-      width: 120px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+      color: #d0d0d0;
+      border-bottom: 1px solid #222222;
     }
     
     .footer-links {
@@ -211,38 +117,28 @@
     
     .footer-links li {
       margin-bottom: 10px;
-      position: relative;
-      overflow: hidden;
     }
         
     .footer-links a {
-      color: rgba(255, 255, 255, 0.7);
+      color: #888888;
       text-decoration: none;
       font-size: 15px;
       font-weight: 400;
-      transition: var(--transition-standard);
-      position: relative;
+      transition: color 0.2s ease;
       display: flex;
       align-items: center;
       gap: 12px;
     }
     
     .footer-links i {
-      color: var(--cyan);
+      color: var(--cyan-muted);
       font-size: 14px;
       width: 22px;
-      transition: var(--transition-standard);
+      transition: color 0.2s ease;
     }
     
     .footer-links a:hover {
-      color: var(--cyan);
-      transform: translateX(10px);
-      text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    }
-    
-    .footer-links a:hover i {
-      transform: scale(1.3) rotate(5deg);
-      filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+      color: var(--cyan-muted);
     }
     
     .contact-info {
@@ -255,45 +151,30 @@
       margin-bottom: 10px;
       display: flex;
       align-items: center;
-      transition: var(--transition-standard);
-      color: rgba(255, 255, 255, 0.7);
-    }
-    
-    .contact-info p:hover {
-      transform: translateX(6px);
-      color: var(--cyan);
+      color: #888888;
     }
     
     .contact-info i {
       margin-right: 14px;
-      color: var(--cyan);
-      font-size: 17px;
+      color: var(--cyan-muted);
+      font-size: 16px;
       width: 22px;
       text-align: center;
-      transition: var(--transition-standard);
-    }
-    
-    .contact-info p:hover i {
-      transform: scale(1.25) rotate(-5deg);
-      filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
     }
     
     .contact-info a {
-      color: rgba(255, 255, 255, 0.7);
+      color: #888888;
       text-decoration: none;
-      transition: var(--transition-standard);
-      position: relative;
+      transition: color 0.2s ease;
     }
     
     .contact-info a:hover {
-      color: var(--cyan);
-      text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+      color: var(--cyan-muted);
     }
     
-    /* ENHANCED SOCIAL ICONS - NO OUTLINES */
     .social-icons {
       display: flex;
-      gap: 18px;
+      gap: 16px;
       margin-top: 0;
     }
     
@@ -301,95 +182,39 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(20, 20, 20, 0.95));
-      color: var(--white);
+      background: #111111;
+      color: #ffffff;
       text-decoration: none;
-      transition: var(--transition-standard);
-      position: relative;
-      border: 2px solid rgba(0, 255, 255, 0.2);
-      overflow: hidden;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      border: 1px solid #222222;
       cursor: pointer;
-      /* CRITICAL: Remove all focus styles */
       outline: none !important;
-      outline-width: 0 !important;
       -webkit-tap-highlight-color: transparent !important;
     }
     
     .social-icon i {
-      font-size: 20px;
-      color: var(--cyan);
-      transition: var(--transition-standard);
-      position: relative;
-      z-index: 3;
-    }
-    
-    .social-icon::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(45deg, var(--purple), var(--cyan), var(--blue), var(--purple));
-      border-radius: 50%;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: 1;
-      background-size: 200% 200%;
-    }
-    
-    .social-icon::after {
-      content: '';
-      position: absolute;
-      inset: 2px;
-      background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(20, 20, 20, 0.95));
-      border-radius: 50%;
-      z-index: 2;
-    }
-    
-    .social-icon:hover::before {
-      opacity: 1;
-      animation: gradient-rotate 3s linear infinite;
+      font-size: 18px;
+      color: var(--cyan-muted);
+      transition: color 0.2s ease;
     }
     
     .social-icon:hover {
-      transform: translateY(-6px) scale(1.15);
-      box-shadow: 
-        0 8px 25px rgba(0, 255, 255, 0.4),
-        0 0 40px rgba(157, 0, 255, 0.3);
-      border-color: transparent;
+      background: #1a1a1a;
+      border-color: var(--cyan-dim);
     }
     
     .social-icon:hover i {
-      color: var(--white);
-      transform: rotate(12deg) scale(1.1);
-      filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+      color: #4ab8b8;
     }
     
-    /* ABSOLUTELY NO FOCUS STYLES FOR SOCIAL ICONS */
     .social-icon:focus,
     .social-icon:focus-visible,
-    .social-icon:focus-within,
     .social-icon:active {
       outline: none !important;
-      outline-width: 0 !important;
-      outline-style: none !important;
       box-shadow: none !important;
-      border: 2px solid rgba(0, 255, 255, 0.2) !important;
-    }
-    
-    @keyframes gradient-rotate {
-      0% { 
-        background-position: 0% 50%;
-        filter: hue-rotate(0deg);
-      }
-      50% { 
-        background-position: 100% 50%;
-      }
-      100% { 
-        background-position: 0% 50%;
-        filter: hue-rotate(360deg);
-      }
     }
     
     .newsletter-form {
@@ -400,93 +225,59 @@
     
     .newsletter-input {
       width: 100%;
-      padding: 16px 65px 16px 22px;
-      border: 2px solid var(--input-border);
-      border-radius: 50px;
-      background-color: var(--input-bg);
-      color: var(--white);
+      padding: 14px 60px 14px 20px;
+      border: 1px solid #222222;
+      border-radius: 40px;
+      background-color: #0c0c0c;
+      color: #ffffff;
       font-family: 'Rajdhani', sans-serif;
-      font-size: 15px;
-      transition: var(--transition-standard);
+      font-size: 14px;
+      transition: border-color 0.2s ease;
       letter-spacing: 0.5px;
       font-weight: 400;
-      backdrop-filter: blur(10px);
     }
     
     .newsletter-input:focus {
-      border-color: var(--cyan);
-      box-shadow: 
-        0 0 20px rgba(0, 255, 255, 0.4),
-        inset 0 0 10px rgba(0, 255, 255, 0.1);
-      transform: translateY(-2px);
-      background-color: rgba(255, 255, 255, 0.08);
+      border-color: var(--cyan-dim);
     }
     
     .newsletter-input::placeholder {
-      color: rgba(255, 255, 255, 0.45);
+      color: #666666;
       font-weight: 300;
     }
     
     .newsletter-btn {
       position: absolute;
-      right: 6px;
-      top: 6px;
-      background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
-      color: var(--black);
+      right: 5px;
+      top: 5px;
+      background: #1a1a1a;
+      color: var(--cyan-muted);
       border: none;
-      border-radius: 50px;
-      width: 44px;
-      height: 44px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: var(--transition-standard);
-      overflow: hidden;
+      transition: background 0.2s ease, color 0.2s ease;
       font-weight: 700;
       z-index: 2;
     }
     
     .newsletter-btn i {
-      font-size: 17px;
-      position: relative;
-      z-index: 3;
-      transition: var(--transition-standard);
-      color: var(--white);
-    }
-    
-    .newsletter-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transition: left 0.6s ease;
-      z-index: 2;
-    }
-    
-    .newsletter-btn:hover::before {
-      left: 100%;
+      font-size: 16px;
     }
     
     .newsletter-btn:hover {
-      background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 100%);
-      box-shadow: 
-        0 0 25px rgba(0, 255, 255, 0.7),
-        0 5px 15px rgba(157, 0, 255, 0.4);
-      transform: scale(1.08) rotate(5deg);
-    }
-    
-    .newsletter-btn:hover i {
-      transform: rotate(-15deg) scale(1.15);
+      background: #252525;
+      color: #4ab8b8;
     }
     
     .footer-bottom {
       width: 90%;
       max-width: 1400px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid #151515;
       padding-top: 20px;
       text-align: center;
       font-size: 14px;
@@ -497,7 +288,7 @@
     }
     
     .copyright {
-      color: rgba(255, 255, 255, 0.5);
+      color: #666666;
       margin-bottom: 12px;
       font-weight: 300;
     }
@@ -510,33 +301,15 @@
     }
     
     .footer-legal a {
-      color: rgba(255, 255, 255, 0.5);
+      color: #666666;
       text-decoration: none;
-      transition: var(--transition-standard);
-      position: relative;
+      transition: color 0.2s ease;
       font-weight: 300;
       padding: 5px 0;
     }
     
-    .footer-legal a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple));
-      transition: var(--transition-standard);
-      box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
-    }
-    
     .footer-legal a:hover {
-      color: var(--cyan);
-      text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-    }
-    
-    .footer-legal a:hover::after {
-      width: 100%;
+      color: var(--cyan-muted);
     }
     
     .newsletter-wrapper {
@@ -551,82 +324,43 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, rgba(10, 0, 20, 0.95), rgba(0, 20, 30, 0.95));
-      color: var(--white);
-      border-radius: 50px;
+      background: #0c0c0c;
+      color: #ffffff;
+      border-radius: 40px;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
+      font-size: 14px;
       opacity: 0;
       z-index: 3;
-      transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-      backdrop-filter: blur(10px);
-      border: 2px solid var(--cyan);
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      transition: opacity 0.3s ease;
+      border: 1px solid #222222;
     }
     
     .thank-you-message i {
-      color: var(--cyan);
-      margin-right: 12px;
-      font-size: 20px;
-      animation: pulse 1.5s infinite;
-      filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+      color: var(--cyan-muted);
+      margin-right: 10px;
+      font-size: 16px;
     }
     
     .thank-you-message span {
-      animation: fadeIn 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
-      letter-spacing: 0.5px;
-      font-weight: 400;
-      background: linear-gradient(135deg, var(--cyan), var(--white));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.25);
-        opacity: 0.7;
-      }
+      animation: fadeIn 0.4s ease;
     }
     
     @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    ::selection {
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      color: var(--white);
-    }
-    
-    ::-moz-selection {
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      color: var(--white);
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
     
     .form-controls {
       position: relative;
-      transition: var(--transition-standard);
+      transition: opacity 0.2s ease;
     }
     
     .form-controls.submitted {
-      filter: blur(4px);
-      opacity: 0.6;
-      transform: scale(0.97);
+      opacity: 0.5;
     }
     
-    /* Responsive design */
+    /* Responsive */
     @media (max-width: 768px) {
       .footer {
         padding: 30px 0 20px;
@@ -638,17 +372,13 @@
         margin-bottom: 25px;
       }
       
-      .footer-section h3 {
-        font-size: 18px;
-      }
-      
       .footer-section.newsletter-section {
         max-width: 100%;
       }
       
       .footer-legal {
         flex-direction: column;
-        gap: 18px;
+        gap: 15px;
       }
       
       .social-icons {
@@ -658,11 +388,6 @@
       .footer-logo-section {
         align-items: center;
         text-align: center;
-      }
-      
-      .footer-description {
-        text-align: center;
-        max-width: 100%;
       }
       
       .footer-logo {
@@ -681,61 +406,21 @@
       }
     }
     
-    /* Floating particles effect */
-    .footer-particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-    
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.08;
-      animation: floatAround 20s infinite ease-in-out;
-      filter: blur(1px);
-    }
-    
-    @keyframes floatAround {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
+    @media (min-width: 1400px) {
+      .footer-content {
+        max-width: 1400px;
       }
-      25% {
-        transform: translate(120px, 80px) scale(1.2);
-      }
-      50% {
-        transform: translate(-50px, 150px) scale(0.8);
-      }
-      75% {
-        transform: translate(-120px, 60px) scale(1.1);
-      }
-    }
-    
-    /* Glow effect on hover for sections */
-    .footer-section:hover {
-      filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.1));
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div style="flex-grow: 1;"></div>
-  
-  <div class="footer-particles" id="footerParticles"></div>
-  
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-logo-section">
-        <a href="index.html" class="footer-logo"><span>Sci</span>Trade</a>
+        <a href="index.html" class="footer-logo" target="_top"><span>Sci</span>Trade</a>
         <p class="footer-description">
           Revolutionizing the trading world with cutting-edge indicators, 
-          expert advisors, and AI-powered tools. Empowering traders with 
-          data-driven insights and professional strategies.
+          expert advisors, and AI-powered tools.
         </p>
         <div class="social-icons">
           <a href="https://www.instagram.com/SciTrade/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer" tabindex="-1">
@@ -747,7 +432,7 @@
           <a href="https://www.youtube.com/@SciTrade" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer" tabindex="-1">
             <i class="fab fa-youtube"></i>
           </a>
-          <a href="https://whatsapp.com/channel/0029Vb5VrQLK0IBi7LYKYP2H" class="social-icon" aria-label="WhatsApp Channel" target="_blank" rel="noopener noreferrer" tabindex="-1">
+          <a href="https://whatsapp.com/channel/0029Vb5VrQLK0IBi7LYKYP2H" class="social-icon" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer" tabindex="-1">
             <i class="fab fa-whatsapp"></i>
           </a>
         </div>
@@ -756,27 +441,27 @@
       <div class="footer-section">
         <h3>Quick Links</h3>
         <ul class="footer-links">
-          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="mission.html"><i class="fas fa-bullseye"></i> Mission</a></li>
-          <li><a href="products.html"><i class="fas fa-chart-line"></i> Products</a></li>
-          <li><a href="#"><i class="fas fa-graduation-cap"></i> Courses</a></li>
-          <li><a href="#"><i class="fas fa-star"></i> Reviews</a></li>
+          <li><a href="index.html" target="_top"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="mission.html" target="_top"><i class="fas fa-bullseye"></i> Mission</a></li>
+          <li><a href="products.html" target="_top"><i class="fas fa-chart-line"></i> Products</a></li>
+          <li><a href="#" target="_top"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+          <li><a href="#" target="_top"><i class="fas fa-star"></i> Reviews</a></li>
         </ul>
       </div>
       
       <div class="footer-section">
         <h3>Support</h3>
         <ul class="footer-links">
-          <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+          <li><a href="faq.html" target="_top"><i class="fas fa-question-circle"></i> FAQ</a></li>
           <li><a href="https://whatsapp.com/channel/0029Vb5VrQLK0IBi7LYKYP2H" target="_blank" rel="noopener noreferrer"><i class="fas fa-users"></i> Community</a></li>
-          <li><a href="contact.html"><i class="fas fa-headset"></i> Contact Support</a></li>
-          <li><a href="privacypolicy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+          <li><a href="contact.html" target="_top"><i class="fas fa-headset"></i> Contact Support</a></li>
+          <li><a href="privacypolicy.html" target="_top"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
         </ul>
       </div>
       
       <div class="footer-section newsletter-section">
         <h3>Newsletter</h3>
-        <p style="color: rgba(255, 255, 255, 0.65); font-size: 14px; margin-bottom: 12px; font-weight: 300; line-height: 1.6;">
+        <p style="color: #888888; font-size: 14px; margin-bottom: 12px; font-weight: 300; line-height: 1.6;">
           Subscribe to get updates on new products and trading insights.
         </p>
         <form class="newsletter-form" id="newsletterForm">
@@ -799,121 +484,61 @@
     <div class="footer-bottom">
       <p class="copyright">SciTrade.org | Copyright &copy; 2024 | All Rights Reserved</p>
       <div class="footer-legal">
-        <a href="termsandconditions.html">Terms and Conditions</a>
-        <a href="privacypolicy.html">Privacy Policy</a>
-        <a href="cookiepolicy.html">Cookie Policy</a>
-        <a href="riskdisclosure.html">Risk Disclosure</a>
+        <a href="termsandconditions.html" target="_top">Terms and Conditions</a>
+        <a href="privacypolicy.html" target="_top">Privacy Policy</a>
+        <a href="cookiepolicy.html" target="_top">Cookie Policy</a>
+        <a href="riskdisclosure.html" target="_top">Risk Disclosure</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // Newsletter form submission
-    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = this;
-      const thankYouMessage = form.querySelector('.thank-you-message');
-      const formControls = form.querySelector('.form-controls');
+    (function() {
+      // Check if we're inside an iframe
+      const isInIframe = window.self !== window.top;
       
-      formControls.classList.add('submitted');
-      
-      thankYouMessage.style.display = 'flex';
-      setTimeout(() => {
-        thankYouMessage.style.opacity = '1';
-      }, 10);
-      
-      setTimeout(function() {
-        thankYouMessage.style.opacity = '0';
-        
-        setTimeout(() => {
-          form.reset();
-          thankYouMessage.style.display = 'none';
-          formControls.classList.remove('submitted');
-        }, 600);
-      }, 3000);
-    });
-    
-    // Create enhanced floating particles
-    const particlesContainer = document.getElementById('footerParticles');
-    const colors = ['#00ffff', '#9d00ff', '#0066ff', '#03fcf4', '#00ff88'];
-    
-    for (let i = 0; i < 20; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      const size = Math.random() * 5 + 2;
-      particle.style.cssText = `
-        width: ${size}px;
-        height: ${size}px;
-        background: ${colors[Math.floor(Math.random() * colors.length)]};
-        left: ${Math.random() * 100}%;
-        top: ${Math.random() * 100}%;
-        opacity: ${Math.random() * 0.12 + 0.05};
-        animation-delay: ${Math.random() * 8}s;
-        animation-duration: ${Math.random() * 15 + 15}s;
-        box-shadow: 0 0 ${size * 2}px ${colors[Math.floor(Math.random() * colors.length)]};
-      `;
-      particlesContainer.appendChild(particle);
-    }
-    
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') {
-          e.preventDefault();
-          return;
-        }
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          e.preventDefault();
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-    
-    // CRITICAL: Remove all focus outlines from social icons
-    document.querySelectorAll('.social-icon').forEach(icon => {
-      // Prevent focus on mousedown
-      icon.addEventListener('mousedown', function(e) {
-        e.preventDefault();
-      });
-      
-      // Remove focus after click
-      icon.addEventListener('click', function(e) {
-        this.blur();
-      });
-      
-      // Prevent keyboard focus
-      icon.addEventListener('focus', function(e) {
-        this.blur();
-      });
-      
-      // Additional safety: remove tabindex ability
-      icon.setAttribute('tabindex', '-1');
-    });
-    
-    // Add parallax effect to footer on scroll
-    let lastScrollTop = 0;
-    window.addEventListener('scroll', function() {
-      const st = window.pageYOffset || document.documentElement.scrollTop;
-      const footer = document.querySelector('.footer');
-      const scrollDiff = st - lastScrollTop;
-      
-      if (footer) {
-        const particles = footer.querySelectorAll('.particle');
-        particles.forEach((particle, index) => {
-          const speed = (index % 3 + 1) * 0.1;
-          const currentTransform = particle.style.transform || '';
-          particle.style.transform = currentTransform + ` translateY(${scrollDiff * speed}px)`;
+      // If in iframe, convert all internal links to target="_top"
+      if (isInIframe) {
+        document.querySelectorAll('.footer a[href]').forEach(link => {
+          const href = link.getAttribute('href');
+          // Skip external links, javascript:, # links
+          if (href && !href.startsWith('http') && !href.startsWith('//') && !href.startsWith('javascript:') && href !== '#') {
+            link.setAttribute('target', '_top');
+          }
         });
       }
       
-      lastScrollTop = st <= 0 ? 0 : st;
-    }, false);
+      // Newsletter form submission
+      const form = document.getElementById('newsletterForm');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const thankYouMessage = this.querySelector('.thank-you-message');
+          const formControls = this.querySelector('.form-controls');
+          
+          formControls.classList.add('submitted');
+          thankYouMessage.style.display = 'flex';
+          setTimeout(() => { thankYouMessage.style.opacity = '1'; }, 10);
+          
+          setTimeout(() => {
+            thankYouMessage.style.opacity = '0';
+            setTimeout(() => {
+              this.reset();
+              thankYouMessage.style.display = 'none';
+              formControls.classList.remove('submitted');
+            }, 300);
+          }, 2500);
+        });
+      }
+      
+      // Remove focus from social icons
+      document.querySelectorAll('.social-icon').forEach(icon => {
+        icon.addEventListener('mousedown', e => e.preventDefault());
+        icon.addEventListener('click', function() { this.blur(); });
+        icon.addEventListener('focus', function() { this.blur(); });
+        icon.setAttribute('tabindex', '-1');
+      });
+    })();
   </script>
 </body>
 </html>
