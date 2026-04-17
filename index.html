@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>SciTrade - Home</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/scitradelogotransp.png">
@@ -32,6 +32,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
@@ -98,9 +102,12 @@
 
         .sci-navbar.scrolled {
             padding: 10px 0;
-            background: linear-gradient(180deg, rgba(10, 10, 10, 0.98) 0%, rgba(15, 15, 15, 0.95) 100%);
-            box-shadow: 0 5px 30px rgba(0, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
+            /* Seamless dark gradient without harsh shadows or glowing borders */
+            background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
+            backdrop-filter: blur(8px);
+            /* No box-shadow to keep it smooth and integrated */
+            box-shadow: none;
+            border-bottom: none;
         }
 
         .sci-nav-container {
@@ -293,13 +300,33 @@
             margin: 0 auto;
         }
         
-        /* Home Header Overlay */
-        .header-overlay {
+        /* Header wrapper for relative positioning (scroll button) */
+        .header-wrapper {
             position: relative;
             width: 100%;
             height: 100vh;
             overflow: hidden;
             z-index: 1;
+        }
+        
+        /* Seamless transition from header to content: increased space and smooth fade */
+        .header-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 160px; /* Increased for a little extra space between header and content */
+            background: linear-gradient(to top, var(--black) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 20;
+        }
+        
+        .header-overlay {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
         
         .header-overlay iframe {
@@ -309,25 +336,67 @@
             display: block;
         }
         
-        /* Content Sections */
+        /* === SMOOTH SCROLL DOWN BUTTON: white, no circle, just V === */
+        .scroll-down-arrow {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            border-radius: 0 !important;
+            width: auto;
+            height: auto;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: gentleFloat 2s infinite ease-in-out;
+        }
+        
+        .scroll-down-arrow i {
+            font-size: 32px;
+            color: white;
+            text-shadow: 0 0 4px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        
+        .scroll-down-arrow:hover {
+            transform: translateX(-50%) translateY(4px);
+        }
+        
+        .scroll-down-arrow:hover i {
+            transform: translateY(3px);
+        }
+        
+        @keyframes gentleFloat {
+            0% { transform: translateX(-50%) translateY(0px); opacity: 0.8; }
+            50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+            100% { transform: translateX(-50%) translateY(0px); opacity: 0.8; }
+        }
+        
+        /* Content Sections - SEAMLESS merging with black gradients */
         .content-sections {
             position: relative;
             z-index: 10;
+            background-color: var(--black);
         }
         
-        /* Iframe Container */
+        /* iframe container: no margins, relative for overlays */
         .iframe-container {
             width: 100%;
             max-width: 1400px;
-            margin: 40px auto 80px;
+            margin: 0 auto;
             position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: var(--black);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            background: transparent;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(18px);
         }
         
         .iframe-container.visible {
@@ -335,18 +404,50 @@
             transform: translateY(0);
         }
         
-        .iframe-container::before {
+        /* Seamless gradient transition: each container fades its bottom into black, 
+           and the next container fades from black into its content */
+        .iframe-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to top, var(--black) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 3;
+            opacity: 1;
+        }
+        
+        /* For the first container, we also add a soft fade-in at top (from header) */
+        .iframe-container:first-of-type::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--purple), var(--cyan), var(--blue), transparent);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-            z-index: 1;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(to bottom, var(--black) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 3;
+            opacity: 1;
         }
         
+        /* For other containers, a tiny top fade to blend with previous bottom fade */
+        .iframe-container:not(:first-of-type)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--black) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 3;
+            opacity: 1;
+        }
+        
+        /* Remove any default borders/shadow/radius */
         .iframe-container iframe {
             width: 100% !important;
             border: none !important;
@@ -354,6 +455,9 @@
             background: var(--black) !important;
             opacity: 1 !important;
             visibility: visible !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            vertical-align: middle;
         }
         
         /* First iframe (description) - taller */
@@ -366,7 +470,7 @@
             height: 600px !important;
         }
         
-        /* Hide all iframe scrollbars */
+        /* Hide iframe scrollbars */
         iframe {
             overflow: hidden !important;
             -ms-overflow-style: none !important;
@@ -377,78 +481,6 @@
             display: none !important;
             width: 0 !important;
             height: 0 !important;
-        }
-        
-        /* Ticker */
-        .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            height: 60px;
-            background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(20,20,20,0.9));
-            margin: 60px 0;
-            position: relative;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 255, 0.1);
-        }
-        
-        .ticker-wrap::before, .ticker-wrap::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 150px;
-            height: 100%;
-            z-index: 2;
-        }
-        
-        .ticker-wrap::before {
-            left: 0;
-            background: linear-gradient(to right, var(--black), transparent);
-        }
-        
-        .ticker-wrap::after {
-            right: 0;
-            background: linear-gradient(to left, var(--black), transparent);
-        }
-        
-        .ticker {
-            display: inline-block;
-            white-space: nowrap;
-            padding-right: 100%;
-            animation: ticker 40s linear infinite;
-        }
-        
-        .ticker-item {
-            display: inline-block;
-            padding: 0 40px;
-            font-size: 1.3rem;
-            color: var(--white);
-            font-family: 'Oswald', sans-serif;
-            font-weight: 300;
-            position: relative;
-        }
-        
-        .ticker-item::after {
-            content: '•';
-            color: var(--cyan);
-            margin-left: 40px;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-        
-        .ticker-item span {
-            background: linear-gradient(45deg, var(--cyan), var(--purple), var(--red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 400;
-        }
-        
-        @keyframes ticker {
-            0% {
-                transform: translate3d(0, 0, 0);
-            }
-            100% {
-                transform: translate3d(-100%, 0, 0);
-            }
         }
         
         /* Moving Background */
@@ -466,24 +498,32 @@
             z-index: -1;
         }
         
-        /* Footer Container */
+        /* Footer Container - completely seamless, no visible separator */
         .footer-container {
             width: 100%;
             margin: 0;
             padding: 0;
             border: 0;
             position: relative;
+            background: var(--black);
         }
         
+        /* Only a subtle blend from last section, no visible line or glow separator */
         .footer-container::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--purple), var(--cyan), var(--blue), transparent);
-            z-index: 1;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--black) 0%, transparent 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        /* Remove any extra lines or separators */
+        .footer-container::after {
+            display: none;
         }
         
         .footer-container iframe {
@@ -494,6 +534,7 @@
             display: block;
             margin: 0;
             padding: 0;
+            background: var(--black);
         }
         
         /* Responsive Design */
@@ -548,92 +589,93 @@
                 display: block;
             }
             
-            /* Header Overlay Adjustments */
-            .header-overlay {
+            .header-wrapper {
                 height: 80vh;
             }
             
-            /* Iframe Container Adjustments */
+            .scroll-down-arrow {
+                bottom: 18px;
+            }
+            
+            .scroll-down-arrow i {
+                font-size: 28px;
+            }
+            
             .iframe-container {
-                margin: 30px auto 60px;
-                border-radius: 15px;
-                width: 95%;
+                max-width: 100%;
             }
             
             .iframe-container.description-iframe iframe {
-                height: 500px !important;
+                height: 520px !important;
             }
             
             .iframe-container:not(.description-iframe) iframe {
-                height: 400px !important;
+                height: 460px !important;
             }
             
             .footer-container iframe {
                 height: 450px;
             }
             
-            .ticker-wrap {
-                margin: 40px 0;
+            .iframe-container::after,
+            .iframe-container:first-of-type::before,
+            .iframe-container:not(:first-of-type)::before {
                 height: 50px;
             }
             
-            .ticker-item {
-                font-size: 1.1rem;
-                padding: 0 30px;
+            .header-wrapper::after {
+                height: 120px; /* Slightly less on mobile but still adds space */
             }
         }
         
         @media screen and (max-width: 480px) {
-            .header-overlay {
+            .header-wrapper {
                 height: 70vh;
             }
             
-            .iframe-container {
-                margin: 20px auto 40px;
-                width: 92%;
+            .scroll-down-arrow i {
+                font-size: 24px;
             }
             
             .iframe-container.description-iframe iframe {
-                height: 450px !important;
+                height: 480px !important;
             }
             
             .iframe-container:not(.description-iframe) iframe {
-                height: 350px !important;
+                height: 420px !important;
             }
             
             .footer-container iframe {
                 height: 400px;
             }
             
-            .ticker-wrap {
-                height: 45px;
-                margin: 30px 0;
+            .iframe-container::after,
+            .iframe-container:first-of-type::before,
+            .iframe-container:not(:first-of-type)::before {
+                height: 40px;
             }
             
-            .ticker-item {
-                font-size: 1rem;
-                padding: 0 20px;
+            .header-wrapper::after {
+                height: 100px;
             }
         }
         
         @media screen and (max-width: 360px) {
             .iframe-container.description-iframe iframe {
-                height: 400px !important;
+                height: 450px !important;
             }
-            
             .iframe-container:not(.description-iframe) iframe {
-                height: 300px !important;
+                height: 380px !important;
             }
         }
         
-        /* Touch-friendly improvements for mobile */
+        /* touch-friendly */
         @media (hover: none) and (pointer: coarse) {
-            .sci-nav-link {
-                padding: 20px 0;
+            .scroll-down-arrow {
+                bottom: 20px;
             }
-            
-            .iframe-container {
-                border-radius: 12px;
+            .scroll-down-arrow i {
+                font-size: 34px;
             }
         }
     </style>
@@ -681,36 +723,32 @@
     <div class="moving-bg"></div>
     
     <div class="container">
-        <!-- Animated Header Overlay -->
-        <div class="header-overlay">
-            <iframe src="https://scitrade.org/homeheader.html" 
-                    scrolling="no" 
-                    frameborder="0"
-                    loading="eager"
-                    allowtransparency="true">
-            </iframe>
+        <!-- Animated Header Overlay with Scroll Button -->
+        <div class="header-wrapper">
+            <div class="header-overlay">
+                <iframe src="https://scitrade.org/homeheader.html" 
+                        scrolling="no" 
+                        frameborder="0"
+                        loading="eager"
+                        allowtransparency="true"
+                        title="SciTrade Hero Header">
+                </iframe>
+            </div>
+            <!-- Smooth scroll down button: white V, no circle, clean -->
+            <div class="scroll-down-arrow" id="scrollDownBtn" aria-label="Scroll down">
+                <i class="fas fa-chevron-down"></i>
+            </div>
         </div>
         
         <div class="content-sections">
-            <div class="ticker-wrap">
-                <div class="ticker">
-                    <div class="ticker-item"><span>ADVANCED TRADING ALGORITHMS</span></div>
-                    <div class="ticker-item"><span>AI-POWERED MARKET ANALYSIS</span></div>
-                    <div class="ticker-item"><span>REAL-TIME DATA PROCESSING</span></div>
-                    <div class="ticker-item"><span>QUANTITATIVE TRADING STRATEGIES</span></div>
-                    <div class="ticker-item"><span>MACHINE LEARNING MODELS</span></div>
-                    <div class="ticker-item"><span>RISK-MANAGED APPROACHES</span></div>
-                    <div class="ticker-item"><span>SYSTEMATIC TRADING SOLUTIONS</span></div>
-                    <div class="ticker-item"><span>DATA-DRIVEN DECISION MAKING</span></div>
-                </div>
-            </div>
-            
+            <!-- All iframes seamlessly stacked with gradient transitions, zero gaps -->
             <div class="iframe-container description-iframe visible" id="description">
                 <iframe src="https://scitrade.org/description.html" 
                         scrolling="no" 
                         frameborder="0"
                         loading="eager"
-                        allowtransparency="true">
+                        allowtransparency="true"
+                        title="SciTrade Description">
                 </iframe>
             </div>
 
@@ -719,7 +757,8 @@
                         scrolling="no" 
                         frameborder="0"
                         loading="eager"
-                        allowtransparency="true">
+                        allowtransparency="true"
+                        title="Core Qualities">
                 </iframe>
             </div>
 
@@ -728,7 +767,8 @@
                         scrolling="no" 
                         frameborder="0"
                         loading="eager"
-                        allowtransparency="true">
+                        allowtransparency="true"
+                        title="Carousel Showcase">
                 </iframe>
             </div>
 
@@ -737,21 +777,9 @@
                         scrolling="no" 
                         frameborder="0"
                         loading="eager"
-                        allowtransparency="true">
+                        allowtransparency="true"
+                        title="Why Choose Us">
                 </iframe>
-            </div>
-            
-            <div class="ticker-wrap">
-                <div class="ticker">
-                    <div class="ticker-item"><span>TRADING WITH CONFIDENCE</span></div>
-                    <div class="ticker-item"><span>MARKET LEADING TECHNOLOGY</span></div>
-                    <div class="ticker-item"><span>PROVEN TRADING METHODOLOGIES</span></div>
-                    <div class="ticker-item"><span>SCIENTIFIC TRADING APPROACH</span></div>
-                    <div class="ticker-item"><span>ADAPTIVE ALGORITHMS</span></div>
-                    <div class="ticker-item"><span>PRECISION TRADING TOOLS</span></div>
-                    <div class="ticker-item"><span>INNOVATIVE MARKET SOLUTIONS</span></div>
-                    <div class="ticker-item"><span>YOUR SUCCESS IS OUR PRIORITY</span></div>
-                </div>
             </div>
         </div>
     </div>
@@ -762,24 +790,27 @@
               scrolling="no" 
               frameborder="0" 
               allowtransparency="true"
-              loading="eager">
+              loading="eager"
+              title="Footer">
       </iframe>
     </div>
     
     <script>
         // Mobile menu toggle
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            const navLinks = document.getElementById('sciNavLinks');
-            const hamburger = document.querySelector('.sci-hamburger');
-            navLinks.classList.toggle('open');
-            hamburger.classList.toggle('open');
-        });
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('sciNavLinks');
+        const hamburger = document.querySelector('.sci-hamburger');
+        
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('open');
+                hamburger.classList.toggle('open');
+            });
+        }
 
         // Close mobile menu when clicking a link
         document.querySelectorAll('.sci-nav-link').forEach(link => {
             link.addEventListener('click', function() {
-                const navLinks = document.getElementById('sciNavLinks');
-                const hamburger = document.querySelector('.sci-hamburger');
                 if (navLinks.classList.contains('open')) {
                     navLinks.classList.remove('open');
                     hamburger.classList.remove('open');
@@ -787,10 +818,45 @@
             });
         });
         
-        // Enhanced animation for iframe sections
+        // ========== CUSTOM ULTRA-SMOOTH SCROLL (no teleport) ==========
+        function smoothScrollToElement(element, duration = 1000) {
+            if (!element) return;
+            const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            let startTime = null;
+            
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                // cubic-bezier easing for smooth deceleration
+                const ease = 1 - Math.pow(1 - progress, 3);
+                window.scrollTo(0, startPosition + distance * ease);
+                if (timeElapsed < duration) requestAnimationFrame(animation);
+            }
+            requestAnimationFrame(animation);
+        }
+        
+        const scrollBtn = document.getElementById('scrollDownBtn');
+        if (scrollBtn) {
+            scrollBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Target the first .iframe-container inside .content-sections
+                const firstSection = document.querySelector('.content-sections .iframe-container');
+                if (firstSection) {
+                    smoothScrollToElement(firstSection, 1000);
+                } else {
+                    // fallback: scroll by 85% of viewport height
+                    const targetY = window.scrollY + window.innerHeight * 0.85;
+                    smoothScrollToElement({ getBoundingClientRect: () => ({ top: targetY - window.scrollY }) }, 800);
+                }
+            });
+        }
+        
+        // Intersection Observer for iframe fade-in animation
         document.addEventListener('DOMContentLoaded', function() {
             const iframeContainers = document.querySelectorAll('.iframe-container');
-            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -798,8 +864,8 @@
                     }
                 });
             }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                threshold: 0.05,
+                rootMargin: '0px 0px -20px 0px'
             });
             
             iframeContainers.forEach(container => {
@@ -807,7 +873,7 @@
             });
         });
         
-        // Enhanced navbar scroll effect
+        // Navbar scroll effect + progress bar
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('sciNavbar');
             const scrollProgress = document.getElementById('scrollProgress');
@@ -821,56 +887,54 @@
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
-            scrollProgress.style.width = scrolled + '%';
+            if (scrollProgress) scrollProgress.style.width = scrolled + '%';
         });
         
-        // Initialize navbar on load
-        window.addEventListener('load', function() {
-            const navbar = document.getElementById('sciNavbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            }
-        });
-        
-        // Adjust iframe heights dynamically for mobile
+        // Adjust iframe heights dynamically for mobile/responsive
         function adjustIframeHeights() {
-            const iframes = document.querySelectorAll('.iframe-container iframe');
             const isMobile = window.innerWidth <= 768;
+            const isSmallMobile = window.innerWidth <= 480;
+            const isTiny = window.innerWidth <= 360;
             
-            iframes.forEach((iframe) => {
-                try {
-                    if (isMobile) {
-                        if (iframe.closest('.description-iframe')) {
-                            iframe.style.height = '500px';
-                        } else {
-                            iframe.style.height = '400px';
-                        }
-                    } else {
-                        if (iframe.closest('.description-iframe')) {
-                            iframe.style.height = '700px';
-                        } else {
-                            iframe.style.height = '600px';
-                        }
-                    }
-                } catch (e) {
-                    // Cross-origin error
-                }
+            const descriptionIframe = document.querySelector('.description-iframe iframe');
+            const otherIframes = document.querySelectorAll('.iframe-container:not(.description-iframe) iframe');
+            
+            if (descriptionIframe) {
+                if (isTiny) descriptionIframe.style.height = '450px';
+                else if (isSmallMobile) descriptionIframe.style.height = '480px';
+                else if (isMobile) descriptionIframe.style.height = '520px';
+                else descriptionIframe.style.height = '700px';
+            }
+            
+            otherIframes.forEach(iframe => {
+                if (isTiny) iframe.style.height = '380px';
+                else if (isSmallMobile) iframe.style.height = '420px';
+                else if (isMobile) iframe.style.height = '460px';
+                else iframe.style.height = '600px';
             });
             
-            // Adjust header overlay height on mobile
-            const headerOverlay = document.querySelector('.header-overlay');
-            if (headerOverlay) {
-                if (isMobile) {
-                    headerOverlay.style.height = '80vh';
-                } else {
-                    headerOverlay.style.height = '100vh';
-                }
+            const footerIframe = document.querySelector('.footer-container iframe');
+            if (footerIframe) {
+                if (isTiny) footerIframe.style.height = '380px';
+                else if (isSmallMobile) footerIframe.style.height = '400px';
+                else if (isMobile) footerIframe.style.height = '450px';
+                else footerIframe.style.height = '500px';
+            }
+            
+            const headerWrapper = document.querySelector('.header-wrapper');
+            if (headerWrapper) {
+                if (isMobile) headerWrapper.style.height = '80vh';
+                else headerWrapper.style.height = '100vh';
             }
         }
         
-        // Adjust on load and resize
         window.addEventListener('load', adjustIframeHeights);
         window.addEventListener('resize', adjustIframeHeights);
+        
+        // ensure iframes content background is black for seamless blending
+        const style = document.createElement('style');
+        style.textContent = `iframe body { background: #000 !important; margin:0 !important; }`;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
