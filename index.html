@@ -2,30 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SciTrade - Home</title>
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/scitrade-org/scitrade/main/Images/scitradelogotransp.png">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Import fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cyan: #00ffff;
-            --dark-cyan: #03c9c2;
-            --white: #ffffff;
+            --cyan-muted: #3ab8b8;
+            --purple-muted: #7b5ea7;
+            --cyan-dim: rgba(58, 184, 184, 0.12);
+            --purple-dim: rgba(123, 94, 167, 0.12);
             --black: #000000;
-            --transparent-black: rgba(0, 0, 0, 0.7);
-            --red: #03fcf4;
-            --gray-bg: #0a0a0a;
-            --card-bg: rgba(20, 20, 20, 0.8);
-            --purple: #9d00ff;
-            --blue: #0066ff;
-            --green: #00ff88;
-            --pink: #ff00ff;
+            --white: #ffffff;
         }
         
         * {
@@ -35,7 +26,7 @@
         }
         
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
         }
         
         body {
@@ -44,46 +35,32 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        /* Custom Scrollbar - Enhanced */
+        /* Clean gray scrollbar - not purple */
         ::-webkit-scrollbar {
-            width: 14px;
-            height: 14px;
+            width: 10px;
+            height: 10px;
         }
-
         ::-webkit-scrollbar-track {
-            background: linear-gradient(180deg, var(--black), #111);
-            border-radius: 8px;
+            background: var(--black);
         }
-
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, var(--purple), var(--blue), var(--cyan), var(--red));
-            border-radius: 8px;
-            border: 2px solid var(--black);
-            transition: all 0.4s ease;
+            background: #2a2a2a;
+            border-radius: 5px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, var(--red), var(--cyan), var(--blue), var(--purple));
-            box-shadow: 0 0 20px rgba(157, 0, 255, 0.8);
-            transform: scale(1.08);
+            background: #3a3a3a;
         }
-
         * {
             scrollbar-width: thin;
-            scrollbar-color: var(--purple) var(--black);
+            scrollbar-color: #2a2a2a var(--black);
         }
 
         ::selection {
-            background: linear-gradient(45deg, var(--red), var(--cyan));
+            background: var(--cyan-muted);
             color: var(--black);
         }
 
-        ::-moz-selection {
-            background: linear-gradient(45deg, var(--red), var(--cyan));
-            color: var(--black);
-        }
-
-        /* --- NAVIGATION BAR --- */
+        /* --- NAVIGATION BAR (matching mission/contact/products) --- */
         .sci-navbar {
             position: fixed;
             top: 0;
@@ -92,22 +69,14 @@
             padding: 15px 0;
             z-index: 1000;
             background-color: transparent;
-            transition: all 0.3s ease;
-            font-family: 'Rajdhani', sans-serif !important;
-        }
-
-        .sci-navbar * {
-            font-family: 'Rajdhani', sans-serif !important;
+            transition: background 0.25s ease, padding 0.25s ease;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .sci-navbar.scrolled {
             padding: 10px 0;
-            /* Seamless dark gradient without harsh shadows or glowing borders */
-            background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
-            backdrop-filter: blur(8px);
-            /* No box-shadow to keep it smooth and integrated */
-            box-shadow: none;
-            border-bottom: none;
+            background: rgba(8, 8, 8, 0.98);
+            border-bottom: 1px solid #1a1a1a;
         }
 
         .sci-nav-container {
@@ -115,123 +84,79 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         .sci-logo-container {
             display: flex;
             align-items: center;
-            margin-right: auto;
         }
 
         .sci-logo {
-            height: 40px;
-            transition: transform 0.3s ease;
-            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
+            height: 36px;
+            transition: opacity 0.2s ease;
         }
 
         .sci-logo:hover {
-            transform: scale(1.1) rotate(5deg);
-            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.9));
+            opacity: 0.8;
         }
 
         .sci-brand-name {
-            font-family: 'Rajdhani', sans-serif !important;
+            font-family: 'Rajdhani', sans-serif;
             font-size: 18px;
             font-weight: 500;
             text-decoration: none;
             color: var(--white);
             margin-left: 12px;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
+            transition: color 0.2s ease;
         }
 
         .sci-logo-container:hover .sci-brand-name {
-            color: var(--cyan);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            color: var(--cyan-muted);
         }
 
         .sci-nav-links {
             display: flex;
             list-style: none;
-            gap: 10px;
-            margin-left: auto;
-        }
-
-        .sci-nav-item {
-            font-family: 'Rajdhani', sans-serif !important;
+            gap: 8px;
         }
 
         .sci-nav-link {
             position: relative;
             padding: 8px 16px;
-            color: var(--white);
+            color: #c0c0c0;
             text-decoration: none;
             letter-spacing: 1px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 400;
-            transition: all 0.3s ease;
-            font-family: 'Rajdhani', sans-serif !important;
-        }
-
-        .sci-nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--purple), var(--cyan));
-            transition: width 0.3s ease, left 0.3s ease;
-            transform: translateX(-50%);
-            border-radius: 1px;
+            transition: color 0.2s ease;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .sci-nav-link:hover {
-            color: var(--cyan);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .sci-nav-link:hover::after {
-            width: calc(100% - 32px);
-            left: 50%;
+            color: var(--cyan-muted);
         }
 
         .sci-nav-link.active {
-            color: var(--cyan);
-        }
-
-        .sci-nav-link.active::after {
-            width: calc(100% - 32px);
-            left: 50%;
+            color: var(--cyan-muted);
+            border-bottom: 1px solid var(--cyan-dim);
         }
 
         .sci-mobile-toggle {
             display: none;
-            cursor: pointer;
             background: none;
             border: none;
-            color: var(--white);
-            font-size: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .sci-mobile-toggle:hover {
-            color: var(--cyan);
-            transform: scale(1.1);
-        }
-
-        /* Animated hamburger menu */
-        .sci-hamburger {
-            width: 30px;
-            height: 20px;
-            position: relative;
-            margin: 0 auto;
-            transform: rotate(0deg);
-            transition: .5s ease-in-out;
             cursor: pointer;
+            padding: 8px;
+        }
+
+        .sci-hamburger {
+            width: 24px;
+            height: 18px;
+            position: relative;
         }
 
         .sci-hamburger span {
@@ -239,68 +164,126 @@
             position: absolute;
             height: 2px;
             width: 100%;
-            background: var(--white);
-            border-radius: 9px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
-            transition: .25s ease-in-out;
+            background: #c0c0c0;
+            border-radius: 2px;
+            transition: 0.2s ease;
         }
 
-        .sci-hamburger span:nth-child(1) {
-            top: 0px;
-        }
+        .sci-hamburger span:nth-child(1) { top: 0; }
+        .sci-hamburger span:nth-child(2), 
+        .sci-hamburger span:nth-child(3) { top: 8px; }
+        .sci-hamburger span:nth-child(4) { top: 16px; }
 
-        .sci-hamburger span:nth-child(2),
-        .sci-hamburger span:nth-child(3) {
-            top: 9px;
-        }
-
-        .sci-hamburger span:nth-child(4) {
-            top: 18px;
-        }
-
-        .sci-hamburger.open span:nth-child(1) {
-            top: 9px;
-            width: 0%;
-            left: 50%;
+        .sci-hamburger.open span:nth-child(1),
+        .sci-hamburger.open span:nth-child(4) {
+            opacity: 0;
         }
 
         .sci-hamburger.open span:nth-child(2) {
             transform: rotate(45deg);
-            background: var(--cyan);
+            background: var(--cyan-muted);
         }
 
         .sci-hamburger.open span:nth-child(3) {
             transform: rotate(-45deg);
-            background: var(--cyan);
+            background: var(--cyan-muted);
         }
 
-        .sci-hamburger.open span:nth-child(4) {
-            top: 9px;
-            width: 0%;
-            left: 50%;
-        }
-
-        /* Scroll indicator */
         .sci-scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--purple), var(--blue), var(--cyan), var(--red));
+            height: 2px;
+            background: var(--cyan-muted);
             z-index: 1001;
             width: 0%;
             transition: width 0.1s ease;
-            box-shadow: 0 0 10px rgba(157, 0, 255, 0.5);
+            box-shadow: 0 0 6px rgba(58, 184, 184, 0.3);
         }
-        
-        .container {
-            width: 100%;
-            margin: 0 auto;
+
+        /* --- COOKIE BANNER (non-intrusive, bottom left) --- */
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 380px;
+            background: rgba(8, 8, 8, 0.98);
+            border: 1px solid #1a1a1a;
+            border-radius: 10px;
+            padding: 16px 20px;
+            z-index: 9999;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            font-family: 'Roboto', sans-serif;
         }
-        
-        /* Header wrapper for relative positioning (scroll button) */
+
+        .cookie-banner.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            pointer-events: none;
+        }
+
+        .cookie-banner p {
+            color: #b0b0b0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .cookie-banner a {
+            color: var(--cyan-muted);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(58, 184, 184, 0.3);
+        }
+
+        .cookie-banner a:hover {
+            border-bottom-color: var(--cyan-muted);
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cookie-btn {
+            padding: 6px 18px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+        }
+
+        .cookie-btn.accept {
+            background: var(--cyan-muted);
+            color: var(--black);
+            border: 1px solid var(--cyan-muted);
+        }
+
+        .cookie-btn.accept:hover {
+            background: transparent;
+            color: var(--cyan-muted);
+        }
+
+        .cookie-btn.reject {
+            background: transparent;
+            color: #888;
+            border: 1px solid #333;
+        }
+
+        .cookie-btn.reject:hover {
+            border-color: #555;
+            color: #aaa;
+        }
+
+        /* --- HEADER WRAPPER (extra space below) --- */
         .header-wrapper {
             position: relative;
             width: 100%;
@@ -308,35 +291,34 @@
             overflow: hidden;
             z-index: 1;
         }
-        
-        /* Seamless transition from header to content: increased space and smooth fade */
+
         .header-wrapper::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 160px; /* Increased for a little extra space between header and content */
+            height: 200px; /* Increased for extra space */
             background: linear-gradient(to top, var(--black) 0%, transparent 100%);
             pointer-events: none;
             z-index: 20;
         }
-        
+
         .header-overlay {
             position: relative;
             width: 100%;
             height: 100%;
             overflow: hidden;
         }
-        
+
         .header-overlay iframe {
             width: 100%;
             height: 100%;
             border: none;
             display: block;
         }
-        
-        /* === SMOOTH SCROLL DOWN BUTTON: white, no circle, just V === */
+
+        /* --- SCROLL DOWN ARROW --- */
         .scroll-down-arrow {
             position: absolute;
             bottom: 28px;
@@ -358,36 +340,35 @@
             justify-content: center;
             animation: gentleFloat 2s infinite ease-in-out;
         }
-        
+
         .scroll-down-arrow i {
             font-size: 32px;
             color: white;
             text-shadow: 0 0 4px rgba(0,0,0,0.3);
             transition: transform 0.2s ease;
         }
-        
+
         .scroll-down-arrow:hover {
             transform: translateX(-50%) translateY(4px);
         }
-        
+
         .scroll-down-arrow:hover i {
             transform: translateY(3px);
         }
-        
+
         @keyframes gentleFloat {
             0% { transform: translateX(-50%) translateY(0px); opacity: 0.8; }
             50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
             100% { transform: translateX(-50%) translateY(0px); opacity: 0.8; }
         }
-        
-        /* Content Sections - SEAMLESS merging with black gradients */
+
+        /* --- CONTENT SECTIONS --- */
         .content-sections {
             position: relative;
             z-index: 10;
             background-color: var(--black);
         }
-        
-        /* iframe container: no margins, relative for overlays */
+
         .iframe-container {
             width: 100%;
             max-width: 1400px;
@@ -398,14 +379,12 @@
             opacity: 0;
             transform: translateY(18px);
         }
-        
+
         .iframe-container.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Seamless gradient transition: each container fades its bottom into black, 
-           and the next container fades from black into its content */
+
         .iframe-container::after {
             content: '';
             position: absolute;
@@ -418,8 +397,7 @@
             z-index: 3;
             opacity: 1;
         }
-        
-        /* For the first container, we also add a soft fade-in at top (from header) */
+
         .iframe-container:first-of-type::before {
             content: '';
             position: absolute;
@@ -432,8 +410,7 @@
             z-index: 3;
             opacity: 1;
         }
-        
-        /* For other containers, a tiny top fade to blend with previous bottom fade */
+
         .iframe-container:not(:first-of-type)::before {
             content: '';
             position: absolute;
@@ -446,43 +423,35 @@
             z-index: 3;
             opacity: 1;
         }
-        
-        /* Remove any default borders/shadow/radius */
+
         .iframe-container iframe {
             width: 100% !important;
             border: none !important;
             display: block !important;
             background: var(--black) !important;
-            opacity: 1 !important;
-            visibility: visible !important;
             margin: 0 !important;
             padding: 0 !important;
             vertical-align: middle;
         }
-        
-        /* First iframe (description) - taller */
+
         .iframe-container.description-iframe iframe {
             height: 700px !important;
         }
-        
-        /* Other iframes */
+
         .iframe-container:not(.description-iframe) iframe {
             height: 600px !important;
         }
-        
-        /* Hide iframe scrollbars */
+
         iframe {
             overflow: hidden !important;
             -ms-overflow-style: none !important;
             scrollbar-width: none !important;
         }
-        
+
         iframe::-webkit-scrollbar {
             display: none !important;
-            width: 0 !important;
-            height: 0 !important;
         }
-        
+
         /* Moving Background */
         .moving-bg {
             position: fixed;
@@ -491,14 +460,14 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, var(--purple-dim) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, var(--cyan-dim) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(58, 184, 184, 0.05) 0%, transparent 50%);
             opacity: 0.8;
             z-index: -1;
         }
-        
-        /* Footer Container - completely seamless, no visible separator */
+
+        /* Footer Container */
         .footer-container {
             width: 100%;
             margin: 0;
@@ -507,8 +476,7 @@
             position: relative;
             background: var(--black);
         }
-        
-        /* Only a subtle blend from last section, no visible line or glow separator */
+
         .footer-container::before {
             content: '';
             position: absolute;
@@ -520,12 +488,7 @@
             z-index: 2;
             pointer-events: none;
         }
-        
-        /* Remove any extra lines or separators */
-        .footer-container::after {
-            display: none;
-        }
-        
+
         .footer-container iframe {
             width: 100%;
             height: 500px;
@@ -536,25 +499,27 @@
             padding: 0;
             background: var(--black);
         }
-        
-        /* Responsive Design */
+
+        /* --- RESPONSIVE --- */
         @media screen and (max-width: 768px) {
-            /* Mobile Navigation */
+            .sci-nav-container {
+                padding: 0 20px;
+            }
+
             .sci-nav-links {
                 position: fixed;
-                top: 70px;
+                top: 66px;
                 left: 0;
                 width: 100%;
                 flex-direction: column;
                 align-items: center;
-                background: linear-gradient(180deg, rgba(0, 0, 0, 0.98) 0%, rgba(10, 10, 10, 0.95) 100%);
+                background: #080808;
                 padding: 20px 0;
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-                transition: clip-path 0.5s ease-in-out;
-                box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+                transition: clip-path 0.3s ease;
                 gap: 0;
                 z-index: 999;
-                backdrop-filter: blur(10px);
+                border-bottom: 1px solid #151515;
             }
 
             .sci-nav-links.open {
@@ -568,123 +533,98 @@
 
             .sci-nav-link {
                 display: block;
-                padding: 18px 0;
-                font-size: 22px;
+                padding: 16px 0;
+                font-size: 20px;
                 width: 100%;
             }
 
-            .sci-nav-link::after {
-                bottom: 5px;
-            }
-
-            .sci-nav-link:hover::after {
-                width: 50%;
-            }
-
-            .sci-nav-link:hover {
-                background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            .sci-nav-link.active {
+                border-bottom: none;
+                background: rgba(58, 184, 184, 0.05);
             }
 
             .sci-mobile-toggle {
                 display: block;
             }
-            
+
             .header-wrapper {
                 height: 80vh;
             }
-            
+
+            .header-wrapper::after {
+                height: 150px;
+            }
+
             .scroll-down-arrow {
                 bottom: 18px;
             }
-            
+
             .scroll-down-arrow i {
                 font-size: 28px;
             }
-            
-            .iframe-container {
-                max-width: 100%;
+
+            .cookie-banner {
+                left: 16px;
+                right: 16px;
+                bottom: 16px;
+                max-width: none;
             }
-            
+
             .iframe-container.description-iframe iframe {
                 height: 520px !important;
             }
-            
+
             .iframe-container:not(.description-iframe) iframe {
                 height: 460px !important;
             }
-            
+
             .footer-container iframe {
                 height: 450px;
             }
-            
-            .iframe-container::after,
-            .iframe-container:first-of-type::before,
-            .iframe-container:not(:first-of-type)::before {
-                height: 50px;
-            }
-            
-            .header-wrapper::after {
-                height: 120px; /* Slightly less on mobile but still adds space */
-            }
         }
-        
+
         @media screen and (max-width: 480px) {
             .header-wrapper {
                 height: 70vh;
             }
-            
+
+            .header-wrapper::after {
+                height: 120px;
+            }
+
             .scroll-down-arrow i {
                 font-size: 24px;
             }
-            
+
+            .cookie-buttons {
+                flex-direction: column;
+            }
+
             .iframe-container.description-iframe iframe {
                 height: 480px !important;
             }
-            
+
             .iframe-container:not(.description-iframe) iframe {
                 height: 420px !important;
             }
-            
+
             .footer-container iframe {
                 height: 400px;
             }
-            
-            .iframe-container::after,
-            .iframe-container:first-of-type::before,
-            .iframe-container:not(:first-of-type)::before {
-                height: 40px;
-            }
-            
-            .header-wrapper::after {
-                height: 100px;
-            }
         }
-        
-        @media screen and (max-width: 360px) {
-            .iframe-container.description-iframe iframe {
-                height: 450px !important;
-            }
-            .iframe-container:not(.description-iframe) iframe {
-                height: 380px !important;
-            }
-        }
-        
-        /* touch-friendly */
-        @media (hover: none) and (pointer: coarse) {
-            .scroll-down-arrow {
-                bottom: 20px;
-            }
-            .scroll-down-arrow i {
-                font-size: 34px;
+
+        @media screen and (min-width: 1400px) {
+            .sci-nav-container,
+            .iframe-container {
+                max-width: 1300px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Scroll Progress Bar -->
     <div class="sci-scroll-progress" id="scrollProgress"></div>
     
-    <!-- Navigation Bar -->
+    <!-- Navigation Bar (updated to match other pages) -->
     <nav class="sci-navbar" id="sciNavbar">
         <div class="sci-nav-container">
             <div class="sci-logo-container">
@@ -695,18 +635,10 @@
             </div>
 
             <ul class="sci-nav-links" id="sciNavLinks">
-                <li class="sci-nav-item">
-                    <a href="index.html" class="sci-nav-link active">Home</a>
-                </li>
-                <li class="sci-nav-item">
-                    <a href="products.html" class="sci-nav-link">Products</a>
-                </li>
-                <li class="sci-nav-item">
-                    <a href="mission.html" class="sci-nav-link">Mission</a>
-                </li>
-                <li class="sci-nav-item">
-                    <a href="contact.html" class="sci-nav-link">Contact</a>
-                </li>
+                <li class="sci-nav-item"><a href="index.html" class="sci-nav-link active">Home</a></li>
+                <li class="sci-nav-item"><a href="products.html" class="sci-nav-link">Products</a></li>
+                <li class="sci-nav-item"><a href="mission.html" class="sci-nav-link">Mission</a></li>
+                <li class="sci-nav-item"><a href="contact.html" class="sci-nav-link">Contact</a></li>
             </ul>
 
             <button class="sci-mobile-toggle" id="mobileToggle">
@@ -720,10 +652,19 @@
         </div>
     </nav>
 
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <p>We use cookies to improve your experience. By continuing, you agree to our use of cookies. <a href="cookiepolicy.html">Learn more</a></p>
+        <div class="cookie-buttons">
+            <button class="cookie-btn accept" id="acceptCookies">Accept</button>
+            <button class="cookie-btn reject" id="rejectCookies">Reject</button>
+        </div>
+    </div>
+
     <div class="moving-bg"></div>
     
     <div class="container">
-        <!-- Animated Header Overlay with Scroll Button -->
+        <!-- Header with iframe -->
         <div class="header-wrapper">
             <div class="header-overlay">
                 <iframe src="https://scitrade.org/homeheader.html" 
@@ -734,15 +675,14 @@
                         title="SciTrade Hero Header">
                 </iframe>
             </div>
-            <!-- Smooth scroll down button: white V, no circle, clean -->
             <div class="scroll-down-arrow" id="scrollDownBtn" aria-label="Scroll down">
                 <i class="fas fa-chevron-down"></i>
             </div>
         </div>
         
         <div class="content-sections">
-            <!-- All iframes seamlessly stacked with gradient transitions, zero gaps -->
             <div class="iframe-container description-iframe visible" id="description">
+                <br></br>
                 <iframe src="https://scitrade.org/description.html" 
                         scrolling="no" 
                         frameborder="0"
@@ -786,76 +726,91 @@
     
     <!-- Footer -->
     <div class="footer-container">
-      <iframe src="https://scitrade.org/footer.html" 
-              scrolling="no" 
-              frameborder="0" 
-              allowtransparency="true"
-              loading="eager"
-              title="Footer">
-      </iframe>
+        <iframe src="https://scitrade.org/footer.html" 
+                scrolling="no" 
+                frameborder="0" 
+                allowtransparency="true"
+                loading="eager"
+                title="Footer">
+        </iframe>
     </div>
     
     <script>
-        // Mobile menu toggle
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navLinks = document.getElementById('sciNavLinks');
-        const hamburger = document.querySelector('.sci-hamburger');
-        
-        if (mobileToggle) {
-            mobileToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('open');
-                hamburger.classList.toggle('open');
-            });
-        }
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.sci-nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                if (navLinks.classList.contains('open')) {
-                    navLinks.classList.remove('open');
-                    hamburger.classList.remove('open');
-                }
-            });
-        });
-        
-        // ========== CUSTOM ULTRA-SMOOTH SCROLL (no teleport) ==========
-        function smoothScrollToElement(element, duration = 1000) {
-            if (!element) return;
-            const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
-            const startPosition = window.pageYOffset;
-            const distance = targetPosition - startPosition;
-            let startTime = null;
+        (function() {
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navLinks = document.getElementById('sciNavLinks');
+            const hamburger = document.querySelector('.sci-hamburger');
             
-            function animation(currentTime) {
-                if (startTime === null) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const progress = Math.min(timeElapsed / duration, 1);
-                // cubic-bezier easing for smooth deceleration
-                const ease = 1 - Math.pow(1 - progress, 3);
-                window.scrollTo(0, startPosition + distance * ease);
-                if (timeElapsed < duration) requestAnimationFrame(animation);
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('open');
+                    hamburger.classList.toggle('open');
+                });
             }
-            requestAnimationFrame(animation);
-        }
-        
-        const scrollBtn = document.getElementById('scrollDownBtn');
-        if (scrollBtn) {
-            scrollBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                // Target the first .iframe-container inside .content-sections
-                const firstSection = document.querySelector('.content-sections .iframe-container');
-                if (firstSection) {
-                    smoothScrollToElement(firstSection, 1000);
-                } else {
-                    // fallback: scroll by 85% of viewport height
-                    const targetY = window.scrollY + window.innerHeight * 0.85;
-                    smoothScrollToElement({ getBoundingClientRect: () => ({ top: targetY - window.scrollY }) }, 800);
-                }
+
+            document.querySelectorAll('.sci-nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navLinks.classList.contains('open')) {
+                        navLinks.classList.remove('open');
+                        hamburger.classList.remove('open');
+                    }
+                });
             });
-        }
-        
-        // Intersection Observer for iframe fade-in animation
-        document.addEventListener('DOMContentLoaded', function() {
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('sciNavbar');
+            const scrollProgress = document.getElementById('scrollProgress');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                if (scrollProgress) scrollProgress.style.width = scrolled + '%';
+            });
+
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            }
+
+            // Smooth scroll function
+            function smoothScrollToElement(element, duration = 800) {
+                if (!element) return;
+                const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                let startTime = null;
+                
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    const ease = 1 - Math.pow(1 - progress, 3);
+                    window.scrollTo(0, startPosition + distance * ease);
+                    if (timeElapsed < duration) requestAnimationFrame(animation);
+                }
+                requestAnimationFrame(animation);
+            }
+
+            // Scroll down button
+            const scrollBtn = document.getElementById('scrollDownBtn');
+            if (scrollBtn) {
+                scrollBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const firstSection = document.querySelector('.content-sections .iframe-container');
+                    if (firstSection) {
+                        smoothScrollToElement(firstSection, 800);
+                    }
+                });
+            }
+
+            // Intersection Observer for fade-in
             const iframeContainers = document.querySelectorAll('.iframe-container');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -863,78 +818,81 @@
                         entry.target.classList.add('visible');
                     }
                 });
-            }, {
-                threshold: 0.05,
-                rootMargin: '0px 0px -20px 0px'
+            }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+            
+            iframeContainers.forEach(container => observer.observe(container));
+
+            // Cookie consent
+            const cookieBanner = document.getElementById('cookieBanner');
+            const acceptBtn = document.getElementById('acceptCookies');
+            const rejectBtn = document.getElementById('rejectCookies');
+            
+            const cookieConsent = localStorage.getItem('scitrade_cookie_consent');
+            if (cookieConsent === 'accepted' || cookieConsent === 'rejected') {
+                cookieBanner.classList.add('hidden');
+            }
+            
+            acceptBtn.addEventListener('click', function() {
+                localStorage.setItem('scitrade_cookie_consent', 'accepted');
+                cookieBanner.classList.add('hidden');
             });
             
-            iframeContainers.forEach(container => {
-                observer.observe(container);
+            rejectBtn.addEventListener('click', function() {
+                localStorage.setItem('scitrade_cookie_consent', 'rejected');
+                cookieBanner.classList.add('hidden');
             });
-        });
-        
-        // Navbar scroll effect + progress bar
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('sciNavbar');
-            const scrollProgress = document.getElementById('scrollProgress');
-            
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+
+            // Iframe detection
+            if (window.self !== window.top) {
+                document.querySelectorAll('a[href]').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && !href.startsWith('http') && !href.startsWith('//') && !href.startsWith('#')) {
+                        link.setAttribute('target', '_top');
+                    }
+                });
+            }
+
+            // Adjust iframe heights dynamically
+            function adjustIframeHeights() {
+                const isMobile = window.innerWidth <= 768;
+                const isSmallMobile = window.innerWidth <= 480;
+                const isTiny = window.innerWidth <= 360;
+                
+                const descriptionIframe = document.querySelector('.description-iframe iframe');
+                const otherIframes = document.querySelectorAll('.iframe-container:not(.description-iframe) iframe');
+                
+                if (descriptionIframe) {
+                    if (isTiny) descriptionIframe.style.height = '450px';
+                    else if (isSmallMobile) descriptionIframe.style.height = '480px';
+                    else if (isMobile) descriptionIframe.style.height = '520px';
+                    else descriptionIframe.style.height = '700px';
+                }
+                
+                otherIframes.forEach(iframe => {
+                    if (isTiny) iframe.style.height = '380px';
+                    else if (isSmallMobile) iframe.style.height = '420px';
+                    else if (isMobile) iframe.style.height = '460px';
+                    else iframe.style.height = '600px';
+                });
+                
+                const footerIframe = document.querySelector('.footer-container iframe');
+                if (footerIframe) {
+                    if (isTiny) footerIframe.style.height = '380px';
+                    else if (isSmallMobile) footerIframe.style.height = '400px';
+                    else if (isMobile) footerIframe.style.height = '450px';
+                    else footerIframe.style.height = '500px';
+                }
+                
+                const headerWrapper = document.querySelector('.header-wrapper');
+                if (headerWrapper) {
+                    if (isMobile) headerWrapper.style.height = '80vh';
+                    else headerWrapper.style.height = '100vh';
+                }
             }
             
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            if (scrollProgress) scrollProgress.style.width = scrolled + '%';
-        });
-        
-        // Adjust iframe heights dynamically for mobile/responsive
-        function adjustIframeHeights() {
-            const isMobile = window.innerWidth <= 768;
-            const isSmallMobile = window.innerWidth <= 480;
-            const isTiny = window.innerWidth <= 360;
-            
-            const descriptionIframe = document.querySelector('.description-iframe iframe');
-            const otherIframes = document.querySelectorAll('.iframe-container:not(.description-iframe) iframe');
-            
-            if (descriptionIframe) {
-                if (isTiny) descriptionIframe.style.height = '450px';
-                else if (isSmallMobile) descriptionIframe.style.height = '480px';
-                else if (isMobile) descriptionIframe.style.height = '520px';
-                else descriptionIframe.style.height = '700px';
-            }
-            
-            otherIframes.forEach(iframe => {
-                if (isTiny) iframe.style.height = '380px';
-                else if (isSmallMobile) iframe.style.height = '420px';
-                else if (isMobile) iframe.style.height = '460px';
-                else iframe.style.height = '600px';
-            });
-            
-            const footerIframe = document.querySelector('.footer-container iframe');
-            if (footerIframe) {
-                if (isTiny) footerIframe.style.height = '380px';
-                else if (isSmallMobile) footerIframe.style.height = '400px';
-                else if (isMobile) footerIframe.style.height = '450px';
-                else footerIframe.style.height = '500px';
-            }
-            
-            const headerWrapper = document.querySelector('.header-wrapper');
-            if (headerWrapper) {
-                if (isMobile) headerWrapper.style.height = '80vh';
-                else headerWrapper.style.height = '100vh';
-            }
-        }
-        
-        window.addEventListener('load', adjustIframeHeights);
-        window.addEventListener('resize', adjustIframeHeights);
-        
-        // ensure iframes content background is black for seamless blending
-        const style = document.createElement('style');
-        style.textContent = `iframe body { background: #000 !important; margin:0 !important; }`;
-        document.head.appendChild(style);
+            window.addEventListener('load', adjustIframeHeights);
+            window.addEventListener('resize', adjustIframeHeights);
+        })();
     </script>
 </body>
 </html>
